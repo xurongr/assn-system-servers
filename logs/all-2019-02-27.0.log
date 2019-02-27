@@ -1,0 +1,15 @@
+2019-02-27 11:27:42.367 [main] INFO  com.xrr.assnsystem.AssnSystemApplication - Starting AssnSystemApplication on ufsoft with PID 7852 (started by Administrator in G:\IntelliJ IDEA  WORK\assn-system)
+2019-02-27 11:27:42.389 [main] DEBUG com.xrr.assnsystem.AssnSystemApplication - Running with Spring Boot v2.1.3.RELEASE, Spring v5.1.5.RELEASE
+2019-02-27 11:27:42.390 [main] INFO  com.xrr.assnsystem.AssnSystemApplication - No active profile set, falling back to default profiles: default
+2019-02-27 11:27:45.928 [main] WARN  org.mybatis.spring.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.xrr.assnsystem]' package. Please check your configuration.
+2019-02-27 11:27:49.358 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8082"]
+2019-02-27 11:27:49.382 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2019-02-27 11:27:49.383 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-02-27 11:27:49.657 [main] INFO  org.apache.catalina.core.AprLifecycleListener - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_102\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Python27\;C:\Python27\Scripts;C:\Windows\System32;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files\Java\jdk1.8.0_102\bin;C:\Program Files\MySQL\MySQL Utilities 1.6\;C:\Program Files\Git\cmd;C:\Program Files\TortoiseSVN\bin;G:\apache-maven-3.5.4-bin\apache-maven-3.5.4\bin;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;D:\Android\Sdk\platform-tools;C:\Users\Administrator\AppData\Roaming\npm;.]
+2019-02-27 11:27:50.103 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2019-02-27 11:27:51.714 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2019-02-27 11:27:53.288 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2019-02-27 11:27:53.362 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2019-02-27 11:27:53.438 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2019-02-27 11:27:53.474 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8082"]
+2019-02-27 11:27:53.536 [main] INFO  com.xrr.assnsystem.AssnSystemApplication - Started AssnSystemApplication in 12.741 seconds (JVM running for 19.387)
