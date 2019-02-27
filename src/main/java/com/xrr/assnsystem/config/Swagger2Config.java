@@ -27,8 +27,8 @@ public class Swagger2Config {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("毕设-基于SpringBoot与Ajax的实验室系统")
-                .description("实验室系统接口")
+                .title("毕设-宁师社团管理系统")
+                .description("社团管理系统接口")
 //                .termsOfServiceUrl("http://www.duikavip.com/")
 //                .contact(new Contact("福建华灿网络科技有限公司", "", ""))
                 .version("1.0")
