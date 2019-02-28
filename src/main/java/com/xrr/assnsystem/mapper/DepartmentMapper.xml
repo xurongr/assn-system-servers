@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xrr.assnsystem.mapper.DepartmentMapper">
+  <resultMap id="BaseResultMap" type="com.xrr.assnsystem.dto.po.Department">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="association_id" jdbcType="BIGINT" property="associationId" />
+    <result column="minister_user_id" jdbcType="BIGINT" property="ministerUserId" />
+    <result column="department_name" jdbcType="BIGINT" property="departmentName" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from department_table
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xrr.assnsystem.dto.po.Department">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into department_table (association_id, minister_user_id, department_name,
+      content, create_time)
+    values (#{associationId,jdbcType=BIGINT}, #{ministerUserId,jdbcType=BIGINT}, #{departmentName,jdbcType=BIGINT},
+      #{content,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.xrr.assnsystem.dto.po.Department">
+    update department_table
+    set association_id = #{associationId,jdbcType=BIGINT},
+      minister_user_id = #{ministerUserId,jdbcType=BIGINT},
+      department_name = #{departmentName,jdbcType=BIGINT},
+      content = #{content,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, association_id, minister_user_id, department_name, content, create_time
+    from department_table
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, association_id, minister_user_id, department_name, content, create_time
+    from department_table
+  </select>
+</mapper>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xrr.assnsystem.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.xrr.assnsystem.dto.po.User">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="identity_id" jdbcType="BIGINT" property="identityId" />
+    <result column="major" jdbcType="VARCHAR" property="major" />
+    <result column="department_id" jdbcType="BIGINT" property="departmentId" />
+    <result column="association_id" jdbcType="BIGINT" property="associationId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="pwd" jdbcType="VARCHAR" property="pwd" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sex" jdbcType="TINYINT" property="sex" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="job" jdbcType="VARCHAR" property="job" />
+    <result column="tel_number" jdbcType="BIGINT" property="telNumber" />
+    <result column="grade" jdbcType="INTEGER" property="grade" />
+    <result column="user_img" jdbcType="VARCHAR" property="userImg" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from user_table
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xrr.assnsystem.dto.po.User">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user_table (identity_id, major, department_id, 
+      association_id, user_name, pwd, 
+      `name`, sex, age, job, 
+      tel_number, grade, user_img
+      )
+    values (#{identityId,jdbcType=BIGINT}, #{major,jdbcType=VARCHAR}, #{departmentId,jdbcType=BIGINT}, 
+      #{associationId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, #{age,jdbcType=INTEGER}, #{job,jdbcType=VARCHAR}, 
+      #{telNumber,jdbcType=BIGINT}, #{grade,jdbcType=INTEGER}, #{userImg,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.xrr.assnsystem.dto.po.User">
+    update user_table
+    set identity_id = #{identityId,jdbcType=BIGINT},
+      major = #{major,jdbcType=VARCHAR},
+      department_id = #{departmentId,jdbcType=BIGINT},
+      association_id = #{associationId,jdbcType=BIGINT},
+      user_name = #{userName,jdbcType=VARCHAR},
+      pwd = #{pwd,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=TINYINT},
+      age = #{age,jdbcType=INTEGER},
+      job = #{job,jdbcType=VARCHAR},
+      tel_number = #{telNumber,jdbcType=BIGINT},
+      grade = #{grade,jdbcType=INTEGER},
+      user_img = #{userImg,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, identity_id, major, department_id, association_id, user_name, pwd, `name`, 
+    sex, age, job, tel_number, grade, user_img
+    from user_table
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, identity_id, major, department_id, association_id, user_name, pwd, `name`, 
+    sex, age, job, tel_number, grade, user_img
+    from user_table
+  </select>
+</mapper>
