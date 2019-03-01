@@ -1,9 +1,11 @@
 package com.xrr.assnsystem.mapper;
 
 import com.xrr.assnsystem.dto.po.Association;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface AssociationMapper {
     int deleteByPrimaryKey(Long id);
 

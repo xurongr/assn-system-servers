@@ -17,6 +17,27 @@
     <result column="grade" jdbcType="INTEGER" property="grade" />
     <result column="user_img" jdbcType="VARCHAR" property="userImg" />
   </resultMap>
+
+  <resultMap id="UserResultMap" type="com.xrr.assnsystem.dto.UserDto">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="identity_id" jdbcType="BIGINT" property="identityId" />
+    <result column="identity_name" jdbcType="VARCHAR" property="identityName" />
+    <result column="major" jdbcType="VARCHAR" property="major" />
+    <result column="department_id" jdbcType="BIGINT" property="departmentId" />
+    <result column="department_Name" jdbcType="VARCHAR" property="departmentName" />
+    <result column="association_id" jdbcType="BIGINT" property="associationId" />
+    <result column="association_name" jdbcType="BIGINT" property="associationName" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="pwd" jdbcType="VARCHAR" property="pwd" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sex" jdbcType="TINYINT" property="sex" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="job" jdbcType="VARCHAR" property="job" />
+    <result column="tel_number" jdbcType="BIGINT" property="telNumber" />
+    <result column="grade" jdbcType="INTEGER" property="grade" />
+    <result column="user_img" jdbcType="VARCHAR" property="userImg" />
+  </resultMap>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from user_table
     where id = #{id,jdbcType=BIGINT}
@@ -64,4 +85,44 @@
     sex, age, job, tel_number, grade, user_img
     from user_table
   </select>
+
+  <!-- 查询全部信息 -->
+  <select id="selectAll" resultMap="UserResultMap">
+    select u.id,u.identity_id, i.identity_name, u.major, u.department_id,d.department_name,
+     u.association_id,a.association_name, u.user_name, u.pwd, u.`name`,
+     u.sex, u.age, u.job, u.tel_number, u.grade, u.user_img
+    from user_table u
+    left join `identity_table` i on i.id = u.identity_id
+    left join `department_table` d on d.id = u.department_id
+    left join `association_table` a on a.id = u.association_id
+    limit #{pageNo},#{pageSize}
+  </select>
+
+  <!-- 查询总数 -->
+  <select id="selectCount" resultType="java.lang.Long">
+    select count(*)
+    from user_table
+  </select>
+
+  <!-- 通过账号密码查询 -->
+  <select id="selectByUserNameAndPwd"  resultMap="UserResultMap">
+    select u.id,u.identity_id, i.identity_name, u.major, u.department_id,d.department_name,
+     u.association_id,a.association_name, u.user_name, u.pwd, u.`name`,
+     u.sex, u.age, u.job, u.tel_number, u.grade, u.user_img
+    from user_table u
+    left join `identity_table` i on i.id = u.identity_id
+    left join `department_table` d on d.id = u.department_id
+    left join `association_table` a on a.id = u.association_id
+    where u.user_name = #{userName}
+    and u.pwd = #{pwd}
+  </select>
+
+  <!-- 修改密码 -->
+  <update id="updatePwd">
+    update user_table
+    set pwd = #{pwd}
+    where pwd = #{oldPwd}
+    and user_name = #{newPwd}
+  </update>
+
 </mapper>
