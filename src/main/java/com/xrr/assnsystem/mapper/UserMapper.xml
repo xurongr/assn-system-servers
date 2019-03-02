@@ -80,11 +80,6 @@
     from user_table
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select id, identity_id, major, department_id, association_id, user_name, pwd, `name`, 
-    sex, age, job, tel_number, grade, user_img
-    from user_table
-  </select>
 
   <!-- 查询全部信息 -->
   <select id="selectAll" resultMap="UserResultMap">
