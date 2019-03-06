@@ -11,7 +11,7 @@
  Target Server Version : 50718
  File Encoding         : 65001
 
- Date: 06/03/2019 15:15:48
+ Date: 06/03/2019 15:40:50
 */
 
 SET NAMES utf8mb4;
@@ -119,8 +119,9 @@ CREATE TABLE `user_activity_table`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) DEFAULT NULL COMMENT '人员ID：user_id',
   `association_id` bigint(20) DEFAULT NULL COMMENT '社团ID:association_id',
-  `department_id` bigint(20) DEFAULT NULL,
-  `activity_id` bigint(20) DEFAULT NULL,
+  `department_id` bigint(20) DEFAULT NULL COMMENT '部门ID:department_id',
+  `activity_id` bigint(20) DEFAULT NULL COMMENT '活动ID：activity_id',
+  `job` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '职务：job',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '人员活动中间表：user_activity_table' ROW_FORMAT = Dynamic;
 
@@ -137,7 +138,6 @@ CREATE TABLE `user_table`  (
   `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '姓名：name',
   `sex` tinyint(4) DEFAULT NULL COMMENT '性别：sex',
   `age` int(11) DEFAULT NULL COMMENT '年龄：age',
-  `job` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '职务：job',
   `tel_number` bigint(20) DEFAULT NULL COMMENT '联系方式:tel_number',
   `grade` int(11) DEFAULT NULL COMMENT '年级:grade',
   `user_img` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '图片:user_img',
