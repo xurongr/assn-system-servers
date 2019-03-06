@@ -1,5 +1,6 @@
 package com.xrr.assnsystem.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @Builder
@@ -17,6 +19,7 @@ import java.io.Serializable;
 public class UserDto implements Serializable {
 
     private static final long serialVersionUID = -4463692058892902854L;
+
     private Long id;
 
     @ApiModelProperty("身份ID")
@@ -28,21 +31,10 @@ public class UserDto implements Serializable {
     @ApiModelProperty("专业")
     private String major;
 
-    @ApiModelProperty("所属部门ID")
-    private Long departmentId;
-
-    @ApiModelProperty("所属部门ID")
-    private String departmentName;
-
-    @ApiModelProperty("所属社团ID")
-    private Long associationId;
-
-    @ApiModelProperty("所属社团名称")
-    private String associationName;
-
     @ApiModelProperty("用户名或学号")
     private String userName;
 
+    @JsonIgnore
     @ApiModelProperty("密码")
     private String pwd;
 
@@ -55,9 +47,6 @@ public class UserDto implements Serializable {
     @ApiModelProperty("年龄")
     private Integer age;
 
-    @ApiModelProperty("职称")
-    private String job;
-
     @ApiModelProperty("联系方式")
     private Long telNumber;
 
@@ -66,4 +55,38 @@ public class UserDto implements Serializable {
 
     @ApiModelProperty("图片")
     private String userImg;
+
+    @ApiModelProperty("社团列表")
+    private List<AssnBasic> assnBasicList;
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    class AssnBasic{
+
+        @ApiModelProperty("社团名称")
+        private Long associationId;
+
+        @ApiModelProperty("社团名称")
+        private String associationName;
+
+        @ApiModelProperty("职务")
+        private String job;
+
+        @ApiModelProperty("社团下的部门列表")
+        private List<DepartmentBasic> departmentBasicList;
+
+        @Data
+        @NoArgsConstructor
+        @AllArgsConstructor
+        class DepartmentBasic {
+
+            @ApiModelProperty("部门ID")
+            private Long departmentId;
+
+            @ApiModelProperty("部门名称")
+            private String departmentName;
+        }
+    }
+
 }

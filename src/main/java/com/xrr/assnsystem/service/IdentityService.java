@@ -3,12 +3,14 @@ package com.xrr.assnsystem.service;
 import com.xrr.assnsystem.dto.po.Identity;
 import com.xrr.assnsystem.exception.ServiceException;
 import com.xrr.assnsystem.mapper.IdentityMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Slf4j
 public class IdentityService {
 
     @Autowired
@@ -46,6 +48,15 @@ public class IdentityService {
         int result = identityMapper.updateByPrimaryKey(identity);
         if(0 == result) throw new ServiceException(501, "修改失败");
         return result;
+    }
+
+    /**
+     * 查询身份
+     * @param identityId
+     * @return
+     */
+    public Identity selectIdentityById(Long identityId){
+        return identityMapper.selectByPrimaryKey(identityId);
     }
 
 }

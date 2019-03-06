@@ -5,14 +5,11 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="identity_id" jdbcType="BIGINT" property="identityId" />
     <result column="major" jdbcType="VARCHAR" property="major" />
-    <result column="department_id" jdbcType="BIGINT" property="departmentId" />
-    <result column="association_id" jdbcType="BIGINT" property="associationId" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="pwd" jdbcType="VARCHAR" property="pwd" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="sex" jdbcType="TINYINT" property="sex" />
     <result column="age" jdbcType="INTEGER" property="age" />
-    <result column="job" jdbcType="VARCHAR" property="job" />
     <result column="tel_number" jdbcType="BIGINT" property="telNumber" />
     <result column="grade" jdbcType="INTEGER" property="grade" />
     <result column="user_img" jdbcType="VARCHAR" property="userImg" />
@@ -23,19 +20,25 @@
     <result column="identity_id" jdbcType="BIGINT" property="identityId" />
     <result column="identity_name" jdbcType="VARCHAR" property="identityName" />
     <result column="major" jdbcType="VARCHAR" property="major" />
-    <result column="department_id" jdbcType="BIGINT" property="departmentId" />
-    <result column="department_Name" jdbcType="VARCHAR" property="departmentName" />
-    <result column="association_id" jdbcType="BIGINT" property="associationId" />
-    <result column="association_name" jdbcType="BIGINT" property="associationName" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="pwd" jdbcType="VARCHAR" property="pwd" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="sex" jdbcType="TINYINT" property="sex" />
     <result column="age" jdbcType="INTEGER" property="age" />
-    <result column="job" jdbcType="VARCHAR" property="job" />
     <result column="tel_number" jdbcType="BIGINT" property="telNumber" />
     <result column="grade" jdbcType="INTEGER" property="grade" />
     <result column="user_img" jdbcType="VARCHAR" property="userImg" />
+
+    <collection   property="assnBasicList" javaType="java.util.List" ofType="com.xrr.assnsystem.dto.UserDto$AssnBasic">
+      <id column="association_id" property="associationId" jdbcType="INTEGER"/>
+      <result column="association_name" property="associationName" jdbcType="VARCHAR" />
+      <result column="job" property="job" jdbcType="VARCHAR" />
+      <collection   property="departmentBasicList" javaType="java.util.List" ofType="com.xrr.assnsystem.dto.UserDto$AssnBasic$DepartmentBasic">
+        <id column="department_id" property="departmentId" jdbcType="INTEGER"/>
+        <result column="department_name" property="departmentName" jdbcType="VARCHAR" />
+      </collection>
+    </collection>
+
   </resultMap>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
@@ -46,14 +49,12 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into user_table (identity_id, major, department_id, 
-      association_id, user_name, pwd, 
-      `name`, sex, age, job, 
+    insert into user_table (identity_id, major, user_name, pwd,
+      `name`, sex, age,
       tel_number, grade, user_img
       )
-    values (#{identityId,jdbcType=BIGINT}, #{major,jdbcType=VARCHAR}, #{departmentId,jdbcType=BIGINT}, 
-      #{associationId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, #{age,jdbcType=INTEGER}, #{job,jdbcType=VARCHAR}, 
+    values (#{identityId,jdbcType=BIGINT}, #{major,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR},
+      #{name,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, #{age,jdbcType=INTEGER},
       #{telNumber,jdbcType=BIGINT}, #{grade,jdbcType=INTEGER}, #{userImg,jdbcType=VARCHAR}
       )
   </insert>
@@ -61,53 +62,86 @@
     update user_table
     set identity_id = #{identityId,jdbcType=BIGINT},
       major = #{major,jdbcType=VARCHAR},
-      department_id = #{departmentId,jdbcType=BIGINT},
-      association_id = #{associationId,jdbcType=BIGINT},
       user_name = #{userName,jdbcType=VARCHAR},
       pwd = #{pwd,jdbcType=VARCHAR},
       `name` = #{name,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=TINYINT},
       age = #{age,jdbcType=INTEGER},
-      job = #{job,jdbcType=VARCHAR},
       tel_number = #{telNumber,jdbcType=BIGINT},
       grade = #{grade,jdbcType=INTEGER},
       user_img = #{userImg,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select id, identity_id, major, department_id, association_id, user_name, pwd, `name`, 
-    sex, age, job, tel_number, grade, user_img
-    from user_table
+    select u.id,u.identity_id, i.identity_name, u.major, u.user_name, u.pwd, u.`name`,
+    u.sex, u.age, u.tel_number, u.grade, u.user_img, a.id as association_id ,a.association_name,
+    ua.job,d.id as department_id,d.department_name
+    from user_table u
+    left join `identity_table` i on i.id = u.identity_id
+    left join user_activity_table ua on u.id = ua.user_id
+    left join association_table a on a.id = ua.association_id
+    left join department_table d on d.association_id = a.id
     where id = #{id,jdbcType=BIGINT}
   </select>
 
   <!-- 查询全部信息 -->
   <select id="selectAll" resultMap="UserResultMap">
-    select u.id,u.identity_id, i.identity_name, u.major, u.department_id,d.department_name,
-     u.association_id,a.association_name, u.user_name, u.pwd, u.`name`,
-     u.sex, u.age, u.job, u.tel_number, u.grade, u.user_img
+    select u.id,u.identity_id, i.identity_name, u.major, u.user_name, u.pwd, u.`name`,
+    u.sex, u.age, u.tel_number, u.grade, u.user_img, a.id as association_id ,a.association_name,
+    ua.job,d.id as department_id,d.department_name
     from user_table u
     left join `identity_table` i on i.id = u.identity_id
-    left join `department_table` d on d.id = u.department_id
-    left join `association_table` a on a.id = u.association_id
+    left join user_activity_table ua on u.id = ua.user_id
+    left join association_table a on a.id = ua.association_id
+    left join department_table d on d.association_id = a.id
+    <where>
+      <if test="identityId != null and identityId != ''">
+         and  u.identity_id = #{identityId}
+      </if>
+      <if test="associationId != null and associationId != ''">
+        and  a.id = #{associationId}
+      </if>
+      <if test="departmentiId != null and departmentiId != ''">
+        and  d.id = #{departmentiId}
+      </if>
+    </where>
     limit #{pageNo},#{pageSize}
   </select>
 
   <!-- 查询总数 -->
   <select id="selectCount" resultType="java.lang.Long">
     select count(*)
-    from user_table
+    select u.id,u.identity_id, i.identity_name, u.major, u.user_name, u.pwd, u.`name`,
+    u.sex, u.age, u.tel_number, u.grade, u.user_img, a.id as association_id ,a.association_name,
+    ua.job,d.id as department_id,d.department_name
+    from user_table u
+    left join `identity_table` i on i.id = u.identity_id
+    left join user_activity_table ua on u.id = ua.user_id
+    left join association_table a on a.id = ua.association_id
+    left join department_table d on d.association_id = a.id
+    <where>
+      <if test="identityId != null and identityId != ''">
+        and  u.identity_id = #{identityId}
+      </if>
+      <if test="associationId != null and associationId != ''">
+        and  a.id = #{associationId}
+      </if>
+      <if test="departmentiId != null and departmentiId != ''">
+        and  d.id = #{departmentiId}
+      </if>
+    </where>
   </select>
 
   <!-- 通过账号密码查询 -->
   <select id="selectByUserNameAndPwd"  resultMap="UserResultMap">
-    select u.id,u.identity_id, i.identity_name, u.major, u.department_id,d.department_name,
-     u.association_id,a.association_name, u.user_name, u.pwd, u.`name`,
-     u.sex, u.age, u.job, u.tel_number, u.grade, u.user_img
+    select u.id,u.identity_id, i.identity_name, u.major, u.user_name, u.pwd, u.`name`,
+     u.sex, u.age, u.tel_number, u.grade, u.user_img, a.id as association_id ,a.association_name,
+     ua.job,d.id as department_id,d.department_name
     from user_table u
     left join `identity_table` i on i.id = u.identity_id
-    left join `department_table` d on d.id = u.department_id
-    left join `association_table` a on a.id = u.association_id
+    left join user_activity_table ua on u.id = ua.user_id
+    left join association_table a on a.id = ua.association_id
+    left join department_table d on d.association_id = a.id
     where u.user_name = #{userName}
     and u.pwd = #{pwd}
   </select>

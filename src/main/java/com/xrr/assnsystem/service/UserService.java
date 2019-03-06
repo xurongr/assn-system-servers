@@ -67,7 +67,7 @@ public class UserService {
     }
 
     /**
-     * 修改账户信息
+     * 修改用户信息
      * @param users
      * @return
      */
@@ -79,13 +79,16 @@ public class UserService {
 
     /**
      * 查询所有用户列表
+     * @param identityId
+     * @param associationId
+     * @param departmentiId
      * @param pageNo
      * @param pageSize
      * @return
      */
-    public PageDto<UserDto> selectUsersAll(Integer pageNo, Integer pageSize) {
-        List<UserDto> users = userMapper.selectAll(pageNo, pageSize);
-        Long count = userMapper.selectCount();
+    public PageDto<UserDto> selectUsersAll(Long identityId,Long associationId,Long departmentiId,Integer pageNo, Integer pageSize) {
+        List<UserDto> users = userMapper.selectAll(identityId,associationId,departmentiId,pageNo,pageSize);
+        Long count = userMapper.selectCount(identityId,associationId,departmentiId);
         PageDto<UserDto> pageDto = new PageDto<>();
         pageDto.setTotal(count);
         pageDto.setData(users);

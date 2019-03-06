@@ -4,8 +4,10 @@
   <resultMap id="BaseResultMap" type="com.xrr.assnsystem.dto.po.UserActivity">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="association_id" jdbcType="BIGINT" property="associationId" />
     <result column="department_id" jdbcType="BIGINT" property="departmentId" />
     <result column="activity_id" jdbcType="BIGINT" property="activityId" />
+    <result column="job" jdbcType="VARCHAR" property="job" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from user_activity_table

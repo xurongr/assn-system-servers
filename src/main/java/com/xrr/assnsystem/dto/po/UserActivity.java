@@ -20,12 +20,17 @@ public class UserActivity implements Serializable {
 
     @ApiModelProperty("人员ID")
     private Long userId;
+    @ApiModelProperty("社团ID")
+    private Long associationId;
 
-    @ApiModelProperty("部门id")
+    @ApiModelProperty("部门ID")
     private Long departmentId;
 
     @ApiModelProperty("活动ID")
     private Long activityId;
+
+    @ApiModelProperty("职务")
+    private String job;
 
 
 }

@@ -23,13 +23,13 @@ public interface UserMapper {
      * @param pageSize
      * @return
      */
-    List<UserDto> selectAll(@Param("pageNo") Integer pageNo , @Param("pageSize")Integer pageSize);
+    List<UserDto> selectAll(@Param("identityId")Long identityId,@Param("associationId") Long associationId,@Param("departmentiId") Long departmentiId,@Param("pageNo") Integer pageNo , @Param("pageSize")Integer pageSize);
 
     /**
      * 查询总数
      * @return
      */
-    Long selectCount();
+    Long selectCount(@Param("identityId")Long identityId,@Param("associationId") Long associationId,@Param("departmentiId") Long departmentiId);
 
     /**
      * 通过账号密码查询

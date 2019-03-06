@@ -38,4 +38,10 @@ public class IdentityController {
         return ResultDto.ok(identityService.updateIdentity(identity));
     }
 
+    @ApiOperation("查询身份")
+    @GetMapping("selectIdentityById")
+    public ResultDto<Identity> selectIdentityById(Long identityId){
+        return ResultDto.ok(identityService.selectIdentityById(identityId));
+    }
+
 }

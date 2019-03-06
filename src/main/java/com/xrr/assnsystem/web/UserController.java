@@ -34,7 +34,7 @@ public class UserController {
         return ResultDto.ok(userService.insertUser(user));
     }
 
-    @ApiOperation("修改账户信息(不能改密码)")
+    @ApiOperation("修改用户信息(不能改密码,不能修改职务)")
     @PostMapping("updateUser")
     public ResultDto<Integer> updateUser(@RequestBody User users){
         return ResultDto.ok(userService.updateUser(users));
@@ -42,8 +42,12 @@ public class UserController {
 
     @ApiOperation("查询所有用户列表")
     @GetMapping("selectUsersAll")
-    public ResultDto<PageDto<UserDto>> selectUsersAll(@RequestParam Integer pageNo, @RequestParam Integer pageSize){
-        return ResultDto.ok(userService.selectUsersAll(pageNo,pageSize));
+    public ResultDto<PageDto<UserDto>> selectUsersAll(@RequestParam Long identityId,
+                                                      @RequestParam Long associationId,
+                                                      @RequestParam Long departmentiId,
+                                                      @RequestParam Integer pageNo,
+                                                      @RequestParam Integer pageSize){
+        return ResultDto.ok(userService.selectUsersAll(identityId,associationId,departmentiId,pageNo,pageSize));
     }
 
     @ApiOperation("查询用户信息")

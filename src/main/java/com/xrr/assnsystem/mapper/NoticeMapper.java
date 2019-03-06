@@ -1,6 +1,8 @@
 package com.xrr.assnsystem.mapper;
 
+import com.xrr.assnsystem.dto.NoticeDto;
 import com.xrr.assnsystem.dto.po.Notice;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,7 +15,7 @@ public interface NoticeMapper {
 
     Notice selectByPrimaryKey(Long id);
 
-    List<Notice> selectAll();
+    List<NoticeDto> selectAll(@Param("notice") Notice notice,@Param("pageNo") Integer pageNo , @Param("pageSize")Integer pageSize);
 
     int updateByPrimaryKey(Notice record);
 }

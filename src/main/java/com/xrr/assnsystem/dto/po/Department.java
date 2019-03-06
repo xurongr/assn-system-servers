@@ -27,7 +27,7 @@ public class Department implements Serializable {
     private Long ministerUserId;
 
     @ApiModelProperty("部门名称")
-    private Long departmentName;
+    private String departmentName;
 
     @ApiModelProperty("简介")
     private String content;

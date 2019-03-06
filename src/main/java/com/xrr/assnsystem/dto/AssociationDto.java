@@ -1,4 +1,4 @@
-package com.xrr.assnsystem.dto.po;
+package com.xrr.assnsystem.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
@@ -16,8 +16,8 @@ import java.time.Instant;
 @NoArgsConstructor
 @AllArgsConstructor
 @ApiModel("社团")
-public class Association implements Serializable {
-    private static final long serialVersionUID = 8299495086369043760L;
+public class AssociationDto implements Serializable {
+    private static final long serialVersionUID = -9067238755014853997L;
 
     private Long id;
 
@@ -26,6 +26,9 @@ public class Association implements Serializable {
 
     @ApiModelProperty("负责人ID")
     private Long userId;
+
+    @ApiModelProperty("负责人姓名")
+    private String  name;
 
     @ApiModelProperty("介绍")
     private String content;
@@ -39,6 +42,7 @@ public class Association implements Serializable {
 
     @ApiModelProperty("招募状态(0,1)")
     private Integer recruitState;
+
 
 
 }

@@ -10,6 +10,18 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="recruit_state" jdbcType="INTEGER" property="recruitState" />
   </resultMap>
+
+  <resultMap id="AssociationResultMap" type="com.xrr.assnsystem.dto.AssociationDto">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="association_name" jdbcType="VARCHAR" property="associationName" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="recruit_state" jdbcType="INTEGER" property="recruitState" />
+  </resultMap>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from association_table
     where id = #{id,jdbcType=BIGINT}
@@ -35,13 +47,41 @@
       recruit_state = #{recruitState,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select id, association_name, user_id, content, address, create_time, recruit_state
-    from association_table
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="AssociationResultMap">
+    select a.id, a.association_name, a.user_id,u.name, a.content, a.address, a.create_time, a.recruit_state
+    from association_table a
+    left join user_table u on u.id = a.user_id
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select id, association_name, user_id, content, address, create_time, recruit_state
-    from association_table
+  <select id="selectAll" resultMap="AssociationResultMap">
+    select a.id, a.association_name, a.user_id,u.name, a.content, a.address, a.create_time, a.recruit_state
+    from association_table a
+    left join user_table u on u.id = a.user_id
+    <where>
+      <if test="userId != null and userId != ''">
+        and a.user_id = #{userId}
+      </if>
+      <if test="recruitState != null and recruitState != ''">
+        and a.recruit_state = #{recruitState}
+      </if>
+    </where>
+    order by a.recruit_state desc
+    limit #{pageNo},#{pageNo}
   </select>
+
+  <!-- 查询总数 -->
+  <select id="selectCount" resultType="java.lang.Long">
+    select count(*)
+    from association_table a
+    left join user_table u on u.id = a.user_id
+    <where>
+      <if test="userId != null and userId != ''">
+        and a.user_id = #{userId}
+      </if>
+      <if test="recruitState != null and recruitState != ''">
+        and a.recruit_state = #{recruitState}
+      </if>
+    </where>
+  </select>
+
 </mapper>

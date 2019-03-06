@@ -1,6 +1,8 @@
 package com.xrr.assnsystem.mapper;
 
+import com.xrr.assnsystem.dto.AssociationDto;
 import com.xrr.assnsystem.dto.po.Association;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -11,9 +13,19 @@ public interface AssociationMapper {
 
     int insert(Association record);
 
-    Association selectByPrimaryKey(Long id);
+    AssociationDto selectByPrimaryKey(Long id);
 
-    List<Association> selectAll();
+    List<AssociationDto> selectAll(@Param("userId") Long userId, @Param("recruitState") Integer recruitState, @Param("pageNo") Integer pageNo , @Param("pageSize")Integer pageSize);
 
     int updateByPrimaryKey(Association record);
+
+    /**
+     * 查询总数
+     * @param userId
+     * @param recruitState
+     * @return
+     */
+    Long selectCount(@Param("userId") Long userId, @Param("recruitState") Integer recruitState);
+
+
 }

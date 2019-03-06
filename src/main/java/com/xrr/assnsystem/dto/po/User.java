@@ -24,12 +24,6 @@ public class User implements Serializable {
     @ApiModelProperty("专业")
     private String major;
 
-    @ApiModelProperty("所属部门ID")
-    private Long departmentId;
-
-    @ApiModelProperty("所属社团ID")
-    private Long associationId;
-
     @ApiModelProperty("用户名或学号")
     private String userName;
 
@@ -45,8 +39,6 @@ public class User implements Serializable {
     @ApiModelProperty("年龄")
     private Integer age;
 
-    @ApiModelProperty("职称")
-    private String job;
 
     @ApiModelProperty("联系方式")
     private Long telNumber;

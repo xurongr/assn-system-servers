@@ -5,7 +5,7 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="association_id" jdbcType="BIGINT" property="associationId" />
     <result column="minister_user_id" jdbcType="BIGINT" property="ministerUserId" />
-    <result column="department_name" jdbcType="BIGINT" property="departmentName" />
+    <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
@@ -19,14 +19,14 @@
     </selectKey>
     insert into department_table (association_id, minister_user_id, department_name,
       content, create_time)
-    values (#{associationId,jdbcType=BIGINT}, #{ministerUserId,jdbcType=BIGINT}, #{departmentName,jdbcType=BIGINT},
+    values (#{associationId,jdbcType=BIGINT}, #{ministerUserId,jdbcType=BIGINT}, #{departmentName,jdbcType=VARCHAR},
       #{content,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.xrr.assnsystem.dto.po.Department">
     update department_table
     set association_id = #{associationId,jdbcType=BIGINT},
       minister_user_id = #{ministerUserId,jdbcType=BIGINT},
-      department_name = #{departmentName,jdbcType=BIGINT},
+      department_name = #{departmentName,jdbcType=VARCHAR},
       content = #{content,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
