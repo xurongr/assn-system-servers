@@ -9,6 +9,18 @@
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
+
+    <resultMap id="DepartmentResultMap" type="com.xrr.assnsystem.dto.DepartmentDto">
+        <id column="id" jdbcType="BIGINT" property="departmentId" />
+        <result column="association_id" jdbcType="BIGINT" property="associationId" />
+        <result column="association_name" jdbcType="VARCHAR" property="associationName" />
+        <result column="minister_user_id" jdbcType="BIGINT" property="ministerUserId" />
+        <result column="minister_user_name" jdbcType="VARCHAR" property="ministerUserName" />
+        <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
+        <result column="content" jdbcType="VARCHAR" property="content" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    </resultMap>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from department_table
     where id = #{id,jdbcType=BIGINT}
@@ -31,13 +43,44 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select id, association_id, minister_user_id, department_name, content, create_time
-    from department_table
-    where id = #{id,jdbcType=BIGINT}
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="DepartmentResultMap">
+    select d.id, d.association_id,a.association_name, d.minister_user_id,u.name as minister_user_name, d.department_name, d.content, d.create_time
+    from department_table d
+    left join user_table u on u.id = d.minister_user_id
+    left join association_table a on a.id = d.association_id
+    where d.id = #{id,jdbcType=BIGINT}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select id, association_id, minister_user_id, department_name, content, create_time
-    from department_table
+
+  <select id="selectAll" resultMap="DepartmentResultMap">
+    select d.id, d.association_id,a.association_name, d.minister_user_id,u.name as minister_user_name, d.department_name, d.content, d.create_time
+    from department_table d
+    left join user_table u on u.id = d.minister_user_id
+    left join association_table a on a.id = d.association_id
+    <where>
+        <if test="associationId != null and associationId !=''">
+            and d.association_id = #{associationId}
+        </if>
+        <if test="ministerUserId != null and ministerUserId !=''">
+            and d.minister_user_id = #{ministerUserId}
+        </if>
+    </where>
+    limit #{pageNo},#{pageSize}
   </select>
+
+    <!-- 查询总数 -->
+    <select id="selectCount" resultType="java.lang.Long">
+        select count(*)
+        from department_table d
+        left join user_table u on u.id = d.minister_user_id
+        left join association_table a on a.id = d.association_id
+        <where>
+            <if test="associationId != null and associationId !=''">
+                and d.association_id = #{associationId}
+            </if>
+            <if test="ministerUserId != null and ministerUserId !=''">
+                and d.minister_user_id = #{ministerUserId}
+            </if>
+        </where>
+    </select>
 </mapper>

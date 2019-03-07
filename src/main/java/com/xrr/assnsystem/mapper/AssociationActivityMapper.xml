@@ -13,6 +13,22 @@
     <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
     <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
   </resultMap>
+
+  <resultMap id="AssociationActivityResultMap" type="com.xrr.assnsystem.dto.AssociationActivityDto">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="association_id" jdbcType="BIGINT" property="associationId" />
+    <result column="association_name" jdbcType="VARCHAR" property="associationName" />
+    <result column="activity_name" jdbcType="VARCHAR" property="activityName" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="score" jdbcType="DOUBLE" property="score" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+  </resultMap>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from association_activity_table
     where id = #{id,jdbcType=BIGINT}
@@ -43,15 +59,46 @@
       end_time = #{endTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select id, association_id, activity_name, user_id, content, address, image, score, 
-    start_time, end_time
-    from association_activity_table
-    where id = #{id,jdbcType=BIGINT}
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="AssociationActivityResultMap">
+    select aa.id, aa.association_id,a.association_name, aa.activity_name, aa.user_id,a.name, aa.content, aa.address, aa.image, aa.score,
+    aa.start_time, aa.end_time
+    from association_activity_table aa
+    left join user_table u on u.id = aa.user_id
+    left join association_table a on a.id = aa.association_id
+    where aa.id = #{id,jdbcType=BIGINT}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select id, association_id, activity_name, user_id, content, address, image, score, 
-    start_time, end_time
-    from association_activity_table
+
+  <select id="selectAll" resultMap="AssociationActivityResultMap">
+    select aa.id, aa.association_id,a.association_name, aa.activity_name, aa.user_id,a.name, aa.content, aa.address, aa.image, aa.score,
+    aa.start_time, aa.end_time
+    from association_activity_table aa
+    left join user_table u on u.id = aa.user_id
+    left join association_table a on a.id = aa.association_id
+    <where>
+      <if test="associationId != null and associationId !=''">
+        and aa.association_id = #{associationId}
+      </if>
+      <if test="userId != null and userId !=''">
+        and aa.user_id = #{userId}
+      </if>
+    </where>
+    order by  aa.start_time desc
+    limit #{pageNo},#{pageSize}
+  </select>
+
+  <!-- 查询总数 -->
+  <select id="selectCount" resultType="java.lang.Long">
+    select count(*)
+    from association_activity_table aa
+    left join user_table u on u.id = aa.user_id
+    left join association_table a on a.id = aa.association_id
+    <where>
+      <if test="associationId != null and associationId !=''">
+        and aa.association_id = #{associationId}
+      </if>
+      <if test="userId != null and userId !=''">
+        and aa.user_id = #{userId}
+      </if>
+    </where>
   </select>
 </mapper>

@@ -51,7 +51,7 @@
     select a.id, a.association_name, a.user_id,u.name, a.content, a.address, a.create_time, a.recruit_state
     from association_table a
     left join user_table u on u.id = a.user_id
-    where id = #{id,jdbcType=BIGINT}
+    where a.id = #{id,jdbcType=BIGINT}
   </select>
   <select id="selectAll" resultMap="AssociationResultMap">
     select a.id, a.association_name, a.user_id,u.name, a.content, a.address, a.create_time, a.recruit_state

@@ -38,11 +38,14 @@
       `type` = #{type,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select id, user_id, content, create_time, `type`
-    from notice_table
-    where id = #{id,jdbcType=BIGINT}
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="NoticeResultMap">
+    select n.id, n.user_id,u.name, n.content, n.create_time, n.`type`
+    from notice_table n
+    left join user_table u on u.id = n.user_id
+    where n.id = #{id,jdbcType=BIGINT}
   </select>
+
   <select id="selectAll" resultMap="NoticeResultMap">
     select n.id, n.user_id,u.name, n.content, n.create_time, n.`type`
     from notice_table n
@@ -58,4 +61,19 @@
     order by n.create_time desc
     limit #{pageNo},#{pageSize}
   </select>
+
+    <!-- 查询总数 -->
+    <select id="selectCount" resultType="java.lang.Long">
+        select count(*)
+        from notice_table n
+        left join user_table u on u.id = n.user_id
+        <where>
+            <if test="userId != null and userId != ''">
+                and n.user_id = #{userId}
+            </if>
+            <if test="type != null and type != ''">
+                and n.type = #{type}
+            </if>
+        </where>
+    </select>
 </mapper>

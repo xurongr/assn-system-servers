@@ -81,7 +81,7 @@
     left join user_activity_table ua on u.id = ua.user_id
     left join association_table a on a.id = ua.association_id
     left join department_table d on d.association_id = a.id
-    where id = #{id,jdbcType=BIGINT}
+    where u.id = #{id,jdbcType=BIGINT}
   </select>
 
   <!-- 查询全部信息 -->

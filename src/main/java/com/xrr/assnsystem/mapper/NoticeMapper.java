@@ -13,9 +13,17 @@ public interface NoticeMapper {
 
     int insert(Notice record);
 
-    Notice selectByPrimaryKey(Long id);
+    NoticeDto selectByPrimaryKey(Long id);
 
-    List<NoticeDto> selectAll(@Param("notice") Notice notice,@Param("pageNo") Integer pageNo , @Param("pageSize")Integer pageSize);
+    List<NoticeDto> selectAll(@Param("userId") Long userId,@Param("type") Integer type,@Param("pageNo") Integer pageNo , @Param("pageSize")Integer pageSize);
 
     int updateByPrimaryKey(Notice record);
+
+    /**
+     * 查询总数
+     * @param userId
+     * @param type
+     * @return
+     */
+    Long selectCount(@Param("userId") Long userId,@Param("type") Integer type);
 }

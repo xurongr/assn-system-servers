@@ -64,7 +64,7 @@ public class UserDto implements Serializable {
     @AllArgsConstructor
     class AssnBasic{
 
-        @ApiModelProperty("社团名称")
+        @ApiModelProperty("社团ID")
         private Long associationId;
 
         @ApiModelProperty("社团名称")

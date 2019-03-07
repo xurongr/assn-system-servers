@@ -10,6 +10,19 @@
     <result column="apply_time" jdbcType="TIMESTAMP" property="applyTime" />
     <result column="state" jdbcType="INTEGER" property="state" />
   </resultMap>
+
+  <resultMap id="ApplyResultMap" type="com.xrr.assnsystem.dto.ApplyDto">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="association_id" jdbcType="BIGINT" property="associationId" />
+    <result column="association_name" jdbcType="VARCHAR" property="associationName" />
+    <result column="department_id" jdbcType="BIGINT" property="departmentId" />
+    <result column="association_name" jdbcType="VARCHAR" property="associationName" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="apply_time" jdbcType="TIMESTAMP" property="applyTime" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+  </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from apply_table
     where id = #{id,jdbcType=BIGINT}
@@ -32,16 +45,67 @@
       department_id = #{departmentId,jdbcType=BIGINT},
       content = #{content,jdbcType=VARCHAR},
       apply_time = #{applyTime,jdbcType=TIMESTAMP},
-      `state` = #{state,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select id, user_id, association_id, department_id, content, apply_time, `state`
-    from apply_table
-    where id = #{id,jdbcType=BIGINT}
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ApplyResultMap">
+    select a.id, a.user_id,u.name, a.association_id,assn.association_name, a.department_id,d.department_name, a.content, a.apply_time, a.`state`
+    from apply_table a
+    left join user_table u on u.id = a.user_id
+    left join association_table assn on assn.id = a.association_id
+    left join department_table d on d.id = a.department_id
+    where a.id = #{id,jdbcType=BIGINT}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select id, user_id, association_id, department_id, content, apply_time, `state`
-    from apply_table
+  <select id="selectAll" resultMap="ApplyResultMap">
+    select a.id, a.user_id,u.name, a.association_id,assn.association_name, a.department_id,d.department_name, a.content, a.apply_time, a.`state`
+    from apply_table a
+    left join user_table u on u.id = a.user_id
+    left join association_table assn on assn.id = a.association_id
+    left join department_table d on d.id = a.department_id
+    <where>
+      <if test="apply.userId != null and apply.userId != ''">
+        and a.user_id = #{apply.userId}
+      </if>
+      <if test="apply.associationId != null and apply.associationId != ''">
+        and a.association_id = #{apply.associationId}
+      </if>
+      <if test="apply.departmentId != null and apply.departmentId != ''">
+        and a.department_id = #{apply.departmentId}
+      </if>
+      <if test="apply.state != null and apply.state != ''">
+        and a.state = #{apply.state}
+      </if>
+    </where>
+    order by a.apply_time desc
+    limit #{pageNo},#{pageSize}
   </select>
+
+  <!-- 查询总数 -->
+  <select id="selectCount" resultType="java.lang.Long">
+    select count(*)
+    from apply_table a
+    left join user_table u on u.id = a.user_id
+    left join association_table assn on assn.id = a.association_id
+    left join department_table d on d.id = a.department_id
+    <where>
+      <if test="apply.userId != null and apply.userId != ''">
+        and a.user_id = #{apply.userId}
+      </if>
+      <if test="apply.associationId != null and apply.associationId != ''">
+        and a.association_id = #{apply.associationId}
+      </if>
+      <if test="apply.departmentId != null and apply.departmentId != ''">
+        and a.department_id = #{apply.departmentId}
+      </if>
+      <if test="apply.state != null and apply.state != ''">
+        and a.state = #{apply.state}
+      </if>
+    </where>
+  </select>
+
+  <!-- 修改申请状态-->
+  <update id="updateState">
+    update apply_table
+    set  `state` = #{state}
+    where id = #{id}
+  </update>
 </mapper>
