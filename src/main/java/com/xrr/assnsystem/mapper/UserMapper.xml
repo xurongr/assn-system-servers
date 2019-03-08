@@ -101,8 +101,14 @@
       <if test="associationId != null and associationId != ''">
         and  a.id = #{associationId}
       </if>
-      <if test="departmentiId != null and departmentiId != ''">
-        and  d.id = #{departmentiId}
+      <if test="departmentId != null and departmentId != ''">
+        and  d.id = #{departmentId}
+      </if>
+      <if test="name != null and name != ''">
+        and  u.name = #{name}
+      </if>
+      <if test="userName != null and userName != ''">
+        and  u.user_name = #{userName}
       </if>
     </where>
     limit #{pageNo},#{pageSize}
@@ -111,25 +117,28 @@
   <!-- 查询总数 -->
   <select id="selectCount" resultType="java.lang.Long">
     select count(*)
-    select u.id,u.identity_id, i.identity_name, u.major, u.user_name, u.pwd, u.`name`,
-    u.sex, u.age, u.tel_number, u.grade, u.user_img, a.id as association_id ,a.association_name,
-    ua.job,d.id as department_id,d.department_name
     from user_table u
     left join `identity_table` i on i.id = u.identity_id
     left join user_activity_table ua on u.id = ua.user_id
     left join association_table a on a.id = ua.association_id
     left join department_table d on d.association_id = a.id
-    <where>
-      <if test="identityId != null and identityId != ''">
-        and  u.identity_id = #{identityId}
-      </if>
-      <if test="associationId != null and associationId != ''">
-        and  a.id = #{associationId}
-      </if>
-      <if test="departmentiId != null and departmentiId != ''">
-        and  d.id = #{departmentiId}
-      </if>
-    </where>
+      <where>
+          <if test="identityId != null and identityId != ''">
+              and  u.identity_id = #{identityId}
+          </if>
+          <if test="associationId != null and associationId != ''">
+              and  a.id = #{associationId}
+          </if>
+          <if test="departmentId != null and departmentId != ''">
+              and  d.id = #{departmentId}
+          </if>
+          <if test="name != null and name != ''">
+              and  u.name = #{name}
+          </if>
+          <if test="userName != null and userName != ''">
+              and  u.user_name = #{userName}
+          </if>
+      </where>
   </select>
 
   <!-- 通过账号密码查询 -->

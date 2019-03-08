@@ -61,6 +61,9 @@ public class UserService {
         Assert.notNull(users.getUserName(), "用户名不能为空");
         Assert.notNull(users.getPwd(), "密码不能为空");
         Assert.notNull(users.getIdentityId(), "必须绑定身份");
+        List<UserDto> usersList = userMapper.selectAll(null,null,null,null,users.getUserName(),0,10);
+        if(0 != usersList.size())
+            throw new ServiceException(501, "该用户名已存在！");
         int result = userMapper.insert(users);
         if (0 == result) throw new ServiceException(501, "添加账号失败");
         return result;
@@ -81,14 +84,13 @@ public class UserService {
      * 查询所有用户列表
      * @param identityId
      * @param associationId
-     * @param departmentiId
      * @param pageNo
      * @param pageSize
      * @return
      */
-    public PageDto<UserDto> selectUsersAll(Long identityId,Long associationId,Long departmentiId,Integer pageNo, Integer pageSize) {
-        List<UserDto> users = userMapper.selectAll(identityId,associationId,departmentiId,pageNo,pageSize);
-        Long count = userMapper.selectCount(identityId,associationId,departmentiId);
+    public PageDto<UserDto> selectUsersAll(Long identityId,Long associationId,Long departmentId,String name,String userName,Integer pageNo, Integer pageSize) {
+        List<UserDto> users = userMapper.selectAll(identityId,associationId,departmentId,name,userName,pageNo,pageSize);
+        Long count = userMapper.selectCount(identityId,associationId,departmentId,name,userName);
         PageDto<UserDto> pageDto = new PageDto<>();
         pageDto.setTotal(count);
         pageDto.setData(users);

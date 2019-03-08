@@ -3,11 +3,14 @@ package com.xrr.assnsystem.service;
 import com.xrr.assnsystem.dto.ApplyDto;
 import com.xrr.assnsystem.dto.PageDto;
 import com.xrr.assnsystem.dto.po.Apply;
+import com.xrr.assnsystem.dto.po.UserActivity;
 import com.xrr.assnsystem.exception.ServiceException;
 import com.xrr.assnsystem.mapper.ApplyMapper;
+import com.xrr.assnsystem.mapper.UserActivityMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.time.Instant;
@@ -19,6 +22,9 @@ import java.util.concurrent.TimeUnit;
 public class ApplyService {
     @Autowired
     private ApplyMapper applyMapper;
+
+    @Autowired
+    private UserActivityMapper userActivityMapper;
 
     /**
      * 获取申请列表
@@ -70,14 +76,39 @@ public class ApplyService {
     public ApplyDto selectApplyById(Long applyId){
         return applyMapper.selectByPrimaryKey(applyId);
     }
-//
-//    @Transactional
-//    public Integer updateApplyState(Long applyId,Integer state){
-//        int i = 0;
-//        if (2 == state) {
-//            i = applyMapper.updateState(applyId, state);
-//        }
-//
-//
-//    }
+
+
+    /**
+     * 修改申请状态
+     * @param applyId
+     * @param state
+     * @return
+     */
+    @Transactional
+    public Integer updateApplyState(Long applyId,Integer state){
+        ApplyDto applyDto = applyMapper.selectByPrimaryKey(applyId);
+        Integer state1 = applyDto.getState();
+        int result1 = 0;
+        int result2 = 0;
+        if(0 == state) throw new ServiceException(501, "不能将状态改成申请中");
+        if(1 == state1){
+            throw new ServiceException(501, "成员已通过申请，不能再做修改。");
+        }else{
+            result1 = applyMapper.updateState(applyId, state);
+            if(1 == state){
+                UserActivity userActivity = new UserActivity();
+                userActivity.setUserId(applyDto.getUserId());
+                userActivity.setAssociationId(applyDto.getAssociationId());
+                if(null != applyDto.getDepartmentId())
+                    userActivity.setDepartmentId(applyDto.getDepartmentId());
+                result2 = userActivityMapper.insert(userActivity);
+            }
+        }
+        if (((2 == state) && (1 != result1))
+                || ((1 == state) && (1 != result1) && (1 != result2))) {
+
+            throw new ServiceException(501, "修改状态失败");
+        }
+        return 1;
+    }
 }

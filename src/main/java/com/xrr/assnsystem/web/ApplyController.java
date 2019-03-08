@@ -39,8 +39,14 @@ public class ApplyController {
 
     @ApiOperation("查询申请")
     @GetMapping("selectApplyById")
-    public ResultDto<ApplyDto> selectApplyById(Long applyId){
+    public ResultDto<ApplyDto> selectApplyById(@RequestParam Long applyId){
         return ResultDto.ok(applyService.selectApplyById(applyId));
+    }
+
+    @ApiOperation("修改申请状态")
+    @GetMapping("updateApplyState")
+    public ResultDto<Integer> updateApplyState(@RequestParam Long applyId,@RequestParam Integer state){
+        return ResultDto.ok(applyService.updateApplyState(applyId,state));
     }
 
 }

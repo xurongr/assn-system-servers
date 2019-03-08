@@ -75,7 +75,7 @@
         and a.state = #{apply.state}
       </if>
     </where>
-    order by a.apply_time desc
+    order by a.state asc
     limit #{pageNo},#{pageSize}
   </select>
 
