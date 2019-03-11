@@ -11,7 +11,7 @@
  Target Server Version : 50718
  File Encoding         : 65001
 
- Date: 06/03/2019 15:40:50
+ Date: 11/03/2019 13:50:44
 */
 
 SET NAMES utf8mb4;
@@ -73,7 +73,7 @@ CREATE TABLE `department_table`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `association_id` bigint(20) DEFAULT NULL COMMENT '社团名称：association_id',
   `minister_user_id` bigint(20) DEFAULT NULL COMMENT '负责人ID：user_id',
-  `department_name` bigint(20) DEFAULT NULL,
+  `department_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `content` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '介绍:content',
   `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间：create_time',
   PRIMARY KEY (`id`) USING BTREE
@@ -105,6 +105,7 @@ DROP TABLE IF EXISTS `notice_table`;
 CREATE TABLE `notice_table`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) DEFAULT NULL COMMENT '发布人ID：user_id',
+  `association_id` bigint(20) DEFAULT NULL COMMENT '社团ID:association_id',
   `content` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '公告内容:content',
   `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间：create_time',
   `type` int(11) DEFAULT NULL COMMENT '类型(0系统公告,1社团公告)：type',
@@ -142,6 +143,12 @@ CREATE TABLE `user_table`  (
   `grade` int(11) DEFAULT NULL COMMENT '年级:grade',
   `user_img` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '图片:user_img',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户表user_table' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户表user_table' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of user_table
+-- ----------------------------
+INSERT INTO `user_table` VALUES (1, 1, NULL, 'admin', 'admin', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `user_table` VALUES (2, 0, 'string', 'string', 'string', 'string', 0, 0, 0, 0, 'string');
 
 SET FOREIGN_KEY_CHECKS = 1;
