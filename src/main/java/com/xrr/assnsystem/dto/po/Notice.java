@@ -26,6 +26,9 @@ public class Notice implements Serializable {
     @ApiModelProperty("内容")
     private String content;
 
+    @ApiModelProperty("所属社团ID")
+    private Long associationId;
+
     @ApiModelProperty("发布时间")
     @JsonFormat(pattern ="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Instant createTime;

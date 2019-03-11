@@ -18,12 +18,13 @@ public class NoticController {
     private NoticeService noticeService;
 
     @ApiOperation("获取公告列表")
-    @PostMapping("selectNoticeAll")
+    @GetMapping("selectNoticeAll")
     public ResultDto<PageDto<NoticeDto>> selectNoticeAll(@RequestParam Long userId ,
+                                                         @RequestParam Long associationId,
                                                          @RequestParam Integer type,
                                                          @RequestParam Integer pageNo ,
                                                          @RequestParam Integer pageSize){
-        return ResultDto.ok(noticeService.selectNoticeAll(userId,type,pageNo,pageSize));
+        return ResultDto.ok(noticeService.selectNoticeAll(userId,associationId,type,pageNo,pageSize));
     }
 
     @ApiOperation("添加公告")

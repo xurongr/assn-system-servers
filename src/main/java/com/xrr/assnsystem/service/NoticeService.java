@@ -24,9 +24,9 @@ public class NoticeService {
      * 获取公告列表
      * @return
      */
-    public PageDto<NoticeDto> selectNoticeAll(Long userId, Integer type, Integer pageNo , Integer pageSize){
-        List<NoticeDto> noticeDtoList = noticeMapper.selectAll(userId,type,pageNo,pageSize);
-        Long count = noticeMapper.selectCount(userId,type);
+    public PageDto<NoticeDto> selectNoticeAll(Long userId,Long associationId, Integer type, Integer pageNo , Integer pageSize){
+        List<NoticeDto> noticeDtoList = noticeMapper.selectAll(userId,associationId,type,pageNo,pageSize);
+        Long count = noticeMapper.selectCount(userId,associationId,type);
         PageDto<NoticeDto> pageDto = new PageDto<>();
         pageDto.setTotal(count);
         pageDto.setData(noticeDtoList);

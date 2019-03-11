@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.xrr.assnsystem.dto.po.Notice">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="association_id" jdbcType="BIGINT" property="associationId" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="type" jdbcType="INTEGER" property="type" />
@@ -13,6 +14,8 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="association_id" jdbcType="BIGINT" property="associationId" />
+    <result column="association_name" jdbcType="VARCHAR" property="associationName" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="type" jdbcType="INTEGER" property="type" />
@@ -25,14 +28,15 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into notice_table (user_id, content, create_time, 
+    insert into notice_table (user_id,association_id, content, create_time,
       `type`)
-    values (#{userId,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+    values (#{userId,jdbcType=BIGINT},#{associationId,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
       #{type,jdbcType=INTEGER})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.xrr.assnsystem.dto.po.Notice">
     update notice_table
     set user_id = #{userId,jdbcType=BIGINT},
+      association_id = #{associationId,jdbcType=BIGINT},
       content = #{content,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       `type` = #{type,jdbcType=INTEGER}
@@ -40,19 +44,24 @@
   </update>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="NoticeResultMap">
-    select n.id, n.user_id,u.name, n.content, n.create_time, n.`type`
+    select n.id, n.user_id,u.name,n.association_id,a.association_name, n.content, n.create_time, n.`type`
     from notice_table n
     left join user_table u on u.id = n.user_id
+    left join association_table a on a.id = n.association_id
     where n.id = #{id,jdbcType=BIGINT}
   </select>
 
   <select id="selectAll" resultMap="NoticeResultMap">
-    select n.id, n.user_id,u.name, n.content, n.create_time, n.`type`
+    select n.id, n.user_id,u.name,n.association_id,a.association_name, n.content, n.create_time, n.`type`
     from notice_table n
     left join user_table u on u.id = n.user_id
+    left join association_table a on a.id = n.association_id
     <where>
       <if test="userId != null and userId != ''">
         and n.user_id = #{userId}
+      </if>
+      <if test="associationId != null and associationId != ''">
+        and n.association_id = #{associationId}
       </if>
       <if test="type != null and type != ''">
         and n.type = #{type}
@@ -64,16 +73,20 @@
 
     <!-- 查询总数 -->
     <select id="selectCount" resultType="java.lang.Long">
-        select count(*)
-        from notice_table n
-        left join user_table u on u.id = n.user_id
-        <where>
-            <if test="userId != null and userId != ''">
-                and n.user_id = #{userId}
-            </if>
-            <if test="type != null and type != ''">
-                and n.type = #{type}
-            </if>
-        </where>
+      select count(*)
+      from notice_table n
+      left join user_table u on u.id = n.user_id
+      left join association_table a on a.id = n.association_id
+      <where>
+        <if test="userId != null and userId != ''">
+          and n.user_id = #{userId}
+        </if>
+        <if test="associationId != null and associationId != ''">
+          and n.association_id = #{associationId}
+        </if>
+        <if test="type != null and type != ''">
+          and n.type = #{type}
+        </if>
+      </where>
     </select>
 </mapper>

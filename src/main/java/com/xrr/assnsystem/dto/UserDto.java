@@ -62,7 +62,7 @@ public class UserDto implements Serializable {
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
-    class AssnBasic{
+    static class AssnBasic{
 
         @ApiModelProperty("社团ID")
         private Long associationId;
@@ -79,7 +79,7 @@ public class UserDto implements Serializable {
         @Data
         @NoArgsConstructor
         @AllArgsConstructor
-        class DepartmentBasic {
+        static class DepartmentBasic {
 
             @ApiModelProperty("部门ID")
             private Long departmentId;

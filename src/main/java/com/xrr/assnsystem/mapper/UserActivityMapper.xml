@@ -31,20 +31,22 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into user_activity_table (user_id, department_id, activity_id
+    insert into user_activity_table (user_id,association_id, department_id, activity_id
       )
-    values (#{userId,jdbcType=BIGINT}, #{departmentId,jdbcType=BIGINT}, #{activityId,jdbcType=BIGINT}
+    values (#{userId,jdbcType=BIGINT},#{associationId,jdbcType=BIGINT}, #{departmentId,jdbcType=BIGINT}, #{activityId,jdbcType=BIGINT}
       )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.xrr.assnsystem.dto.po.UserActivity">
     update user_activity_table
     set user_id = #{userId,jdbcType=BIGINT},
+        association_id = #{associationId,jdbcType=BIGINT},
       department_id = #{departmentId,jdbcType=BIGINT},
       activity_id = #{activityId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="UserActivityResultMap">
-    select id, user_id, department_id, activity_id
+    select id, user_id,association_id, department_id, activity_id
     from user_activity_table
     where id = #{id,jdbcType=BIGINT}
   </select>
@@ -64,17 +66,21 @@
             <if test="departmentId != null and departmentId != ''">
                 and  department_id = #{usdepartmentIderId}
             </if>
+            <if test="activityId != null and activityId != ''">
+                and  activity_id = #{activityId}
+            </if>
         </where>
     </delete>
 
     <!-- 查询某用户参与的所有社团列表 -->
     <select id="selectAssociationAllByUserId" resultMap="UserActivityResultMap">
-        select ua.id, ua.user_id,u.name,ua.association_id,a.association_name, ua.department_id
+        select ua.id, ua.user_id,u.name,ua.association_id,a.association_name
         from user_activity_table ua
         join user_table u on u.id = ua.user_id
         join association_table a on a.id = ua.association_id
         where ua.user_id = #{userId}
         and ua.department_id = 0
+        and ua.activity_id = 0
         limit #{pageNo},{pageSize}
     </select>
     <!-- 查询某用户参与的社团总数 -->
@@ -85,6 +91,7 @@
         join association_table a on a.id = ua.association_id
         where ua.user_id = #{userId}
         and ua.department_id = 0
+        and ua.activity_id = 0
     </select>
 
     <!-- 查询某用户参与的所有部门列表 -->
@@ -98,6 +105,7 @@
         join association_activity_table aa on aa.id = ua.activity_id
         where ua.user_id = #{userId}
         and ua.department_id  &lt;&gt; 0
+        and ua.activity_id = 0
         <if test="associationId != null and associationId != ''">
             and ua.association_id = #{associationId}
         </if>
@@ -113,6 +121,7 @@
         join association_activity_table aa on aa.id = ua.activity_id
         where ua.user_id = #{userId}
         and ua.department_id  &lt;&gt; 0
+        and ua.activity_id = 0
         <if test="associationId != null and associationId != ''">
             and ua.association_id = #{associationId}
         </if>
@@ -130,10 +139,13 @@
         join association_activity_table aa on aa.id = ua.activity_id
         <where>
             <if test="associationId != null and associationId != ''">
-                and ua.association_id = #{userActivity.associationId}
+                and ua.association_id = #{associationId}
             </if>
             <if test="departmentId != null and departmentId != ''">
-                and ua.department_id = #{userActivity.departmentId}
+                and ua.department_id = #{departmentId}
+            </if>
+            <if test="activityId != null and activityId != ''">
+                and ua.activity_id = #{activityId}
             </if>
         </where>
         limit #{pageNo,pageSize}
@@ -149,12 +161,16 @@
         join association_activity_table aa on aa.id = ua.activity_id
         <where>
             <if test="associationId != null and associationId != ''">
-                and ua.association_id = #{userActivity.associationId}
+                and ua.association_id = #{associationId}
             </if>
             <if test="departmentId != null and departmentId != ''">
-                and ua.department_id = #{userActivity.departmentId}
+                and ua.department_id = #{departmentId}
+            </if>
+            <if test="activityId != null and activityId != ''">
+                and ua.activity_id = #{activityId}
             </if>
         </where>
     </select>
+
 
 </mapper>

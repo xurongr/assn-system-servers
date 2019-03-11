@@ -27,6 +27,12 @@ public class NoticeDto implements Serializable {
     @ApiModelProperty("发布人姓名")
     private String name;
 
+    @ApiModelProperty("所属社团ID")
+    private Long associationId;
+
+    @ApiModelProperty("所属社团名称")
+    private String associationName;
+
     @ApiModelProperty("内容")
     private String content;
 

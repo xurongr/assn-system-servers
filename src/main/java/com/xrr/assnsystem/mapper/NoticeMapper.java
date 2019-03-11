@@ -15,15 +15,16 @@ public interface NoticeMapper {
 
     NoticeDto selectByPrimaryKey(Long id);
 
-    List<NoticeDto> selectAll(@Param("userId") Long userId,@Param("type") Integer type,@Param("pageNo") Integer pageNo , @Param("pageSize")Integer pageSize);
+    List<NoticeDto> selectAll(@Param("userId") Long userId,@Param("associationId") Long associationId,@Param("type") Integer type,@Param("pageNo") Integer pageNo , @Param("pageSize")Integer pageSize);
 
     int updateByPrimaryKey(Notice record);
 
     /**
      * 查询总数
+     * @param associationId
      * @param userId
      * @param type
      * @return
      */
-    Long selectCount(@Param("userId") Long userId,@Param("type") Integer type);
+    Long selectCount(@Param("userId") Long userId,@Param("associationId") Long associationId,@Param("type") Integer type);
 }

@@ -58,4 +58,14 @@ public interface UserMapper {
      * @return
      */
     int updatePwd(@Param("userName") String userName, @Param("oldPwd") String oldPwd, @Param("newPwd") String newPwd);
+
+
+    /**
+     * 修改职务
+     * @param job
+     * @param userId
+     * @param associationId
+     * @return
+     */
+    int updateJob(@Param("job") String job, @Param("userId") Long userId, @Param("associationId") Long  associationId);
 }

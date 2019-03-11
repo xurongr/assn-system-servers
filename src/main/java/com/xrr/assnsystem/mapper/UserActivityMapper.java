@@ -25,7 +25,7 @@ public interface UserActivityMapper {
      * @param departmentId
      * @return
      */
-    int deleteBy(@Param("userId")Long userId,@Param("associationId")Long associationId,@Param("departmentId")Long departmentId);
+    int deleteBy(@Param("userId")Long userId,@Param("associationId")Long associationId,@Param("departmentId")Long departmentId,@Param("activityId") Long  activityId);
 
 
     /**
@@ -76,6 +76,7 @@ public interface UserActivityMapper {
      */
     List<UserActivityDto> selectUserAll(@Param("associationId") Long  associationId,
                                         @Param("departmentId") Long  departmentId,
+                                        @Param("activityId") Long  activityId,
                                         @Param("pageNo") Integer pageNo ,
                                         @Param("pageSize")Integer pageSize);
 
@@ -86,5 +87,6 @@ public interface UserActivityMapper {
      * @return
      */
     Long selectUserCount(@Param("associationId") Long  associationId,
-                         @Param("departmentId") Long  departmentId);
+                         @Param("departmentId") Long  departmentId,
+                         @Param("activityId") Long  activityId);
 }

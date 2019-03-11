@@ -58,10 +58,10 @@ public class UserController {
         return ResultDto.ok(userService.selectByUserId(UserId));
     }
 
-    @ApiOperation("删除账户")
-    @GetMapping("deleteUser")
-    public ResultDto<Integer> deleteUser(@RequestParam Long UserId){
-        return ResultDto.ok(userService.deleteUser(UserId));
+    @ApiOperation("修改职务")
+    @GetMapping("updateJob")
+    public ResultDto<Integer> updateJob(@RequestParam String  job ,@RequestParam Long userId,@RequestParam Long  associationId){
+        return ResultDto.ok(userService.updateJob(job, userId, associationId));
     }
 
 }

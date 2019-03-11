@@ -81,6 +81,21 @@ public class UserService {
     }
 
     /**
+     * 修改职务
+     * @param job
+     * @param userId
+     * @param associationId
+     * @return
+     */
+    public Integer updateJob(String  job , Long userId,Long  associationId){
+        Assert.notNull(userId, "用户ID不能为空");
+        Assert.notNull(job, "职务不能为空");
+        Assert.notNull(associationId, "社团不能为空");
+        int result = userMapper.updateJob(job, userId, associationId);
+        return result;
+    }
+
+    /**
      * 查询所有用户列表
      * @param identityId
      * @param associationId
