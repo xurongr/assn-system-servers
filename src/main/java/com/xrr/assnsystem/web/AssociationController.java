@@ -19,8 +19,8 @@ public class AssociationController {
 
     @ApiOperation("获取社团列表")
     @GetMapping("selectAssociationAll")
-    public ResultDto<PageDto<AssociationDto>> selectAssociationAll(@RequestParam Long userId,
-                                                                @RequestParam Integer recruitState,
+    public ResultDto<PageDto<AssociationDto>> selectAssociationAll(@RequestParam(value ="userId",required = false) Long userId,
+                                                                @RequestParam(value ="recruitState",required = false) Integer recruitState,
                                                                 @RequestParam Integer pageNo ,
                                                                 @RequestParam Integer pageSize){
         return ResultDto.ok(associationService.selectAssociationAll(userId,recruitState,pageNo,pageSize));

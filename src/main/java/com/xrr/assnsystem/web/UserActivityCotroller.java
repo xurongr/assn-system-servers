@@ -96,7 +96,7 @@ public class UserActivityCotroller {
         return ResultDto.ok(userActivityService.selectActivityUserAll(associationId,activityId,pageNo,pageSize));
     }
 
-    @ApiOperation("查询参加某活动成员列表")
+    @ApiOperation("删除参加活动的某用户")
     @GetMapping("deleteUserInActivity")
     public ResultDto<Integer> deleteUserInActivity(@RequestParam Long userId,
                                                     @RequestParam Long associationId,

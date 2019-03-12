@@ -19,8 +19,8 @@ public class DepartmentController {
 
     @ApiOperation("获取部门列表")
     @GetMapping("selectDepartmentAll")
-    public ResultDto<PageDto<DepartmentDto>> selectDepartmentAll(@RequestParam Long associationId,
-                                                                 @RequestParam Long ministerUserId,
+    public ResultDto<PageDto<DepartmentDto>> selectDepartmentAll(@RequestParam(value ="associationId",required = false) Long associationId,
+                                                                 @RequestParam(value ="ministerUserId",required = false) Long ministerUserId,
                                                                  @RequestParam Integer pageNo ,
                                                                  @RequestParam Integer pageSize){
         return ResultDto.ok(departmentService.selectDepartmentAll(associationId,ministerUserId,pageNo,pageSize));

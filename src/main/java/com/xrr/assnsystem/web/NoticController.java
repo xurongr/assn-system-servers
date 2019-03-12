@@ -19,9 +19,9 @@ public class NoticController {
 
     @ApiOperation("获取公告列表")
     @GetMapping("selectNoticeAll")
-    public ResultDto<PageDto<NoticeDto>> selectNoticeAll(@RequestParam Long userId ,
-                                                         @RequestParam Long associationId,
-                                                         @RequestParam Integer type,
+    public ResultDto<PageDto<NoticeDto>> selectNoticeAll(@RequestParam(value ="userId",required = false) Long userId ,
+                                                         @RequestParam(value ="associationId",required = false) Long associationId,
+                                                         @RequestParam(value ="type",required = false) Integer type,
                                                          @RequestParam Integer pageNo ,
                                                          @RequestParam Integer pageSize){
         return ResultDto.ok(noticeService.selectNoticeAll(userId,associationId,type,pageNo,pageSize));

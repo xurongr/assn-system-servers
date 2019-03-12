@@ -5,8 +5,7 @@ import com.xrr.assnsystem.dto.ResultDto;
 import com.xrr.assnsystem.dto.UserDto;
 import com.xrr.assnsystem.dto.po.User;
 import com.xrr.assnsystem.service.UserService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +17,7 @@ public class UserController {
 
     @ApiOperation("登录")
     @PostMapping("login")
-    public ResultDto<UserDto> longin(@RequestBody User user){
+    public ResultDto<UserDto> longin(@ApiParam(name = "user", value = "参数（userName，pwd）") @RequestBody User user){
         return ResultDto.ok(userService.login(user.getUserName(), user.getPwd()));
     }
 
@@ -42,11 +41,11 @@ public class UserController {
 
     @ApiOperation("查询所有用户列表")
     @GetMapping("selectUsersAll")
-    public ResultDto<PageDto<UserDto>> selectUsersAll(@RequestParam Long identityId,
-                                                      @RequestParam Long associationId,
-                                                      @RequestParam Long departmentId,
-                                                      @RequestParam String name,
-                                                      @RequestParam String userName,
+    public ResultDto<PageDto<UserDto>> selectUsersAll(@RequestParam(value ="identityId",required = false) Long identityId,
+                                                      @RequestParam(value ="associationId",required = false) Long associationId,
+                                                      @RequestParam(value ="departmentId",required = false) Long departmentId,
+                                                      @RequestParam(value ="name",required = false) String name,
+                                                      @RequestParam(value ="userName",required = false) String userName,
                                                       @RequestParam Integer pageNo,
                                                       @RequestParam Integer pageSize){
         return ResultDto.ok(userService.selectUsersAll(identityId,associationId,departmentId,name,userName,pageNo,pageSize));
