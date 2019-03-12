@@ -66,7 +66,7 @@
       </if>
     </where>
     order by a.recruit_state desc
-    limit #{pageNo},#{pageNo}
+    limit #{pageNo},#{pageSize}
   </select>
 
   <!-- 查询总数 -->

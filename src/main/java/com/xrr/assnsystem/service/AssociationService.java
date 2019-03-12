@@ -3,8 +3,10 @@ package com.xrr.assnsystem.service;
 import com.xrr.assnsystem.dto.AssociationDto;
 import com.xrr.assnsystem.dto.PageDto;
 import com.xrr.assnsystem.dto.po.Association;
+import com.xrr.assnsystem.dto.po.UserActivity;
 import com.xrr.assnsystem.exception.ServiceException;
 import com.xrr.assnsystem.mapper.AssociationMapper;
+import com.xrr.assnsystem.mapper.UserActivityMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,9 @@ import java.util.concurrent.TimeUnit;
 public class AssociationService {
     @Autowired
     private AssociationMapper associationMapper;
+
+    @Autowired
+    private UserActivityMapper userActivityMapper;
 
     /**
      * 获取社团列表
@@ -44,6 +49,14 @@ public class AssociationService {
         association.setCreateTime(Instant.now().plusMillis(TimeUnit.HOURS.toMillis(8)));
         int result = associationMapper.insert(association);
         if(0 == result) throw new ServiceException(501, "添加失败");
+
+        if((null != association.getUserId())||(0 != association.getUserId())) {
+            userActivityMapper.insert(UserActivity.builder()
+                    .userId(association.getUserId())
+                    .associationId(association.getId())
+                    .departmentId(0L)
+                    .activityId(0L).build());
+        }
         return result;
     }
 
