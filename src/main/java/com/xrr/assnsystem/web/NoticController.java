@@ -41,7 +41,7 @@ public class NoticController {
 
     @ApiOperation("查询公告")
     @GetMapping("selectNoticeById")
-    public ResultDto<NoticeDto> selectNoticeById(Long noticeId){
+    public ResultDto<NoticeDto> selectNoticeById(@RequestParam Long noticeId){
         return ResultDto.ok(noticeService.selectNoticeById(noticeId));
     }
 

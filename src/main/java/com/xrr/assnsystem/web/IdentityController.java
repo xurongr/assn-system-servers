@@ -7,10 +7,7 @@ import com.xrr.assnsystem.service.IdentityService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -40,7 +37,7 @@ public class IdentityController {
 
     @ApiOperation("查询身份")
     @GetMapping("selectIdentityById")
-    public ResultDto<Identity> selectIdentityById(Long identityId){
+    public ResultDto<Identity> selectIdentityById(@RequestParam Long identityId){
         return ResultDto.ok(identityService.selectIdentityById(identityId));
     }
 

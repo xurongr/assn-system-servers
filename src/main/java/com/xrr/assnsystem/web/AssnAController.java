@@ -40,7 +40,7 @@ public class AssnAController {
 
     @ApiOperation("查询社团活动")
     @GetMapping("selectAssnAById")
-    public ResultDto<AssociationActivityDto> selectAssnAById(Long associationActivityId){
+    public ResultDto<AssociationActivityDto> selectAssnAById(@RequestParam Long associationActivityId){
         return ResultDto.ok(associationActivityService.selectAssnAById(associationActivityId));
     }
 

@@ -18,12 +18,12 @@ public class UserController {
 
     @ApiOperation("登录")
     @PostMapping("login")
-    public ResultDto<UserDto> longin(@RequestParam String userName, @RequestParam String pwd){
-        return ResultDto.ok(userService.login(userName, pwd));
+    public ResultDto<UserDto> longin(@RequestBody User user){
+        return ResultDto.ok(userService.login(user.getUserName(), user.getPwd()));
     }
 
     @ApiOperation("修改密码")
-    @PostMapping("updatePwd")
+    @GetMapping("updatePwd")
     public ResultDto<Integer> updatePwd(@RequestParam String userName,@RequestParam String oldPwd,@RequestParam String newPwd){
         return ResultDto.ok(userService.updatePwd(userName, oldPwd, newPwd));
     }

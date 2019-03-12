@@ -40,7 +40,7 @@ public class DepartmentController {
 
     @ApiOperation("查询社团")
     @GetMapping("selectDepartmentById")
-    public ResultDto<DepartmentDto> selectDepartmentById(Long departmentId){
+    public ResultDto<DepartmentDto> selectDepartmentById(@RequestParam Long departmentId){
         return ResultDto.ok(departmentService.selectDepartmentById(departmentId));
     }
 
