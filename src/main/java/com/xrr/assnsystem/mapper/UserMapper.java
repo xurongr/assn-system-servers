@@ -24,6 +24,7 @@ public interface UserMapper {
      * @return
      */
     List<UserDto> selectAll(@Param("identityId")Long identityId,
+                            @Param("identityName") String identityName,
                             @Param("associationId") Long associationId,
                             @Param("departmentId") Long departmentId,
                             @Param("name") String name,
@@ -36,6 +37,7 @@ public interface UserMapper {
      * @return
      */
     Long selectCount(@Param("identityId")Long identityId,
+                     @Param("identityName") String identityName,
                      @Param("associationId") Long associationId,
                      @Param("departmentId") Long departmentId,
                      @Param("name") String name,

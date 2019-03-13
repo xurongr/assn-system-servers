@@ -98,6 +98,9 @@
       <if test="identityId != null and identityId != ''">
          and  u.identity_id = #{identityId}
       </if>
+      <if test="identityName != null and identityName != ''">
+        and i.identity_name = #{identityName}
+      </if>
       <if test="associationId != null and associationId != ''">
         and  a.id = #{associationId}
       </if>
@@ -125,6 +128,9 @@
       <where>
           <if test="identityId != null and identityId != ''">
               and  u.identity_id = #{identityId}
+          </if>
+          <if test="identityName != null and identityName != ''">
+            and i.identity_name = #{identityName}
           </if>
           <if test="associationId != null and associationId != ''">
               and  a.id = #{associationId}

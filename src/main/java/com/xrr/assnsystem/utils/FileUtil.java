@@ -38,7 +38,7 @@ public class FileUtil {
         // 获取上传文件的后缀
         String fileSuffix = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
         // 设置上传文件路径
-        String uploadPath = new File(System.getProperty("user.dir")).getParent().replace("\\","/") + resourceDir + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "/" + fileSuffix + "/";
+        String uploadPath = System.getProperty("user.dir").replace("\\","/") + resourceDir + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "/" + fileSuffix + "/";
         // 上传文件名
         String fileName = System.currentTimeMillis()  + new Random().nextInt(1000) + "-" + originalFilename;
         File savefile = new File(uploadPath + "/" + fileName);
