@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * 文件上传
+ * 2019-03-13
+ */
 @Component
 public class FileUtil {
 
@@ -36,7 +40,7 @@ public class FileUtil {
         // 设置上传文件路径
         String uploadPath = new File(System.getProperty("user.dir")).getParent().replace("\\","/") + resourceDir + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "/" + fileSuffix + "/";
         // 上传文件名
-        String fileName = System.currentTimeMillis()  + new Random().nextInt(1000) + originalFilename;
+        String fileName = System.currentTimeMillis()  + new Random().nextInt(1000) + "-" + originalFilename;
         File savefile = new File(uploadPath + "/" + fileName);
         if (!savefile.getParentFile().exists()) {
             savefile.getParentFile().mkdirs();
