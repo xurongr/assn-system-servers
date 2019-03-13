@@ -72,7 +72,7 @@
       user_img = #{userImg,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="UserResultMap">
     select u.id,u.identity_id, i.identity_name, u.major, u.user_name, u.pwd, u.`name`,
     u.sex, u.age, u.tel_number, u.grade, u.user_img, a.id as association_id ,a.association_name,
     ua.job,d.id as department_id,d.department_name

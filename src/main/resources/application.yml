@@ -24,11 +24,10 @@ mybatis:
 
 
 
-#配置上传文件地址
-upfile:
+#配置上传文件地址 (工程同级目录下)
+fileUpload:
   location:
-    path: /FileTemp/
+    path: /upload_tmp/
 
-#配置文件大小限制
 
 
