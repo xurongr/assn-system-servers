@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : 127.0.0.1
+ Source Server         : root
  Source Server Type    : MySQL
  Source Server Version : 50718
  Source Host           : localhost:3306
@@ -11,7 +11,7 @@
  Target Server Version : 50718
  File Encoding         : 65001
 
- Date: 11/03/2019 13:50:44
+ Date: 15/03/2019 23:27:16
 */
 
 SET NAMES utf8mb4;
@@ -23,12 +23,12 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `apply_table`;
 CREATE TABLE `apply_table`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) DEFAULT NULL COMMENT '负责人ID：user_id',
-  `association_id` bigint(20) DEFAULT NULL,
-  `department_id` bigint(20) DEFAULT NULL COMMENT '部门ID：department_id',
-  `content` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '介绍:content',
-  `apply_time` datetime(0) DEFAULT NULL COMMENT '创建时间：create_time',
-  `state` int(11) DEFAULT NULL COMMENT '状态(0申请中,1通过,2未通过):state',
+  `user_id` bigint(20) NULL DEFAULT NULL COMMENT '负责人ID：user_id',
+  `association_id` bigint(20) NULL DEFAULT NULL,
+  `department_id` bigint(20) NULL DEFAULT NULL COMMENT '部门ID：department_id',
+  `content` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '介绍:content',
+  `apply_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间：create_time',
+  `state` int(11) NULL DEFAULT NULL COMMENT '状态(0申请中,1通过,2未通过):state',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '申请表：apply_table' ROW_FORMAT = Dynamic;
 
@@ -38,15 +38,15 @@ CREATE TABLE `apply_table`  (
 DROP TABLE IF EXISTS `association_activity_table`;
 CREATE TABLE `association_activity_table`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `association_id` bigint(20) DEFAULT NULL COMMENT '社团名称：association_name',
-  `activity_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '社团名称：association_name',
-  `user_id` bigint(20) DEFAULT NULL COMMENT '负责人ID：user_id',
-  `content` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '介绍:content',
-  `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '地址：address',
-  `image` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '图片：image',
-  `score` double DEFAULT NULL,
-  `start_time` datetime(0) DEFAULT NULL COMMENT '创建时间：create_time',
-  `end_time` datetime(0) DEFAULT NULL,
+  `association_id` bigint(20) NULL DEFAULT NULL COMMENT '社团名称：association_name',
+  `activity_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '社团名称：association_name',
+  `user_id` bigint(20) NULL DEFAULT NULL COMMENT '负责人ID：user_id',
+  `content` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '介绍:content',
+  `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '地址：address',
+  `image` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '图片：image',
+  `score` double NULL DEFAULT NULL,
+  `start_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间：create_time',
+  `end_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '社团活动表association_activity_table' ROW_FORMAT = Dynamic;
 
@@ -56,14 +56,26 @@ CREATE TABLE `association_activity_table`  (
 DROP TABLE IF EXISTS `association_table`;
 CREATE TABLE `association_table`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `association_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '社团名称：association_name',
-  `user_id` bigint(20) DEFAULT NULL COMMENT '负责人ID：user_id',
-  `content` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '介绍:content',
-  `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '地址：address',
-  `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间：create_time',
-  `recruit_state` int(11) DEFAULT NULL COMMENT '招募状态：recruit_state',
+  `association_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '社团名称：association_name',
+  `user_id` bigint(20) NULL DEFAULT NULL COMMENT '负责人ID：user_id',
+  `content` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '介绍:content',
+  `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '地址：address',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间：create_time',
+  `recruit_state` int(11) NULL DEFAULT NULL COMMENT '招募状态：recruit_state',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '社团表association_table' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '社团表association_table' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of association_table
+-- ----------------------------
+INSERT INTO `association_table` VALUES (1, '计算机协会', 1, '致力于用专业学到的知识帮助同学们解决与计算机有关的问题', '求是楼', '2019-03-09 20:15:10', 0);
+INSERT INTO `association_table` VALUES (2, '青年志愿者协会', NULL, '致力于志愿服务的大学生团队1', '女生宿舍里一楼右侧2n110', '2019-03-10 05:15:17', 0);
+INSERT INTO `association_table` VALUES (3, '后山夜校', NULL, '三十载风雨兼程；三十载春华秋实；三十载沧桑巨变。后山夜校坚持教育扶贫已经三十年。后山夜校是校团委于1987年成立的一所义务支教学校，坚持了30年的教学。在每周一至周五晚及周末的早上为后山畲族村周边中小学生义教，发展至今变为了集课业辅导、兴趣培训、人文教育为一体的特色教学基地。', '宁德师范学院', '2019-03-15 18:39:21', 0);
+INSERT INTO `association_table` VALUES (4, 'string', 0, 'string', 'string', '2019-03-15 18:44:38', 0);
+INSERT INTO `association_table` VALUES (5, '后山夜校', 4, '后山夜校是校团委于1987年成立的一所义务支教学校，坚持了30年的教学。在每周一至周五晚及周末的早上为后山畲族村周边中小学生义教，发展至今变为了集课业辅导、兴趣培训、人文教育为一体的特色教学基地。', '宁德师范学院', '2019-03-16 01:39:08', 0);
+INSERT INTO `association_table` VALUES (6, '潮音文学社', 4, '3333333333333333333333', '3333', '2019-03-16 01:42:36', 1);
+INSERT INTO `association_table` VALUES (7, 'string', 0, 'string', 'string', '2019-03-16 01:44:40', 0);
+INSERT INTO `association_table` VALUES (8, 'g', 0, 'g', 'g', '2019-03-16 01:46:07', 0);
 
 -- ----------------------------
 -- Table structure for department_table
@@ -71,11 +83,11 @@ CREATE TABLE `association_table`  (
 DROP TABLE IF EXISTS `department_table`;
 CREATE TABLE `department_table`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `association_id` bigint(20) DEFAULT NULL COMMENT '社团名称：association_id',
-  `minister_user_id` bigint(20) DEFAULT NULL COMMENT '负责人ID：user_id',
-  `department_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `content` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '介绍:content',
-  `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间：create_time',
+  `association_id` bigint(20) NULL DEFAULT NULL COMMENT '社团名称：association_id',
+  `minister_user_id` bigint(20) NULL DEFAULT NULL COMMENT '负责人ID：user_id',
+  `department_name` bigint(20) NULL DEFAULT NULL,
+  `content` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '介绍:content',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间：create_time',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '部门表department_table' ROW_FORMAT = Dynamic;
 
@@ -85,8 +97,8 @@ CREATE TABLE `department_table`  (
 DROP TABLE IF EXISTS `identity_table`;
 CREATE TABLE `identity_table`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `identity_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '身份名称：identity_name',
-  `level` bigint(20) DEFAULT NULL COMMENT '等级:level',
+  `identity_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '身份名称：identity_name',
+  `level` bigint(20) NULL DEFAULT NULL COMMENT '等级:level',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '身份表identity_table' ROW_FORMAT = Dynamic;
 
@@ -104,13 +116,19 @@ INSERT INTO `identity_table` VALUES (4, '普通用户', 3);
 DROP TABLE IF EXISTS `notice_table`;
 CREATE TABLE `notice_table`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) DEFAULT NULL COMMENT '发布人ID：user_id',
-  `association_id` bigint(20) DEFAULT NULL COMMENT '社团ID:association_id',
-  `content` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '公告内容:content',
-  `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间：create_time',
-  `type` int(11) DEFAULT NULL COMMENT '类型(0系统公告,1社团公告)：type',
+  `user_id` bigint(20) NULL DEFAULT NULL COMMENT '发布人ID：user_id',
+  `content` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '公告内容:content',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间：create_time',
+  `type` int(11) NULL DEFAULT NULL COMMENT '类型(0系统公告,1社团公告)：type',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '公告表notice_table' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '公告表notice_table' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of notice_table
+-- ----------------------------
+INSERT INTO `notice_table` VALUES (1, 1, '社团管理系统旨在于更好的服务于学校和学生', '2019-03-10 23:03:43', 0);
+INSERT INTO `notice_table` VALUES (2, 1, '测试测试测试', '2019-03-10 23:11:39', 1);
+INSERT INTO `notice_table` VALUES (3, 1, '测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2', '2019-03-10 23:13:27', 1);
 
 -- ----------------------------
 -- Table structure for user_activity_table
@@ -118,13 +136,22 @@ CREATE TABLE `notice_table`  (
 DROP TABLE IF EXISTS `user_activity_table`;
 CREATE TABLE `user_activity_table`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) DEFAULT NULL COMMENT '人员ID：user_id',
-  `association_id` bigint(20) DEFAULT NULL COMMENT '社团ID:association_id',
-  `department_id` bigint(20) DEFAULT NULL COMMENT '部门ID:department_id',
-  `activity_id` bigint(20) DEFAULT NULL COMMENT '活动ID：activity_id',
-  `job` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '职务：job',
+  `user_id` bigint(20) NULL DEFAULT NULL COMMENT '人员ID：user_id',
+  `association_id` bigint(20) NULL DEFAULT NULL COMMENT '社团ID:association_id',
+  `department_id` bigint(20) NULL DEFAULT NULL COMMENT '部门ID:department_id',
+  `activity_id` bigint(20) NULL DEFAULT NULL COMMENT '活动ID：activity_id',
+  `job` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '职务：job',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '人员活动中间表：user_activity_table' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '人员活动中间表：user_activity_table' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of user_activity_table
+-- ----------------------------
+INSERT INTO `user_activity_table` VALUES (1, 0, 4, 0, 0, NULL);
+INSERT INTO `user_activity_table` VALUES (2, 4, 5, 0, 0, NULL);
+INSERT INTO `user_activity_table` VALUES (3, 4, 6, 0, 0, NULL);
+INSERT INTO `user_activity_table` VALUES (4, 0, 7, 0, 0, NULL);
+INSERT INTO `user_activity_table` VALUES (5, 0, 8, 0, 0, NULL);
 
 -- ----------------------------
 -- Table structure for user_table
@@ -132,23 +159,33 @@ CREATE TABLE `user_activity_table`  (
 DROP TABLE IF EXISTS `user_table`;
 CREATE TABLE `user_table`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `identity_id` bigint(20) DEFAULT NULL COMMENT '身份ID=>identity->id:identity_id',
-  `major` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '专业:major',
-  `user_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '用户名:user_name',
-  `pwd` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '密码：pwd',
-  `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '姓名：name',
-  `sex` tinyint(4) DEFAULT NULL COMMENT '性别：sex',
-  `age` int(11) DEFAULT NULL COMMENT '年龄：age',
-  `tel_number` bigint(20) DEFAULT NULL COMMENT '联系方式:tel_number',
-  `grade` int(11) DEFAULT NULL COMMENT '年级:grade',
-  `user_img` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '图片:user_img',
+  `identity_id` bigint(20) NULL DEFAULT NULL COMMENT '身份ID=>identity->id:identity_id',
+  `major` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '专业:major',
+  `user_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '用户名:user_name',
+  `pwd` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '密码：pwd',
+  `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '姓名：name',
+  `sex` tinyint(4) NULL DEFAULT NULL COMMENT '性别：sex',
+  `age` int(11) NULL DEFAULT NULL COMMENT '年龄：age',
+  `tel_number` bigint(20) NULL DEFAULT NULL COMMENT '联系方式:tel_number',
+  `grade` int(11) NULL DEFAULT NULL COMMENT '年级:grade',
+  `user_img` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '图片:user_img',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户表user_table' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户表user_table' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_table
 -- ----------------------------
-INSERT INTO `user_table` VALUES (1, 1, NULL, 'admin', 'admin', NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `user_table` VALUES (2, 0, 'string', 'string', 'string', 'string', 0, 0, 0, 0, 'string');
+INSERT INTO `user_table` VALUES (1, 0, '', 'NDSFXY', '111111', '徐徐', 2, 18, 17705032963, 0, NULL);
+INSERT INTO `user_table` VALUES (3, 3, '', 'B2015102201', '111111', '张三', 0, 20, 17705032963, 2015, '');
+INSERT INTO `user_table` VALUES (4, 0, NULL, 'admin', 'admin', 'admin', 0, NULL, NULL, NULL, NULL);
+INSERT INTO `user_table` VALUES (5, 0, 'string', '111111', '111111', '111111', 0, 0, 0, 0, NULL);
+INSERT INTO `user_table` VALUES (6, 3, '计算机科学与技术', 'B2015102202', '123456', '张三', NULL, 18, NULL, NULL, NULL);
+INSERT INTO `user_table` VALUES (7, 3, '1', 'B2015102203', '1', '1', 1, 1, 1111, 1, '');
+INSERT INTO `user_table` VALUES (8, 3, '中文系', 'B2015102204', 'iajsd', '艳艳', 2, 22, 18873838384, 2016, '');
+INSERT INTO `user_table` VALUES (9, 3, '计算机科学与技术', 'B2015102210', '123456', '徐蓉蓉', 2, 22, 17705032963, 2015, '');
+INSERT INTO `user_table` VALUES (10, 3, 'gffg', 'sjjhdd', 'dddd', 'fdg', 1, 14, 14455445445, NULL, '');
+INSERT INTO `user_table` VALUES (11, 3, '', 'defsdf', 'ff', 'dfdf', 1, NULL, NULL, NULL, '');
+INSERT INTO `user_table` VALUES (12, 3, '', 'fffff', 'fff', 'fff', NULL, NULL, NULL, NULL, '');
+INSERT INTO `user_table` VALUES (13, 3, '', 'aaaa', 'aaaa', '', NULL, NULL, NULL, NULL, '');
 
 SET FOREIGN_KEY_CHECKS = 1;
