@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : root
+ Source Server         : 本地
  Source Server Type    : MySQL
  Source Server Version : 50718
  Source Host           : localhost:3306
@@ -11,7 +11,7 @@
  Target Server Version : 50718
  File Encoding         : 65001
 
- Date: 15/03/2019 23:27:16
+ Date: 16/03/2019 16:59:01
 */
 
 SET NAMES utf8mb4;
@@ -117,6 +117,7 @@ DROP TABLE IF EXISTS `notice_table`;
 CREATE TABLE `notice_table`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) NULL DEFAULT NULL COMMENT '发布人ID：user_id',
+  `association_id` bigint(20) NULL DEFAULT NULL COMMENT '社团ID：association_id',
   `content` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '公告内容:content',
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间：create_time',
   `type` int(11) NULL DEFAULT NULL COMMENT '类型(0系统公告,1社团公告)：type',
@@ -126,9 +127,9 @@ CREATE TABLE `notice_table`  (
 -- ----------------------------
 -- Records of notice_table
 -- ----------------------------
-INSERT INTO `notice_table` VALUES (1, 1, '社团管理系统旨在于更好的服务于学校和学生', '2019-03-10 23:03:43', 0);
-INSERT INTO `notice_table` VALUES (2, 1, '测试测试测试', '2019-03-10 23:11:39', 1);
-INSERT INTO `notice_table` VALUES (3, 1, '测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2', '2019-03-10 23:13:27', 1);
+INSERT INTO `notice_table` VALUES (1, 1, NULL, '社团管理系统旨在于更好的服务于学校和学生', '2019-03-10 23:03:43', 0);
+INSERT INTO `notice_table` VALUES (2, 1, NULL, '测试测试测试', '2019-03-10 23:11:39', 1);
+INSERT INTO `notice_table` VALUES (3, 1, NULL, '测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2', '2019-03-10 23:13:27', 1);
 
 -- ----------------------------
 -- Table structure for user_activity_table
