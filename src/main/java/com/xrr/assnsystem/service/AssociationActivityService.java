@@ -25,6 +25,7 @@ public class AssociationActivityService {
      * @return
      */
     public PageDto<AssociationActivityDto> selectAssnAAll(Long associationId, Long userId, Integer pageNo , Integer pageSize){
+        pageNo = pageSize * (pageNo - 1);
         List<AssociationActivityDto> associationActivityDtoList = associationActivityMapper.selectAll(associationId,userId,pageNo,pageSize);
         Long count = associationActivityMapper.selectCount(associationId,userId);
         PageDto<AssociationActivityDto> pageDto = new PageDto<>();

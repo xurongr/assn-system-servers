@@ -30,6 +30,7 @@ public class AssociationService {
      * @return
      */
     public PageDto<AssociationDto> selectAssociationAll(Long userId, Integer recruitState, Integer pageNo , Integer pageSize){
+        pageNo = pageSize * (pageNo - 1);
         List<AssociationDto> associationDtoList = associationMapper.selectAll(userId,recruitState,pageNo,pageSize);
         Long count = associationMapper.selectCount(userId,recruitState);
         PageDto<AssociationDto> pageDto = new PageDto<>();

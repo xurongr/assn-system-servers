@@ -109,6 +109,7 @@ public class UserActivityService {
      */
     public PageDto<UserActivityDto> selectAssociationAllByUserId(Long userId, Integer pageNo , Integer pageSize){
         Assert.notNull(userId, "用户不能为空");
+        pageNo = pageSize * (pageNo - 1);
         List<UserActivityDto> userActivityDtos = userActivityMapper.selectAssociationAllByUserId(userId, pageNo, pageSize);
         Long count = userActivityMapper.selectCountAssociationAllByUserId(userId);
         PageDto<UserActivityDto> pageDto = new PageDto<>();
@@ -127,6 +128,7 @@ public class UserActivityService {
      */
     public PageDto<UserActivityDto> selectDepartmentAllByUserId(Long userId,Long associationId, Integer pageNo , Integer pageSize){
         Assert.notNull(userId, "用户不能为空");
+        pageNo = pageSize * (pageNo - 1);
         List<UserActivityDto> activityDtos = userActivityMapper.selectDepartmentAllByUserId(userId,associationId, pageNo, pageSize);
         Long count = userActivityMapper.selectCountDepartmentAllByUserId(userId,associationId);
         PageDto<UserActivityDto> pageDto = new PageDto<>();
@@ -145,6 +147,7 @@ public class UserActivityService {
      */
     public PageDto<UserActivityDto> selectAssociationUserAll(Long associationId, Integer pageNo, Integer pageSize) {
         Assert.notNull(associationId, "社团不能为空");
+        pageNo = pageSize * (pageNo - 1);
         List<UserActivityDto> userActivityDtos = userActivityMapper.selectUserAll(associationId, 0L,0L, pageNo, pageSize);
         Long count = userActivityMapper.selectUserCount(associationId, 0L,0L);
         PageDto<UserActivityDto> pageDto = new PageDto<>();
@@ -164,6 +167,7 @@ public class UserActivityService {
     public PageDto<UserActivityDto> selectDepartmentUserAll(Long associationId,Long departmentId, Integer pageNo, Integer pageSize) {
         Assert.notNull(associationId, "社团不能为空");
         Assert.notNull(departmentId, "部门不能为空");
+        pageNo = pageSize * (pageNo - 1);
         List<UserActivityDto> userActivityDtos = userActivityMapper.selectUserAll(associationId, departmentId,0L, pageNo, pageSize);
         Long count = userActivityMapper.selectUserCount(associationId, departmentId ,0L);
         PageDto<UserActivityDto> pageDto = new PageDto<>();
@@ -202,6 +206,7 @@ public class UserActivityService {
     public PageDto<UserActivityDto> selectActivityUserAll(Long associationId,Long activityId, Integer pageNo, Integer pageSize) {
         Assert.notNull(associationId, "社团不能为空");
         Assert.notNull(activityId, "活动不能为空");
+        pageNo = pageSize * (pageNo - 1);
         List<UserActivityDto> userActivityDtos = userActivityMapper.selectUserAll(associationId, 0L,activityId, pageNo, pageSize);
         Long count = userActivityMapper.selectUserCount(associationId,0L,activityId);
         PageDto<UserActivityDto> pageDto = new PageDto<>();

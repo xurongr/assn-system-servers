@@ -25,6 +25,7 @@ public class DepartmentService {
      * @return
      */
     public PageDto<DepartmentDto> selectDepartmentAll(Long associationId, Long ministerUserId, Integer pageNo , Integer pageSize){
+        pageNo = pageSize * (pageNo - 1);
         List<DepartmentDto> departmentDtoList = departmentMapper.selectAll(associationId,ministerUserId,pageNo,pageSize);
         Long count = departmentMapper.selectCount(associationId,ministerUserId);
         PageDto<DepartmentDto> pageDto = new PageDto<>();

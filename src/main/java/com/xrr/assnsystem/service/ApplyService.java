@@ -31,6 +31,7 @@ public class ApplyService {
      * @return
      */
     public PageDto<ApplyDto> selectApplyAll(Apply apply, Integer pageNo , Integer pageSize){
+        pageNo = pageSize * (pageNo - 1);
         List<ApplyDto> applyDtoList = applyMapper.selectAll(apply,pageNo,pageSize);
         Long count = applyMapper.selectCount(apply);
         PageDto<ApplyDto> pageDto = new PageDto<>();

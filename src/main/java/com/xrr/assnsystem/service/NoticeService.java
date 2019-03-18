@@ -25,6 +25,7 @@ public class NoticeService {
      * @return
      */
     public PageDto<NoticeDto> selectNoticeAll(Long userId,Long associationId, Integer type, Integer pageNo , Integer pageSize){
+        pageNo = pageSize * (pageNo - 1);
         List<NoticeDto> noticeDtoList = noticeMapper.selectAll(userId,associationId,type,pageNo,pageSize);
         Long count = noticeMapper.selectCount(userId,associationId,type);
         PageDto<NoticeDto> pageDto = new PageDto<>();
