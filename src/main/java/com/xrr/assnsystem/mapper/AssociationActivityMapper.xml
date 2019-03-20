@@ -60,7 +60,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="AssociationActivityResultMap">
-    select aa.id, aa.association_id,a.association_name, aa.activity_name, aa.user_id,a.name, aa.content, aa.address, aa.image, aa.score,
+    select aa.id, aa.association_id,a.association_name, aa.activity_name, aa.user_id,u.name, aa.content, aa.address, aa.image, aa.score,
     aa.start_time, aa.end_time
     from association_activity_table aa
     left join user_table u on u.id = aa.user_id
@@ -69,7 +69,7 @@
   </select>
 
   <select id="selectAll" resultMap="AssociationActivityResultMap">
-    select aa.id, aa.association_id,a.association_name, aa.activity_name, aa.user_id,a.name, aa.content, aa.address, aa.image, aa.score,
+    select aa.id, aa.association_id,a.association_name, aa.activity_name, aa.user_id,u.name, aa.content, aa.address, aa.image, aa.score,
     aa.start_time, aa.end_time
     from association_activity_table aa
     left join user_table u on u.id = aa.user_id
