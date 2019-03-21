@@ -56,7 +56,8 @@
     where a.id = #{id,jdbcType=BIGINT}
   </select>
   <select id="selectAll" resultMap="ApplyResultMap">
-    select a.id, a.user_id,u.name, a.association_id,assn.association_name, a.department_id,d.department_name, a.content, a.apply_time, a.`state`
+    select a.id, a.user_id,u.name, a.association_id,assn.association_name,
+     a.department_id,d.department_name, a.content, a.apply_time, a.`state`
     from apply_table a
     left join user_table u on u.id = a.user_id
     left join association_table assn on assn.id = a.association_id
