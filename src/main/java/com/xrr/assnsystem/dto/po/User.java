@@ -16,6 +16,8 @@ import java.io.Serializable;
 @ApiModel("用户")
 public class User implements Serializable {
     private static final long serialVersionUID = 4676032315587799669L;
+
+    @ApiModelProperty("ID")
     private Long id;
 
     @ApiModelProperty("身份ID")

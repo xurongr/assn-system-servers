@@ -16,6 +16,8 @@ import java.io.Serializable;
 @ApiModel("用户活动中间表")
 public class UserActivity implements Serializable {
     private static final long serialVersionUID = 6035501470214833404L;
+
+    @ApiModelProperty("ID")
     private Long id;
 
     @ApiModelProperty("人员ID")

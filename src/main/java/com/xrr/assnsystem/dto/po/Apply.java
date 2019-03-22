@@ -21,6 +21,7 @@ public class Apply implements Serializable {
 
     private static final long serialVersionUID = 6914719200192436435L;
 
+    @ApiModelProperty("ID")
     private Long id;
 
     @ApiModelProperty("申请人ID")

@@ -17,6 +17,7 @@ import java.io.Serializable;
 public class Identity implements Serializable {
     private static final long serialVersionUID = -924300068956281220L;
 
+    @ApiModelProperty("ID")
     private Long id;
 
     @ApiModelProperty("身份名称")

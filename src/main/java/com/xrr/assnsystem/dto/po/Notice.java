@@ -18,6 +18,8 @@ import java.time.Instant;
 @ApiModel("公告")
 public class Notice implements Serializable {
     private static final long serialVersionUID = -5594100113210930413L;
+
+    @ApiModelProperty("ID")
     private Long id;
 
     @ApiModelProperty("发布人ID")

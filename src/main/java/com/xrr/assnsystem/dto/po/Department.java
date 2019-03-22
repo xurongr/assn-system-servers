@@ -18,6 +18,7 @@ import java.time.Instant;
 @ApiModel("部门")
 public class Department implements Serializable {
     private static final long serialVersionUID = 7761851492469198192L;
+    @ApiModelProperty("ID")
     private Long id;
 
     @ApiModelProperty("社团ID")

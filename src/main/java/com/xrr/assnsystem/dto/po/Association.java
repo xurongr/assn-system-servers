@@ -19,6 +19,7 @@ import java.time.Instant;
 public class Association implements Serializable {
     private static final long serialVersionUID = 8299495086369043760L;
 
+    @ApiModelProperty("ID")
     private Long id;
 
     @ApiModelProperty("社团名称")
