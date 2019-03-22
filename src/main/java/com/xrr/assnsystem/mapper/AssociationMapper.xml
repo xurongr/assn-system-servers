@@ -58,10 +58,10 @@
     from association_table a
     left join user_table u on u.id = a.user_id
     <where>
-      <if test="userId != null and userId != ''">
+      <if test="userId != null ">
         and a.user_id = #{userId}
       </if>
-      <if test="recruitState != null and recruitState != ''">
+      <if test="recruitState != null">
         and a.recruit_state = #{recruitState}
       </if>
     </where>
@@ -75,10 +75,10 @@
     from association_table a
     left join user_table u on u.id = a.user_id
     <where>
-      <if test="userId != null and userId != ''">
+      <if test="userId != null ">
         and a.user_id = #{userId}
       </if>
-      <if test="recruitState != null and recruitState != ''">
+      <if test="recruitState != null ">
         and a.recruit_state = #{recruitState}
       </if>
     </where>

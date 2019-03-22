@@ -57,16 +57,16 @@
     <delete id="deleteBy">
         delete from user_activity_table
         <where>
-            <if test="userId != null and userId != ''">
+            <if test="userId != null '">
                 and  user_id = #{userId}
             </if>
-            <if test="associationId != null and associationId != ''">
+            <if test="associationId != null ">
                 and  association_id = #{associationId}
             </if>
-            <if test="departmentId != null and departmentId != ''">
+            <if test="departmentId != null ">
                 and  department_id = #{usdepartmentIderId}
             </if>
-            <if test="activityId != null and activityId != ''">
+            <if test="activityId != null ">
                 and  activity_id = #{activityId}
             </if>
         </where>
@@ -106,7 +106,7 @@
         where ua.user_id = #{userId}
         and ua.department_id  &lt;&gt; 0
         and ua.activity_id = 0
-        <if test="associationId != null and associationId != ''">
+        <if test="associationId != null ">
             and ua.association_id = #{associationId}
         </if>
         limit #{pageNo},{pageSize}
@@ -122,7 +122,7 @@
         where ua.user_id = #{userId}
         and ua.department_id  &lt;&gt; 0
         and ua.activity_id = 0
-        <if test="associationId != null and associationId != ''">
+        <if test="associationId != null ">
             and ua.association_id = #{associationId}
         </if>
     </select>
@@ -138,13 +138,13 @@
         join department_table d on d.id = ua.department_id
         join association_activity_table aa on aa.id = ua.activity_id
         <where>
-            <if test="associationId != null and associationId != ''">
+            <if test="associationId != null ">
                 and ua.association_id = #{associationId}
             </if>
-            <if test="departmentId != null and departmentId != ''">
+            <if test="departmentId != null ">
                 and ua.department_id = #{departmentId}
             </if>
-            <if test="activityId != null and activityId != ''">
+            <if test="activityId != null ">
                 and ua.activity_id = #{activityId}
             </if>
         </where>
@@ -160,13 +160,13 @@
         join department_table d on d.id = ua.department_id
         join association_activity_table aa on aa.id = ua.activity_id
         <where>
-            <if test="associationId != null and associationId != ''">
+            <if test="associationId != null ">
                 and ua.association_id = #{associationId}
             </if>
-            <if test="departmentId != null and departmentId != ''">
+            <if test="departmentId != null ">
                 and ua.department_id = #{departmentId}
             </if>
-            <if test="activityId != null and activityId != ''">
+            <if test="activityId != null ">
                 and ua.activity_id = #{activityId}
             </if>
         </where>

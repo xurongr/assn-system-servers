@@ -126,16 +126,16 @@
     left join association_table a on a.id = ua.association_id
     left join department_table d on d.association_id = a.id
       <where>
-          <if test="identityId != null and identityId != ''">
+          <if test="identityId != null ">
               and  u.identity_id = #{identityId}
           </if>
           <if test="identityName != null and identityName != ''">
             and i.identity_name = #{identityName}
           </if>
-          <if test="associationId != null and associationId != ''">
+          <if test="associationId != null '">
               and  a.id = #{associationId}
           </if>
-          <if test="departmentId != null and departmentId != ''">
+          <if test="departmentId != null '">
               and  d.id = #{departmentId}
           </if>
           <if test="name != null and name != ''">

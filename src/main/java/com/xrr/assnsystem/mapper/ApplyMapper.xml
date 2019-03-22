@@ -63,16 +63,16 @@
     left join association_table assn on assn.id = a.association_id
     left join department_table d on d.id = a.department_id
     <where>
-      <if test="apply.userId != null and apply.userId != ''">
+      <if test="apply.userId != null '">
         and a.user_id = #{apply.userId}
       </if>
-      <if test="apply.associationId != null and apply.associationId != ''">
+      <if test="apply.associationId != null ">
         and a.association_id = #{apply.associationId}
       </if>
-      <if test="apply.departmentId != null and apply.departmentId != ''">
+      <if test="apply.departmentId != null ">
         and a.department_id = #{apply.departmentId}
       </if>
-      <if test="apply.state != null and apply.state != ''">
+      <if test="apply.state != null ">
         and a.state = #{apply.state}
       </if>
     </where>
@@ -88,16 +88,16 @@
     left join association_table assn on assn.id = a.association_id
     left join department_table d on d.id = a.department_id
     <where>
-      <if test="apply.userId != null and apply.userId != ''">
+      <if test="apply.userId != null ">
         and a.user_id = #{apply.userId}
       </if>
-      <if test="apply.associationId != null and apply.associationId != ''">
+      <if test="apply.associationId != null ">
         and a.association_id = #{apply.associationId}
       </if>
-      <if test="apply.departmentId != null and apply.departmentId != ''">
+      <if test="apply.departmentId != null ">
         and a.department_id = #{apply.departmentId}
       </if>
-      <if test="apply.state != null and apply.state != ''">
+      <if test="apply.state != null ">
         and a.state = #{apply.state}
       </if>
     </where>

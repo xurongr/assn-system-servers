@@ -59,10 +59,10 @@
     left join user_table u on u.id = d.minister_user_id
     left join association_table a on a.id = d.association_id
     <where>
-        <if test="associationId != null and associationId !=''">
+        <if test="associationId != null ">
             and d.association_id = #{associationId}
         </if>
-        <if test="ministerUserId != null and ministerUserId !=''">
+        <if test="ministerUserId != null ">
             and d.minister_user_id = #{ministerUserId}
         </if>
     </where>
@@ -76,10 +76,10 @@
         left join user_table u on u.id = d.minister_user_id
         left join association_table a on a.id = d.association_id
         <where>
-            <if test="associationId != null and associationId !=''">
+            <if test="associationId != null ">
                 and d.association_id = #{associationId}
             </if>
-            <if test="ministerUserId != null and ministerUserId !=''">
+            <if test="ministerUserId != null ">
                 and d.minister_user_id = #{ministerUserId}
             </if>
         </where>

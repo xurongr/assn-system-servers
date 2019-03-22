@@ -75,10 +75,10 @@
     left join user_table u on u.id = aa.user_id
     left join association_table a on a.id = aa.association_id
     <where>
-      <if test="associationId != null and associationId !=''">
+      <if test="associationId != null '">
         and aa.association_id = #{associationId}
       </if>
-      <if test="userId != null and userId !=''">
+      <if test="userId != null ">
         and aa.user_id = #{userId}
       </if>
     </where>
@@ -93,10 +93,10 @@
     left join user_table u on u.id = aa.user_id
     left join association_table a on a.id = aa.association_id
     <where>
-      <if test="associationId != null and associationId !=''">
+      <if test="associationId != null ">
         and aa.association_id = #{associationId}
       </if>
-      <if test="userId != null and userId !=''">
+      <if test="userId != null ">
         and aa.user_id = #{userId}
       </if>
     </where>
