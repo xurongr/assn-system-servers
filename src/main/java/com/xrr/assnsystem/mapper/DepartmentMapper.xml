@@ -11,7 +11,7 @@
   </resultMap>
 
     <resultMap id="DepartmentResultMap" type="com.xrr.assnsystem.dto.DepartmentDto">
-        <id column="id" jdbcType="BIGINT" property="departmentId" />
+        <id column="id" jdbcType="BIGINT" property="id" />
         <result column="association_id" jdbcType="BIGINT" property="associationId" />
         <result column="association_name" jdbcType="VARCHAR" property="associationName" />
         <result column="minister_user_id" jdbcType="BIGINT" property="ministerUserId" />

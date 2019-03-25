@@ -21,7 +21,7 @@ public class DepartmentDto implements Serializable {
     private static final long serialVersionUID = -267859214530967164L;
 
     @ApiModelProperty("部门ID")
-    private Long departmentId;
+    private Long id;
 
     @ApiModelProperty("所属社团ID")
     private Long associationId;

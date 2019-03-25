@@ -148,7 +148,7 @@
                 and ua.activity_id = #{activityId}
             </if>
         </where>
-        limit #{pageNo,pageSize}
+        limit #{pageNo},#{pageSize}
     </select>
 
     <!-- 根据条件查询成员总数 -->

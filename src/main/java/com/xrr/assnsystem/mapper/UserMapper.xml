@@ -101,7 +101,7 @@
       <if test="identityName != null and identityName != ''">
         and i.identity_name like CONCAT('%',#{identityName},'%')
       </if>
-      <if test="associationId != null '">
+      <if test="associationId != null ">
         and  a.id = #{associationId}
       </if>
       <if test="associationName != null and associationName != ''">
@@ -138,7 +138,7 @@
       <if test="identityName != null and identityName != ''">
         and i.identity_name like CONCAT('%',#{identityName},'%')
       </if>
-      <if test="associationId != null '">
+      <if test="associationId != null ">
         and  a.id = #{associationId}
       </if>
       <if test="associationName != null and associationName != ''">

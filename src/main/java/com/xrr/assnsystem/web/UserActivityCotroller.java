@@ -66,7 +66,9 @@ public class UserActivityCotroller {
 
     @ApiOperation("查询社团成员列表")
     @GetMapping("selectAssociationUserAll")
-    public ResultDto<PageDto<UserActivityDto>> selectAssociationUserAll(@RequestParam Long associationId, @RequestParam Integer pageNo, @RequestParam Integer pageSize){
+    public ResultDto<PageDto<UserActivityDto>> selectAssociationUserAll(@RequestParam Long associationId,
+                                                                        @RequestParam Integer pageNo,
+                                                                        @RequestParam Integer pageSize){
         return ResultDto.ok(userActivityService.selectAssociationUserAll(associationId,pageNo,pageSize));
     }
 
