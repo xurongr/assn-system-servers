@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : 本地
+ Source Server         : root
  Source Server Type    : MySQL
  Source Server Version : 50718
  Source Host           : localhost:3306
@@ -11,7 +11,7 @@
  Target Server Version : 50718
  File Encoding         : 65001
 
- Date: 16/03/2019 16:59:01
+ Date: 13/04/2019 00:47:56
 */
 
 SET NAMES utf8mb4;
@@ -89,7 +89,13 @@ CREATE TABLE `department_table`  (
   `content` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '介绍:content',
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间：create_time',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '部门表department_table' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '部门表department_table' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of department_table
+-- ----------------------------
+INSERT INTO `department_table` VALUES (1, 1, 1, NULL, '2222', '2019-03-25 23:41:53');
+INSERT INTO `department_table` VALUES (2, 1, 7, 11, '11', '2019-04-13 00:02:33');
 
 -- ----------------------------
 -- Table structure for identity_table
@@ -143,7 +149,7 @@ CREATE TABLE `user_activity_table`  (
   `activity_id` bigint(20) NULL DEFAULT NULL COMMENT '活动ID：activity_id',
   `job` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '职务：job',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '人员活动中间表：user_activity_table' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '人员活动中间表：user_activity_table' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_activity_table
@@ -153,6 +159,12 @@ INSERT INTO `user_activity_table` VALUES (2, 4, 5, 0, 0, NULL);
 INSERT INTO `user_activity_table` VALUES (3, 4, 6, 0, 0, NULL);
 INSERT INTO `user_activity_table` VALUES (4, 0, 7, 0, 0, NULL);
 INSERT INTO `user_activity_table` VALUES (5, 0, 8, 0, 0, NULL);
+INSERT INTO `user_activity_table` VALUES (6, 4, 1, 0, 0, NULL);
+INSERT INTO `user_activity_table` VALUES (7, 4, 1, 0, 0, NULL);
+INSERT INTO `user_activity_table` VALUES (8, 4, 1, 0, 0, NULL);
+INSERT INTO `user_activity_table` VALUES (9, 7, 1, 0, 0, NULL);
+INSERT INTO `user_activity_table` VALUES (10, 7, 1, 0, 0, NULL);
+INSERT INTO `user_activity_table` VALUES (11, 7, 1, 0, 0, NULL);
 
 -- ----------------------------
 -- Table structure for user_table
