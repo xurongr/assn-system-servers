@@ -75,7 +75,7 @@
     left join user_table u on u.id = aa.user_id
     left join association_table a on a.id = aa.association_id
     <where>
-      <if test="associationId != null '">
+      <if test="associationId != null ">
         and aa.association_id = #{associationId}
       </if>
       <if test="userId != null ">

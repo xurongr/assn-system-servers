@@ -133,10 +133,10 @@
         select ua.id, ua.user_id,u.name,ua.association_id,a.association_name, ua.department_id,
         d.department_name, ua.activity_id,aa.activity_name
         from user_activity_table ua
-        join user_table u on u.id = ua.user_id
-        join association_table a on a.id = ua.association_id
-        join department_table d on d.id = ua.department_id
-        join association_activity_table aa on aa.id = ua.activity_id
+        left join user_table u on u.id = ua.user_id
+        left join association_table a on a.id = ua.association_id
+        left join department_table d on d.id = ua.department_id
+        left join association_activity_table aa on aa.id = ua.activity_id
         <where>
             <if test="associationId != null ">
                 and ua.association_id = #{associationId}
@@ -155,10 +155,10 @@
     <select id="selectUserCount" resultType="java.lang.Long">
         select count(*)
         from user_activity_table ua
-        join user_table u on u.id = ua.user_id
-        join association_table a on a.id = ua.association_id
-        join department_table d on d.id = ua.department_id
-        join association_activity_table aa on aa.id = ua.activity_id
+        left join user_table u on u.id = ua.user_id
+        left join association_table a on a.id = ua.association_id
+        left join department_table d on d.id = ua.department_id
+        left join association_activity_table aa on aa.id = ua.activity_id
         <where>
             <if test="associationId != null ">
                 and ua.association_id = #{associationId}

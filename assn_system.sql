@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : root
+ Source Server         : 本地
  Source Server Type    : MySQL
  Source Server Version : 50718
  Source Host           : localhost:3306
@@ -11,7 +11,7 @@
  Target Server Version : 50718
  File Encoding         : 65001
 
- Date: 13/04/2019 00:47:56
+ Date: 14/04/2019 20:51:03
 */
 
 SET NAMES utf8mb4;
@@ -48,7 +48,19 @@ CREATE TABLE `association_activity_table`  (
   `start_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间：create_time',
   `end_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '社团活动表association_activity_table' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '社团活动表association_activity_table' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of association_activity_table
+-- ----------------------------
+INSERT INTO `association_activity_table` VALUES (1, 0, 'string', 0, 'string', 'string', 'string', 0, '1970-01-19 08:00:43', '2019-04-14 19:57:51');
+INSERT INTO `association_activity_table` VALUES (2, 0, 'string', 0, 'string', 'string', 'string', 0, '1970-01-19 08:00:43', '2019-04-14 19:57:51');
+INSERT INTO `association_activity_table` VALUES (3, 0, 'string', 0, 'string', 'string', 'string', 0, '1970-01-19 08:00:43', '2019-04-14 19:57:51');
+INSERT INTO `association_activity_table` VALUES (4, 0, 'string', 0, 'string', 'string', 'string', 0, '1970-01-19 08:00:43', '1970-01-19 08:00:43');
+INSERT INTO `association_activity_table` VALUES (5, 0, 'string', 0, 'string', 'string', 'string', 0, '2019-04-14 19:57:51', '2019-04-14 19:57:51');
+INSERT INTO `association_activity_table` VALUES (6, 0, 'string', 0, 'string', 'string', 'string', 0, '2019-04-14 19:57:51', '2019-04-14 19:57:51');
+INSERT INTO `association_activity_table` VALUES (7, 0, 'string', 0, 'string', 'string', 'string', 0, '1970-01-19 08:00:43', '1970-01-19 08:00:44');
+INSERT INTO `association_activity_table` VALUES (8, 0, 'string', 0, 'string', 'string', 'string', 0, '2019-04-14 19:58:08', '2019-04-14 20:21:11');
 
 -- ----------------------------
 -- Table structure for association_table
@@ -85,17 +97,18 @@ CREATE TABLE `department_table`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `association_id` bigint(20) NULL DEFAULT NULL COMMENT '社团名称：association_id',
   `minister_user_id` bigint(20) NULL DEFAULT NULL COMMENT '负责人ID：user_id',
-  `department_name` bigint(20) NULL DEFAULT NULL,
+  `department_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `content` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '介绍:content',
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间：create_time',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '部门表department_table' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '部门表department_table' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of department_table
 -- ----------------------------
 INSERT INTO `department_table` VALUES (1, 1, 1, NULL, '2222', '2019-03-25 23:41:53');
-INSERT INTO `department_table` VALUES (2, 1, 7, 11, '11', '2019-04-13 00:02:33');
+INSERT INTO `department_table` VALUES (2, 1, 7, '11', '11', '2019-04-13 00:02:33');
+INSERT INTO `department_table` VALUES (3, 3, 0, 'string', 'string', '1970-01-19 08:00:43');
 
 -- ----------------------------
 -- Table structure for identity_table

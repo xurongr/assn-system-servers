@@ -47,13 +47,15 @@ public class AssociationActivity implements Serializable {
     private Double score;
 
     @ApiModelProperty("开始时间")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @JsonFormat(pattern ="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     @JsonSerialize(using = InstantJacksonSerializer.class)
     @JsonDeserialize(using = InstantJacksonDeserialize.class)
     private Instant startTime;
 
     @ApiModelProperty("结束时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @JsonSerialize(using = InstantJacksonSerializer.class)
+    @JsonDeserialize(using = InstantJacksonDeserialize.class)
     private Instant endTime;
 
 
