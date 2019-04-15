@@ -19,7 +19,12 @@ import java.time.Instant;
 public class NoticeDto implements Serializable {
 
     private static final long serialVersionUID = -210653088058215160L;
+
+    @ApiModelProperty("ID")
     private Long id;
+
+    @ApiModelProperty("标题")
+    private String title;
 
     @ApiModelProperty("发布人ID")
     private Long userId;

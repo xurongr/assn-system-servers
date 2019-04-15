@@ -26,6 +26,9 @@ public class Notice implements Serializable {
     @ApiModelProperty("ID")
     private Long id;
 
+    @ApiModelProperty("标题")
+    private String title;
+
     @ApiModelProperty("发布人ID")
     private Long userId;
 

@@ -11,7 +11,7 @@
  Target Server Version : 50718
  File Encoding         : 65001
 
- Date: 14/04/2019 20:51:03
+ Date: 15/04/2019 20:07:37
 */
 
 SET NAMES utf8mb4;
@@ -43,7 +43,7 @@ CREATE TABLE `association_activity_table`  (
   `user_id` bigint(20) NULL DEFAULT NULL COMMENT '负责人ID：user_id',
   `content` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '介绍:content',
   `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '地址：address',
-  `image` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '图片：image',
+  `image` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '图片：image',
   `score` double NULL DEFAULT NULL,
   `start_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间：create_time',
   `end_time` datetime(0) NULL DEFAULT NULL,
@@ -75,7 +75,7 @@ CREATE TABLE `association_table`  (
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间：create_time',
   `recruit_state` int(11) NULL DEFAULT NULL COMMENT '招募状态：recruit_state',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '社团表association_table' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '社团表association_table' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of association_table
@@ -88,6 +88,7 @@ INSERT INTO `association_table` VALUES (5, '后山夜校', 4, '后山夜校是�
 INSERT INTO `association_table` VALUES (6, '潮音文学社', 4, '3333333333333333333333', '3333', '2019-03-16 01:42:36', 1);
 INSERT INTO `association_table` VALUES (7, 'string', 0, 'string', 'string', '2019-03-16 01:44:40', 0);
 INSERT INTO `association_table` VALUES (8, 'g', 0, 'g', 'g', '2019-03-16 01:46:07', 0);
+INSERT INTO `association_table` VALUES (9, 'string', 0, 'string', 'string', '2019-04-14 19:58:08', 0);
 
 -- ----------------------------
 -- Table structure for department_table
@@ -135,6 +136,7 @@ INSERT INTO `identity_table` VALUES (4, '普通用户', 3);
 DROP TABLE IF EXISTS `notice_table`;
 CREATE TABLE `notice_table`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `user_id` bigint(20) NULL DEFAULT NULL COMMENT '发布人ID：user_id',
   `association_id` bigint(20) NULL DEFAULT NULL COMMENT '社团ID：association_id',
   `content` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '公告内容:content',
@@ -146,9 +148,9 @@ CREATE TABLE `notice_table`  (
 -- ----------------------------
 -- Records of notice_table
 -- ----------------------------
-INSERT INTO `notice_table` VALUES (1, 1, NULL, '社团管理系统旨在于更好的服务于学校和学生', '2019-03-10 23:03:43', 0);
-INSERT INTO `notice_table` VALUES (2, 1, NULL, '测试测试测试', '2019-03-10 23:11:39', 1);
-INSERT INTO `notice_table` VALUES (3, 1, NULL, '测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2', '2019-03-10 23:13:27', 1);
+INSERT INTO `notice_table` VALUES (1, NULL, 1, NULL, '社团管理系统旨在于更好的服务于学校和学生', '2019-03-10 23:03:43', 0);
+INSERT INTO `notice_table` VALUES (2, NULL, 1, NULL, '测试测试测试', '2019-03-10 23:11:39', 1);
+INSERT INTO `notice_table` VALUES (3, NULL, 1, NULL, '测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2', '2019-03-10 23:13:27', 1);
 
 -- ----------------------------
 -- Table structure for user_activity_table
@@ -162,7 +164,7 @@ CREATE TABLE `user_activity_table`  (
   `activity_id` bigint(20) NULL DEFAULT NULL COMMENT '活动ID：activity_id',
   `job` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '职务：job',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '人员活动中间表：user_activity_table' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '人员活动中间表：user_activity_table' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_activity_table
@@ -178,6 +180,7 @@ INSERT INTO `user_activity_table` VALUES (8, 4, 1, 0, 0, NULL);
 INSERT INTO `user_activity_table` VALUES (9, 7, 1, 0, 0, NULL);
 INSERT INTO `user_activity_table` VALUES (10, 7, 1, 0, 0, NULL);
 INSERT INTO `user_activity_table` VALUES (11, 7, 1, 0, 0, NULL);
+INSERT INTO `user_activity_table` VALUES (12, 0, 9, 0, 0, NULL);
 
 -- ----------------------------
 -- Table structure for user_table
