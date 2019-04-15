@@ -15,7 +15,6 @@ public interface UserActivityMapper {
 
     UserActivityDto selectByPrimaryKey(Long id);
 
-
     int updateByPrimaryKey(UserActivity record);
 
     /**

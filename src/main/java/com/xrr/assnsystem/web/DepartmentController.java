@@ -44,4 +44,15 @@ public class DepartmentController {
         return ResultDto.ok(departmentService.selectDepartmentById(departmentId));
     }
 
+    @ApiOperation("获取成员数量(删除部门前用于确认)")
+    @GetMapping("getDepartmentUserCount")
+    public ResultDto<Long> getDepartmentUserCount(@RequestParam Long departmentId){
+        return ResultDto.ok(departmentService.getDepartmentUserCount(departmentId));
+    }
+
+    @ApiOperation("确认删除部门(执行删除操作)")
+    @GetMapping("deleteDepartment")
+    public ResultDto<Integer> deleteDepartment(@RequestParam Long departmentId){
+        return ResultDto.ok(departmentService.deleteDepartment(departmentId));
+    }
 }

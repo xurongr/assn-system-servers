@@ -66,10 +66,22 @@ public class NoticeService {
 
     /**
      * 查询公告
+     *
      * @param noticeId
      * @return
      */
-    public NoticeDto selectNoticeById(Long noticeId){
+    public NoticeDto selectNoticeById(Long noticeId) {
         return noticeMapper.selectByPrimaryKey(noticeId);
+    }
+
+    /**
+     * 删除公告
+     * @param noticeId
+     * @return
+     */
+    public Integer deleteNotice(Long noticeId){
+        int result = noticeMapper.deleteByPrimaryKey(noticeId);
+        if(0 == result) throw new ServiceException(501, "删除失败");
+        return result;
     }
 }

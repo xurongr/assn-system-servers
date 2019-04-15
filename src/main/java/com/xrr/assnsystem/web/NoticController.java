@@ -45,4 +45,9 @@ public class NoticController {
         return ResultDto.ok(noticeService.selectNoticeById(noticeId));
     }
 
+    @ApiOperation("删除公告")
+    @GetMapping("deleteNotice")
+    public ResultDto<Integer> deleteNotice(@RequestParam Long noticeId){
+        return ResultDto.ok(noticeService.deleteNotice(noticeId));
+    }
 }

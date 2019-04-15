@@ -5,15 +5,17 @@ import com.xrr.assnsystem.dto.PageDto;
 import com.xrr.assnsystem.dto.po.Association;
 import com.xrr.assnsystem.dto.po.UserActivity;
 import com.xrr.assnsystem.exception.ServiceException;
-import com.xrr.assnsystem.mapper.AssociationMapper;
-import com.xrr.assnsystem.mapper.UserActivityMapper;
+import com.xrr.assnsystem.mapper.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.time.Instant;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -24,6 +26,15 @@ public class AssociationService {
 
     @Autowired
     private UserActivityMapper userActivityMapper;
+
+    @Autowired
+    private DepartmentMapper departmentMapper;
+
+    @Autowired
+    private AssociationActivityMapper associationActivityMapper;
+
+    @Autowired
+    private NoticeMapper noticeMapper;
 
     /**
      * 获取社团列表
@@ -79,5 +90,40 @@ public class AssociationService {
      */
     public AssociationDto selectAssociationById(Long associationId){
         return associationMapper.selectByPrimaryKey(associationId);
+    }
+
+    /**
+     * 获取社团信息数量(删除部门前用于确认)
+     * @param associationId
+     * @return
+     */
+    public Map<String,Long> getAssociationInfoCount(Long associationId){
+        Map<String, Long> map = new HashMap<>();
+        Long userCount = userActivityMapper.selectUserCount(associationId, 0L, 0L);
+        Long departmentCount = departmentMapper.selectCount(associationId, null);
+        Long associationActivityCount = associationActivityMapper.selectCount(associationId,null);
+        Long noticeCount = noticeMapper.selectCount(null,associationId,null);
+        map.put("userCount", userCount);
+        map.put("departmentCount", departmentCount);
+        map.put("associationActivityCount", associationActivityCount);
+        map.put("noticeCount", noticeCount);
+        return map;
+    }
+
+    /**
+     * 确认删除社团(执行删除操作)
+     * @param associationId
+     * @return
+     */
+    @Transactional
+    public Integer deleteAssociation(Long associationId){
+        associationMapper.deleteDepartment(associationId);
+        associationMapper.deleteAssociationActivity(associationId);
+        associationMapper.deleteNotice(associationId);
+        associationMapper.deleteApply(associationId);
+        userActivityMapper.deleteBy(null, associationId, null, null);
+        int result = associationMapper.deleteByPrimaryKey(associationId);
+        if(0 == result) throw new ServiceException(501, "删除失败");
+        return result;
     }
 }

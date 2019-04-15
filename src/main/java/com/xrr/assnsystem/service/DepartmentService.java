@@ -5,9 +5,11 @@ import com.xrr.assnsystem.dto.PageDto;
 import com.xrr.assnsystem.dto.po.Department;
 import com.xrr.assnsystem.exception.ServiceException;
 import com.xrr.assnsystem.mapper.DepartmentMapper;
+import com.xrr.assnsystem.mapper.UserActivityMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.time.Instant;
@@ -19,6 +21,9 @@ import java.util.concurrent.TimeUnit;
 public class DepartmentService {
     @Autowired
     private DepartmentMapper departmentMapper;
+
+    @Autowired
+    private UserActivityMapper userActivityMapper;
 
     /**
      * 获取部门列表
@@ -69,5 +74,27 @@ public class DepartmentService {
      */
     public DepartmentDto selectDepartmentById(Long departmentId){
         return departmentMapper.selectByPrimaryKey(departmentId);
+    }
+
+    /**
+     * 获取成员数量(删除部门前用于确认)
+     * @param departmentId
+     * @return
+     */
+    public Long getDepartmentUserCount(Long departmentId){
+        return userActivityMapper.selectUserCount(null, departmentId, 0L);
+    }
+
+    /**
+     * 确认删除部门(执行删除操作)
+     * @param departmentId
+     * @return
+     */
+    @Transactional
+    public Integer deleteDepartment(Long departmentId){
+        userActivityMapper.deleteBy(null, null, departmentId, 0L);
+        int result = departmentMapper.deleteByPrimaryKey(departmentId);
+        if(0 == result) throw new ServiceException(501, "删除失败");
+        return result;
     }
 }

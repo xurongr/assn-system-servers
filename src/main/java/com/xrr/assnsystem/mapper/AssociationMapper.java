@@ -28,4 +28,9 @@ public interface AssociationMapper {
     Long selectCount(@Param("userId") Long userId, @Param("recruitState") Integer recruitState);
 
 
+    int deleteDepartment(Long associationId);
+    int deleteAssociationActivity(Long associationId);
+    int deleteNotice(Long associationId);
+    int deleteApply(Long associationId);
+
 }

@@ -112,4 +112,15 @@ public class ApplyService {
         }
         return 1;
     }
+
+    /**
+     * 删除申请
+     * @param applyId
+     * @return
+     */
+    public Integer deleteApply(Long applyId){
+        int result = applyMapper.deleteByPrimaryKey(applyId);
+        if(0 == result) throw new ServiceException(501, "删除失败");
+        return result;
+    }
 }

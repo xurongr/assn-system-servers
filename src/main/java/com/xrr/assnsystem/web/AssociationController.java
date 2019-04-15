@@ -11,6 +11,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @Api(tags ={"2-1 社团管理"})
 public class AssociationController {
@@ -44,4 +46,15 @@ public class AssociationController {
         return ResultDto.ok(associationService.selectAssociationById(associationId));
     }
 
+    @ApiOperation("获取社团信息数量(删除部门前用于确认)")
+    @GetMapping("getAssociationInfoCount")
+    public ResultDto<Map<String,Long>> getAssociationInfoCount(@RequestParam Long associationId){
+        return ResultDto.ok(associationService.getAssociationInfoCount(associationId));
+    }
+
+    @ApiOperation("确认删除社团(执行删除操作)")
+    @GetMapping("deleteAssociation")
+    public ResultDto<Integer> deleteAssociation(@RequestParam Long associationId){
+        return ResultDto.ok(associationService.deleteAssociation(associationId));
+    }
 }

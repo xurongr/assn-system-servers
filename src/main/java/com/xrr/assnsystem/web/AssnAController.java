@@ -44,4 +44,16 @@ public class AssnAController {
         return ResultDto.ok(associationActivityService.selectAssnAById(associationActivityId));
     }
 
+    @ApiOperation("获取成员数量(删除活动前用于确认)")
+    @GetMapping("getAssnAUserCount")
+    public ResultDto<Long> getAssnAUserCount(@RequestParam Long associationActivityId){
+        return ResultDto.ok(associationActivityService.getAssnAUserCount(associationActivityId));
+    }
+
+    @ApiOperation("确认删除社团活动(执行删除操作)")
+    @GetMapping("deleteAssnA")
+    public ResultDto<Integer> deleteAssnA(@RequestParam Long associationActivityId){
+        return ResultDto.ok(associationActivityService.deleteAssnA(associationActivityId));
+    }
+
 }

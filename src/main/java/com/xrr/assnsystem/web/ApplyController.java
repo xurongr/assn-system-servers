@@ -50,4 +50,10 @@ public class ApplyController {
         return ResultDto.ok(applyService.updateApplyState(applyId,state));
     }
 
+    @ApiOperation("删除申请记录")
+    @GetMapping("deleteApply")
+    public ResultDto<Integer> deleteApply(@RequestParam Long applyId){
+        return ResultDto.ok(applyService.deleteApply(applyId));
+    }
+
 }

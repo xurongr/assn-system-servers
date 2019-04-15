@@ -84,4 +84,21 @@
     </where>
   </select>
 
+  <delete id="deleteDepartment" parameterType="java.lang.Long">
+    delete from department_table
+    where association_id = #{associationId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteAssociationActivity" parameterType="java.lang.Long">
+    delete from associationActivity_table
+    where association_id = #{associationId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteNotice" parameterType="java.lang.Long">
+    delete from notice_table
+    where association_id = #{associationId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteApply" parameterType="java.lang.Long">
+    delete from apply_table
+    where association_id = #{associationId,jdbcType=BIGINT}
+  </delete>
+
 </mapper>
