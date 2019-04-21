@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50718
 File Encoding         : 65001
 
-Date: 2019-04-18 00:45:59
+Date: 2019-04-21 22:40:44
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -50,7 +50,7 @@ CREATE TABLE `association_activity_table` (
   `start_time` datetime DEFAULT NULL COMMENT '创建时间：create_time',
   `end_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='社团活动表association_activity_table';
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='社团活动表association_activity_table';
 
 -- ----------------------------
 -- Records of association_activity_table
@@ -63,6 +63,10 @@ INSERT INTO `association_activity_table` VALUES ('5', '0', 'string', '0', 'strin
 INSERT INTO `association_activity_table` VALUES ('6', '0', 'string', '0', 'string', 'string', 'string', '0', '2019-04-14 19:57:51', '2019-04-14 19:57:51');
 INSERT INTO `association_activity_table` VALUES ('7', '0', 'string', '0', 'string', 'string', 'string', '0', '1970-01-19 08:00:43', '1970-01-19 08:00:44');
 INSERT INTO `association_activity_table` VALUES ('8', '0', 'string', '0', 'string', 'string', 'string', '0', '2019-04-14 19:58:08', '2019-04-14 20:21:11');
+INSERT INTO `association_activity_table` VALUES ('9', '2', '666', '9', '111', '111', null, '1', '2019-04-22 02:00:00', '2019-04-22 05:00:00');
+INSERT INTO `association_activity_table` VALUES ('10', '2', '111', '9', '111', '111', null, '1', '2019-04-21 00:00:00', '2019-04-22 05:00:00');
+INSERT INTO `association_activity_table` VALUES ('11', '2', '社团活动日', '9', '社团活动日', '求索大道', null, '2', '2019-04-22 00:00:00', '2019-05-01 00:00:00');
+INSERT INTO `association_activity_table` VALUES ('12', '2', '3', '14', '3', '3', null, '2', '2019-04-21 00:00:00', '2019-04-28 00:00:00');
 
 -- ----------------------------
 -- Table structure for association_table
@@ -104,7 +108,7 @@ CREATE TABLE `department_table` (
   `content` varchar(500) DEFAULT NULL COMMENT '介绍:content',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间：create_time',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='部门表department_table';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='部门表department_table';
 
 -- ----------------------------
 -- Records of department_table
@@ -112,6 +116,8 @@ CREATE TABLE `department_table` (
 INSERT INTO `department_table` VALUES ('1', '1', '1', null, '2222', '2019-03-25 23:41:53');
 INSERT INTO `department_table` VALUES ('2', '1', '7', '11', '11', '2019-04-13 00:02:33');
 INSERT INTO `department_table` VALUES ('3', '3', '0', 'string', 'string', '1970-01-19 08:00:43');
+INSERT INTO `department_table` VALUES ('4', '2', '9', '学习部', '负责活动的签到', '2019-04-21 12:23:15');
+INSERT INTO `department_table` VALUES ('5', '2', '14', '后勤部', '负责活动的后勤工作。。。', '2019-04-21 12:30:40');
 
 -- ----------------------------
 -- Table structure for identity_table
@@ -122,7 +128,7 @@ CREATE TABLE `identity_table` (
   `identity_name` varchar(20) DEFAULT NULL COMMENT '身份名称：identity_name',
   `level` bigint(20) DEFAULT NULL COMMENT '等级:level',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='身份表identity_table';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='身份表identity_table';
 
 -- ----------------------------
 -- Records of identity_table
@@ -131,6 +137,7 @@ INSERT INTO `identity_table` VALUES ('1', '系统管理员', '0');
 INSERT INTO `identity_table` VALUES ('2', '社团管理员', '1');
 INSERT INTO `identity_table` VALUES ('3', '社团成员', '2');
 INSERT INTO `identity_table` VALUES ('4', '普通用户', '3');
+INSERT INTO `identity_table` VALUES ('5', '1', '6');
 
 -- ----------------------------
 -- Table structure for notice_table
@@ -150,11 +157,11 @@ CREATE TABLE `notice_table` (
 -- ----------------------------
 -- Records of notice_table
 -- ----------------------------
-INSERT INTO `notice_table` VALUES ('1', null, '1', null, '社团管理系统旨在于更好的服务于学校和学生', '2019-03-10 23:03:43', '0');
 INSERT INTO `notice_table` VALUES ('2', null, '1', null, '测试测试测试', '2019-03-10 23:11:39', '1');
 INSERT INTO `notice_table` VALUES ('3', null, '1', null, '测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2', '2019-03-10 23:13:27', '1');
 INSERT INTO `notice_table` VALUES ('5', '南山南自愿者活动', '4', '2', '周六早上7点南山南门口集合，自愿者活动。', '2019-04-18 05:33:40', '0');
 INSERT INTO `notice_table` VALUES ('6', '戚继光公园自愿者活动', '4', '2', '戚继光公园自愿者活动，爱好环境人人有责。周六下午2点，公园门口集合。', '2019-04-18 05:36:55', '0');
+INSERT INTO `notice_table` VALUES ('7', '自愿者活动日', '4', '3', '体验生活爱护环境', '2019-04-21 19:03:57', '0');
 
 -- ----------------------------
 -- Table structure for user_activity_table
@@ -168,7 +175,7 @@ CREATE TABLE `user_activity_table` (
   `activity_id` bigint(20) DEFAULT NULL COMMENT '活动ID：activity_id',
   `job` varchar(20) DEFAULT NULL COMMENT '职务：job',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='人员活动中间表：user_activity_table';
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='人员活动中间表：user_activity_table';
 
 -- ----------------------------
 -- Records of user_activity_table
@@ -187,6 +194,16 @@ INSERT INTO `user_activity_table` VALUES ('11', '7', '1', '0', '0', null);
 INSERT INTO `user_activity_table` VALUES ('12', '0', '9', '0', '0', null);
 INSERT INTO `user_activity_table` VALUES ('13', '14', '2', '0', '0', null);
 INSERT INTO `user_activity_table` VALUES ('14', '17', '2', '0', '0', null);
+INSERT INTO `user_activity_table` VALUES ('15', '9', '2', '0', '0', null);
+INSERT INTO `user_activity_table` VALUES ('16', '3', '2', '0', '0', null);
+INSERT INTO `user_activity_table` VALUES ('17', '8', '2', '0', '0', null);
+INSERT INTO `user_activity_table` VALUES ('18', '1', '1', '1', '0', null);
+INSERT INTO `user_activity_table` VALUES ('19', '13', '2', '4', '0', null);
+INSERT INTO `user_activity_table` VALUES ('20', '13', '2', '4', '0', null);
+INSERT INTO `user_activity_table` VALUES ('21', '14', '2', '5', '0', null);
+INSERT INTO `user_activity_table` VALUES ('22', '88', '9', '0', '0', null);
+INSERT INTO `user_activity_table` VALUES ('23', '14', '1', '0', '0', null);
+INSERT INTO `user_activity_table` VALUES ('24', '14', '2', '4', '0', null);
 
 -- ----------------------------
 -- Table structure for user_table
@@ -210,7 +227,6 @@ CREATE TABLE `user_table` (
 -- ----------------------------
 -- Records of user_table
 -- ----------------------------
-INSERT INTO `user_table` VALUES ('1', '0', '', 'NDSFXY', '111111', '徐徐', '2', '18', '17705032963', '0', null);
 INSERT INTO `user_table` VALUES ('3', '3', '', 'B2015102201', '111111', '张三', '0', '20', '17705032963', '2015', '');
 INSERT INTO `user_table` VALUES ('4', '0', null, 'admin', 'admin', 'admin', '1', '20', '17705032963', null, null);
 INSERT INTO `user_table` VALUES ('5', '0', 'string', '111111', '111111', '111111', '0', '0', '0', '0', null);
