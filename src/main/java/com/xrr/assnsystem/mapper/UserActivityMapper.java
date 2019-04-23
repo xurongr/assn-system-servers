@@ -73,7 +73,8 @@ public interface UserActivityMapper {
      * @param pageSize
      * @return
      */
-    List<UserActivityDto> selectUserAll(@Param("associationId") Long  associationId,
+    List<UserActivityDto> selectUserAll(@Param("userId") Long  userId,
+                                        @Param("associationId") Long  associationId,
                                         @Param("departmentId") Long  departmentId,
                                         @Param("activityId") Long  activityId,
                                         @Param("pageNo") Integer pageNo ,
@@ -85,7 +86,8 @@ public interface UserActivityMapper {
      * @param departmentId
      * @return
      */
-    Long selectUserCount(@Param("associationId") Long  associationId,
+    Long selectUserCount(@Param("userId") Long  userId,
+                        @Param("associationId") Long  associationId,
                          @Param("departmentId") Long  departmentId,
                          @Param("activityId") Long  activityId);
 }

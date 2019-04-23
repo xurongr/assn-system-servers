@@ -82,7 +82,7 @@ public class DepartmentService {
      * @return
      */
     public Long getDepartmentUserCount(Long departmentId){
-        return userActivityMapper.selectUserCount(null, departmentId, 0L);
+        return userActivityMapper.selectUserCount(null,null, departmentId, 0L);
     }
 
     /**

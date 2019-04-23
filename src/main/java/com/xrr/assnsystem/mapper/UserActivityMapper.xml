@@ -57,14 +57,14 @@
     <delete id="deleteBy">
         delete from user_activity_table
         <where>
-            <if test="userId != null '">
+            <if test="userId != null ">
                 and  user_id = #{userId}
             </if>
             <if test="associationId != null ">
                 and  association_id = #{associationId}
             </if>
             <if test="departmentId != null ">
-                and  department_id = #{usdepartmentIderId}
+                and  department_id = #{departmentId}
             </if>
             <if test="activityId != null ">
                 and  activity_id = #{activityId}
@@ -138,6 +138,9 @@
         left join department_table d on d.id = ua.department_id
         left join association_activity_table aa on aa.id = ua.activity_id
         <where>
+            <if test="userId != null ">
+                and ua.user_id = #{userId}
+            </if>
             <if test="associationId != null ">
                 and ua.association_id = #{associationId}
             </if>
@@ -160,6 +163,9 @@
         left join department_table d on d.id = ua.department_id
         left join association_activity_table aa on aa.id = ua.activity_id
         <where>
+            <if test="userId != null ">
+                and ua.user_id = #{userId}
+            </if>
             <if test="associationId != null ">
                 and ua.association_id = #{associationId}
             </if>

@@ -43,15 +43,11 @@ public class UserController {
     @GetMapping("selectUsersAll")
     public ResultDto<PageDto<UserDto>> selectUsersAll(@RequestParam(value ="identityId",required = false) Long identityId,
                                                       @RequestParam(value ="identityName",required = false) String  identityName,
-                                                      @RequestParam(value ="associationId",required = false) Long associationId,
-                                                      @RequestParam(value ="associationName",required = false) String  associationName,
-                                                      @RequestParam(value ="departmentId",required = false) Long departmentId,
-                                                      @RequestParam(value ="departmentName",required = false) String  departmentName,
                                                       @RequestParam(value ="name",required = false) String name,
                                                       @RequestParam(value ="userName",required = false) String userName,
                                                       @RequestParam Integer pageNo,
                                                       @RequestParam Integer pageSize){
-        return ResultDto.ok(userService.selectUsersAll(identityId,identityName,associationId,associationName,departmentId,departmentName,name,userName,pageNo,pageSize));
+        return ResultDto.ok(userService.selectUsersAll(identityId,identityName,name,userName,pageNo,pageSize));
     }
 
     @ApiOperation("查询用户信息")

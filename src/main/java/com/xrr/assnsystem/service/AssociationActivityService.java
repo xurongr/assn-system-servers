@@ -82,7 +82,7 @@ public class AssociationActivityService {
      * @return
      */
     public Long getAssnAUserCount(Long associationActivityId){
-        return userActivityMapper.selectUserCount(null, 0L, associationActivityId);
+        return userActivityMapper.selectUserCount(null, null,0L, associationActivityId);
     }
 
     /**

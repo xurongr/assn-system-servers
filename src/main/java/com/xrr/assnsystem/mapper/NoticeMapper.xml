@@ -37,7 +37,7 @@
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.xrr.assnsystem.dto.po.Notice">
     update notice_table
-    set #{title,jdbcType=VARCHAR},
+    set title = #{title,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=BIGINT},
       association_id = #{associationId,jdbcType=BIGINT},
       content = #{content,jdbcType=VARCHAR},

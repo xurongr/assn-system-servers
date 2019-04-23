@@ -63,7 +63,7 @@
     left join association_table assn on assn.id = a.association_id
     left join department_table d on d.id = a.department_id
     <where>
-      <if test="apply.userId != null '">
+      <if test="apply.userId != null ">
         and a.user_id = #{apply.userId}
       </if>
       <if test="apply.associationId != null ">

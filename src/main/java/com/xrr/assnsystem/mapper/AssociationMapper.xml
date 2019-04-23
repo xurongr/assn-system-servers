@@ -89,7 +89,7 @@
     where association_id = #{associationId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteAssociationActivity" parameterType="java.lang.Long">
-    delete from associationActivity_table
+    delete from association_activity_table
     where association_id = #{associationId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteNotice" parameterType="java.lang.Long">
