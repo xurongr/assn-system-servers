@@ -22,10 +22,11 @@ public class AssociationController {
     @ApiOperation("获取社团列表")
     @GetMapping("selectAssociationAll")
     public ResultDto<PageDto<AssociationDto>> selectAssociationAll(@RequestParam(value ="userId",required = false) Long userId,
+                                                                   @RequestParam(value ="associationName",required = false) String  associationName,
                                                                 @RequestParam(value ="recruitState",required = false) Integer recruitState,
                                                                 @RequestParam Integer pageNo ,
                                                                 @RequestParam Integer pageSize){
-        return ResultDto.ok(associationService.selectAssociationAll(userId,recruitState,pageNo,pageSize));
+        return ResultDto.ok(associationService.selectAssociationAll(userId,associationName,recruitState,pageNo,pageSize));
     }
 
     @ApiOperation("添加社团")

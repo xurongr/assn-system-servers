@@ -67,18 +67,22 @@ public class UserActivityCotroller {
     @ApiOperation("查询社团成员列表")
     @GetMapping("selectAssociationUserAll")
     public ResultDto<PageDto<UserActivityDto>> selectAssociationUserAll(@RequestParam Long associationId,
+                                                                        @RequestParam(value ="name",required = false) String  name,
+                                                                        @RequestParam(value ="userName",required = false) String  userName,
                                                                         @RequestParam Integer pageNo,
                                                                         @RequestParam Integer pageSize){
-        return ResultDto.ok(userActivityService.selectAssociationUserAll(associationId,pageNo,pageSize));
+        return ResultDto.ok(userActivityService.selectAssociationUserAll(associationId,name,userName,pageNo,pageSize));
     }
 
     @ApiOperation("查询部门成员列表")
     @GetMapping("selectDepartmentUserAll")
     public ResultDto<PageDto<UserActivityDto>> selectDepartmentUserAll(@RequestParam Long associationId,
                                                                        @RequestParam Long departmentId,
+                                                                       @RequestParam(value ="name",required = false) String  name,
+                                                                       @RequestParam(value ="userName",required = false) String  userName,
                                                                        @RequestParam Integer pageNo,
                                                                        @RequestParam Integer pageSize){
-        return ResultDto.ok(userActivityService.selectDepartmentUserAll(associationId,departmentId,pageNo,pageSize));
+        return ResultDto.ok(userActivityService.selectDepartmentUserAll(associationId,departmentId,name,userName,pageNo,pageSize));
     }
 
     @ApiOperation("参加活动")
@@ -93,9 +97,11 @@ public class UserActivityCotroller {
     @GetMapping("selectActivityUserAll")
     public ResultDto<PageDto<UserActivityDto>> selectActivityUserAll(@RequestParam Long associationId,
                                                                        @RequestParam Long activityId,
+                                                                     @RequestParam(value ="name",required = false) String  name,
+                                                                     @RequestParam(value ="userName",required = false) String  userName,
                                                                        @RequestParam Integer pageNo,
                                                                        @RequestParam Integer pageSize){
-        return ResultDto.ok(userActivityService.selectActivityUserAll(associationId,activityId,pageNo,pageSize));
+        return ResultDto.ok(userActivityService.selectActivityUserAll(associationId,activityId,name,userName,pageNo,pageSize));
     }
 
     @ApiOperation("删除参加活动的某用户")

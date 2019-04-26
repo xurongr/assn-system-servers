@@ -74,6 +74,8 @@ public interface UserActivityMapper {
      * @return
      */
     List<UserActivityDto> selectUserAll(@Param("userId") Long  userId,
+                                        @Param("name") String  name,
+                                        @Param("userName") String  userName,
                                         @Param("associationId") Long  associationId,
                                         @Param("departmentId") Long  departmentId,
                                         @Param("activityId") Long  activityId,
@@ -87,7 +89,9 @@ public interface UserActivityMapper {
      * @return
      */
     Long selectUserCount(@Param("userId") Long  userId,
-                        @Param("associationId") Long  associationId,
+                         @Param("name") String  name,
+                         @Param("userName") String  userName,
+                         @Param("associationId") Long  associationId,
                          @Param("departmentId") Long  departmentId,
                          @Param("activityId") Long  activityId);
 }

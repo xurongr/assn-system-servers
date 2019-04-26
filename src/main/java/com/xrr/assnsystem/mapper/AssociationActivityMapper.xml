@@ -81,6 +81,9 @@
       <if test="userId != null ">
         and aa.user_id = #{userId}
       </if>
+      <if test="activityName != null and activityName != '' ">
+        and aa.activity_name like CONCAT('%',#{activityName},'%')
+      </if>
     </where>
     order by  aa.start_time desc
     limit #{pageNo},#{pageSize}
@@ -98,6 +101,9 @@
       </if>
       <if test="userId != null ">
         and aa.user_id = #{userId}
+      </if>
+      <if test="activityName != null and activityName != '' ">
+        and aa.activity_name like CONCAT('%',#{activityName},'%')
       </if>
     </where>
   </select>

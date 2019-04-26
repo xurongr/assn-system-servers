@@ -150,6 +150,14 @@
     and user_name = #{newPwd}
   </update>
 
+  <!-- 修改密码 -->
+  <update id="updatePwdById">
+    update user_table
+    set pwd = #{pwd}
+    where id = #{id}
+
+  </update>
+
     <!-- 修改职务 -->
   <update id="updateJob">
     update user_activity_table

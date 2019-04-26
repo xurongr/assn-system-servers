@@ -29,10 +29,10 @@ public class AssociationActivityService {
      * 获取社团活动列表
      * @return
      */
-    public PageDto<AssociationActivityDto> selectAssnAAll(Long associationId, Long userId, Integer pageNo , Integer pageSize){
+    public PageDto<AssociationActivityDto> selectAssnAAll(Long associationId, Long userId,String activityName, Integer pageNo , Integer pageSize){
         pageNo = pageSize * (pageNo - 1);
-        List<AssociationActivityDto> associationActivityDtoList = associationActivityMapper.selectAll(associationId,userId,pageNo,pageSize);
-        Long count = associationActivityMapper.selectCount(associationId,userId);
+        List<AssociationActivityDto> associationActivityDtoList = associationActivityMapper.selectAll(associationId,userId,activityName,pageNo,pageSize);
+        Long count = associationActivityMapper.selectCount(associationId,userId,activityName);
         PageDto<AssociationActivityDto> pageDto = new PageDto<>();
         pageDto.setTotal(count);
         pageDto.setData(associationActivityDtoList);
@@ -82,7 +82,7 @@ public class AssociationActivityService {
      * @return
      */
     public Long getAssnAUserCount(Long associationActivityId){
-        return userActivityMapper.selectUserCount(null, null,0L, associationActivityId);
+        return userActivityMapper.selectUserCount(null,null,null, null,0L, associationActivityId);
     }
 
     /**

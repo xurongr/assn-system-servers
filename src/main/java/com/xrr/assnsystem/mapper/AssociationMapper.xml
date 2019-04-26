@@ -61,6 +61,9 @@
       <if test="userId != null ">
         and a.user_id = #{userId}
       </if>
+      <if test="associationName != null and associationName != ''">
+        and a.association_name like CONCAT('%', #{associationName} ,'%')
+      </if>
       <if test="recruitState != null">
         and a.recruit_state = #{recruitState}
       </if>
@@ -77,6 +80,9 @@
     <where>
       <if test="userId != null ">
         and a.user_id = #{userId}
+      </if>
+      <if test="associationName != null and associationName != ''">
+        and a.association_name like CONCAT('%', #{associationName} ,'%')
       </if>
       <if test="recruitState != null ">
         and a.recruit_state = #{recruitState}

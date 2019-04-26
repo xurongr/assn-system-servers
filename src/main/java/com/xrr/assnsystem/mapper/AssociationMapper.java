@@ -15,7 +15,11 @@ public interface AssociationMapper {
 
     AssociationDto selectByPrimaryKey(Long id);
 
-    List<AssociationDto> selectAll(@Param("userId") Long userId, @Param("recruitState") Integer recruitState, @Param("pageNo") Integer pageNo , @Param("pageSize")Integer pageSize);
+    List<AssociationDto> selectAll(@Param("userId") Long userId,
+                                   @Param("associationName") String associationName,
+                                   @Param("recruitState") Integer recruitState,
+                                   @Param("pageNo") Integer pageNo,
+                                   @Param("pageSize")Integer pageSize);
 
     int updateByPrimaryKey(Association record);
 
@@ -25,7 +29,9 @@ public interface AssociationMapper {
      * @param recruitState
      * @return
      */
-    Long selectCount(@Param("userId") Long userId, @Param("recruitState") Integer recruitState);
+    Long selectCount(@Param("userId") Long userId,
+                     @Param("associationName") String associationName,
+                     @Param("recruitState") Integer recruitState);
 
 
     int deleteDepartment(Long associationId);

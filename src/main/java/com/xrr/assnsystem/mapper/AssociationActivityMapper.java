@@ -17,6 +17,7 @@ public interface AssociationActivityMapper {
 
     List<AssociationActivityDto> selectAll(@Param("associationId") Long associationId,
                                            @Param("userId") Long userId,
+                                           @Param("activityName") String activityName,
                                            @Param("pageNo") Integer pageNo ,
                                            @Param("pageSize")Integer pageSize);
 
@@ -28,5 +29,7 @@ public interface AssociationActivityMapper {
      * @param userId
      * @return
      */
-    Long selectCount(@Param("associationId") Long associationId, @Param("userId") Long userId);
+    Long selectCount(@Param("associationId") Long associationId,
+                     @Param("userId") Long userId,
+                     @Param("activityName") String activityName);
 }

@@ -141,6 +141,12 @@
             <if test="userId != null ">
                 and ua.user_id = #{userId}
             </if>
+            <if test="name != null and name !=''">
+                and u.name like CONCAT('%', #{name} ,'%')
+            </if>
+            <if test="userName != null and userName !=''">
+                and u.user_name like CONCAT('%', #{userName} ,'%')
+            </if>
             <if test="associationId != null ">
                 and ua.association_id = #{associationId}
             </if>
@@ -165,6 +171,12 @@
         <where>
             <if test="userId != null ">
                 and ua.user_id = #{userId}
+            </if>
+            <if test="name != null and name !=''">
+                and u.name like CONCAT('%', #{name} ,'%')
+            </if>
+            <if test="userName != null and userName !=''">
+                and u.user_name like CONCAT('%', #{userName} ,'%')
             </if>
             <if test="associationId != null ">
                 and ua.association_id = #{associationId}

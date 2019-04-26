@@ -57,6 +57,8 @@ public interface UserMapper {
      */
     int updatePwd(@Param("userName") String userName, @Param("oldPwd") String oldPwd, @Param("newPwd") String newPwd);
 
+    int updatePwdById(@Param("id") Long userId,@Param("pwd") String pwd);
+
 
     /**
      * 修改职务

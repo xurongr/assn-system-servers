@@ -21,9 +21,10 @@ public class AssnAController {
     @GetMapping("selectAssnAAll")
     public ResultDto<PageDto<AssociationActivityDto>> selectAssnAAll(@RequestParam(value ="associationId",required = false) Long associationId,
                                                                      @RequestParam(value ="userId",required = false) Long userId,
+                                                                     @RequestParam(value ="activityName",required = false) String activityName,
                                                                      @RequestParam Integer pageNo ,
                                                                      @RequestParam Integer pageSize){
-        return ResultDto.ok(associationActivityService.selectAssnAAll(associationId,userId,pageNo,pageSize));
+        return ResultDto.ok(associationActivityService.selectAssnAAll(associationId,userId,activityName,pageNo,pageSize));
     }
 
     @ApiOperation("添加社团活动")

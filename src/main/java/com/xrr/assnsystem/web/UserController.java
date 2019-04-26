@@ -27,6 +27,12 @@ public class UserController {
         return ResultDto.ok(userService.updatePwd(userName, oldPwd, newPwd));
     }
 
+    @ApiOperation("强制修改密码")
+    @GetMapping("updatePwdById")
+    public ResultDto<Integer> updatePwdById(@RequestParam Long userId,@RequestParam String pwd){
+        return ResultDto.ok(userService.updatePwdById(userId, pwd));
+    }
+
     @ApiOperation("添加新账户")
     @PostMapping("insertUser")
     public ResultDto<Integer> insertUser(@RequestBody User user){

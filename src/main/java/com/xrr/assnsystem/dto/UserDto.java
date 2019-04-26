@@ -1,6 +1,5 @@
 package com.xrr.assnsystem.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -34,7 +33,6 @@ public class UserDto implements Serializable {
     @ApiModelProperty("用户名或学号")
     private String userName;
 
-    @JsonIgnore
     @ApiModelProperty("密码")
     private String pwd;
 

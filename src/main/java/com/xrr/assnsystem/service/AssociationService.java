@@ -40,10 +40,10 @@ public class AssociationService {
      * 获取社团列表
      * @return
      */
-    public PageDto<AssociationDto> selectAssociationAll(Long userId, Integer recruitState, Integer pageNo , Integer pageSize){
+    public PageDto<AssociationDto> selectAssociationAll(Long userId,String associationName, Integer recruitState, Integer pageNo , Integer pageSize){
         pageNo = pageSize * (pageNo - 1);
-        List<AssociationDto> associationDtoList = associationMapper.selectAll(userId,recruitState,pageNo,pageSize);
-        Long count = associationMapper.selectCount(userId,recruitState);
+        List<AssociationDto> associationDtoList = associationMapper.selectAll(userId,associationName,recruitState,pageNo,pageSize);
+        Long count = associationMapper.selectCount(userId,associationName,recruitState);
         PageDto<AssociationDto> pageDto = new PageDto<>();
         pageDto.setTotal(count);
         pageDto.setData(associationDtoList);
@@ -99,9 +99,9 @@ public class AssociationService {
      */
     public Map<String,Long> getAssociationInfoCount(Long associationId){
         Map<String, Long> map = new HashMap<>();
-        Long userCount = userActivityMapper.selectUserCount(null,associationId, 0L, 0L);
+        Long userCount = userActivityMapper.selectUserCount(null,null,null,associationId, 0L, 0L);
         Long departmentCount = departmentMapper.selectCount(associationId, null);
-        Long associationActivityCount = associationActivityMapper.selectCount(associationId,null);
+        Long associationActivityCount = associationActivityMapper.selectCount(associationId,null,null);
         Long noticeCount = noticeMapper.selectCount(null,associationId,null);
         map.put("userCount", userCount);
         map.put("departmentCount", departmentCount);
