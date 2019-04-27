@@ -7,6 +7,7 @@ import com.xrr.assnsystem.exception.ServiceException;
 import com.xrr.assnsystem.mapper.UserActivityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.util.List;
@@ -47,6 +48,7 @@ public class UserActivityService {
      * @param departmentId
      * @return
      */
+    @Transactional
     public Integer insertUserToDepartment(Long userId,Long associationId,Long departmentId){
         Assert.notNull(userId, "用户不能为空");
         Assert.notNull(associationId, "社团不能为空");
@@ -54,6 +56,14 @@ public class UserActivityService {
         Long selectUserCount = userActivityMapper.selectUserCount(userId,null,null,associationId, departmentId, 0L);
         if(0L != selectUserCount){
             throw new ServiceException(501, "该用户已在该部门中，可将该用户添加到其它部门中。");
+        }
+        Long selectUserAssociationCount = userActivityMapper.selectUserCount(userId,null,null,associationId, 0L, 0L);
+        if(0L == selectUserAssociationCount){
+            userActivityMapper.insert(UserActivity.builder()
+                    .userId(userId)
+                    .associationId(associationId)
+                    .departmentId(0L)
+                    .activityId(0L).build());
         }
         Integer result = userActivityMapper.insert(UserActivity.builder()
                 .userId(userId)
