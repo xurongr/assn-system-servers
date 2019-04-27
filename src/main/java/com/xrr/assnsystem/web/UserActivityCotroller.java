@@ -113,7 +113,7 @@ public class UserActivityCotroller {
     }
 
     @ApiOperation("修改社团中某成员身份")
-    @GetMapping("updateIdentity")
+    @GetMapping("updateUserIdentity")
     public ResultDto<Integer> updateIdentity(@RequestParam Long userId,
                                                    @RequestParam Long associationId,
                                                    @RequestParam Long identityId){
