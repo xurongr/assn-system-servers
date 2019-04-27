@@ -30,7 +30,10 @@ public class UserService {
        Assert.notNull(userName, "用户名不能为空");
        Assert.notNull(pwd, "密码不能为空");
        UserDto userDto = userMapper.selectByUserNameAndPwd(userName, pwd);
-       if(null == userDto) throw new ServiceException(501, "账号或密码错误");
+       if(null == userDto) {
+           userDto = userMapper.selectByUserAndPwd(userName, pwd);
+           if(null == userDto) throw new ServiceException(501, "账号或密码错误");
+       }
        return userDto;
    }
 

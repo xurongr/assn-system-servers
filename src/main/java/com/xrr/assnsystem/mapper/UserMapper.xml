@@ -32,6 +32,7 @@
       <result column="job" property="job" jdbcType="VARCHAR" />
       <result column="identity_id" jdbcType="BIGINT" property="identityId" />
       <result column="identity_name" jdbcType="VARCHAR" property="identityName" />
+      <result column="level" jdbcType="BIGINT" property="level" />
       <collection   property="departmentBasicList" javaType="java.util.List" ofType="com.xrr.assnsystem.dto.UserDto$AssnBasic$DepartmentBasic">
         <id column="department_id" property="departmentId" jdbcType="INTEGER"/>
         <result column="department_name" property="departmentName" jdbcType="VARCHAR" />
@@ -73,7 +74,7 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="UserResultMap">
     select u.id, u.major, u.user_name, u.pwd, u.`name`,
     u.sex, u.age, u.tel_number, u.grade, u.user_img, a.id as association_id ,a.association_name,
-    ua.job,ua.identity_id, i.identity_name,ua.department_id,d.department_name
+    ua.job,ua.identity_id, i.identity_name,i.level,ua.department_id,d.department_name
     from user_table u
     left join user_activity_table ua on u.id = ua.user_id
     left join `identity_table` i on i.id = ua.identity_id
@@ -116,7 +117,7 @@
   <select id="selectByUserNameAndPwd"  resultMap="UserResultMap">
     select u.id, u.major, u.user_name, u.pwd, u.`name`,
      u.sex, u.age, u.tel_number, u.grade, u.user_img, a.id as association_id ,a.association_name,
-     ua.job,ua.identity_id, i.identity_name,ua.department_id,d.department_name
+     ua.job,ua.identity_id, i.identity_name,i.level,ua.department_id,d.department_name
     from user_table u
     left join user_activity_table ua on u.id = ua.user_id
     left join `identity_table` i on i.id = ua.identity_id
@@ -124,6 +125,15 @@
     left join department_table d on d.association_id = a.id
     where ua.department_id = 0
     and u.user_name = #{userName}
+    and u.pwd = #{pwd}
+  </select>
+
+  <!-- 通过账号密码查询 -->
+  <select id="selectByUserAndPwd"  resultMap="UserResultMap">
+    select u.id, u.major, u.user_name, u.pwd, u.`name`,
+     u.sex, u.age, u.tel_number, u.grade, u.user_img
+    from user_table u
+    where u.user_name = #{userName}
     and u.pwd = #{pwd}
   </select>
 

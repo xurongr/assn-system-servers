@@ -72,6 +72,9 @@ public class UserDto implements Serializable {
         @ApiModelProperty("身份名称")
         private String identityName;
 
+        @ApiModelProperty("身份等级")
+        private Long level;
+
         @ApiModelProperty("社团下的部门列表")
         private List<DepartmentBasic> departmentBasicList;
 

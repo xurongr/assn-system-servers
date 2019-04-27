@@ -45,6 +45,15 @@ public interface UserMapper {
     UserDto selectByUserNameAndPwd(@Param("userName") String userName, @Param("pwd") String pwd);
 
     /**
+     * 通过账号密码查询
+     *
+     * @param userName
+     * @param pwd
+     * @return
+     */
+    UserDto selectByUserAndPwd(@Param("userName") String userName, @Param("pwd") String pwd);
+
+    /**
      * 修改密码
      * @param userName
      * @param oldPwd
