@@ -3,7 +3,6 @@
 <mapper namespace="com.xrr.assnsystem.mapper.UserMapper">
   <resultMap id="BaseResultMap" type="com.xrr.assnsystem.dto.po.User">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="identity_id" jdbcType="BIGINT" property="identityId" />
     <result column="major" jdbcType="VARCHAR" property="major" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="pwd" jdbcType="VARCHAR" property="pwd" />
@@ -17,8 +16,6 @@
 
   <resultMap id="UserResultMap" type="com.xrr.assnsystem.dto.UserDto">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="identity_id" jdbcType="BIGINT" property="identityId" />
-    <result column="identity_name" jdbcType="VARCHAR" property="identityName" />
     <result column="major" jdbcType="VARCHAR" property="major" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="pwd" jdbcType="VARCHAR" property="pwd" />
@@ -33,6 +30,8 @@
       <id column="association_id" property="associationId" jdbcType="INTEGER"/>
       <result column="association_name" property="associationName" jdbcType="VARCHAR" />
       <result column="job" property="job" jdbcType="VARCHAR" />
+      <result column="identity_id" jdbcType="BIGINT" property="identityId" />
+      <result column="identity_name" jdbcType="VARCHAR" property="identityName" />
       <collection   property="departmentBasicList" javaType="java.util.List" ofType="com.xrr.assnsystem.dto.UserDto$AssnBasic$DepartmentBasic">
         <id column="department_id" property="departmentId" jdbcType="INTEGER"/>
         <result column="department_name" property="departmentName" jdbcType="VARCHAR" />
@@ -49,19 +48,18 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into user_table (identity_id, major, user_name, pwd,
+    insert into user_table (major, user_name, pwd,
       `name`, sex, age,
       tel_number, grade, user_img
       )
-    values (#{identityId,jdbcType=BIGINT}, #{major,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR},
+    values ( #{major,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR},
       #{name,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, #{age,jdbcType=INTEGER},
       #{telNumber,jdbcType=BIGINT}, #{grade,jdbcType=INTEGER}, #{userImg,jdbcType=VARCHAR}
       )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.xrr.assnsystem.dto.po.User">
     update user_table
-    set identity_id = #{identityId,jdbcType=BIGINT},
-      major = #{major,jdbcType=VARCHAR},
+    set major = #{major,jdbcType=VARCHAR},
       user_name = #{userName,jdbcType=VARCHAR},
       pwd = #{pwd,jdbcType=VARCHAR},
       `name` = #{name,jdbcType=VARCHAR},
@@ -73,30 +71,23 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="UserResultMap">
-    select u.id,u.identity_id, i.identity_name, u.major, u.user_name, u.pwd, u.`name`,
+    select u.id, u.major, u.user_name, u.pwd, u.`name`,
     u.sex, u.age, u.tel_number, u.grade, u.user_img, a.id as association_id ,a.association_name,
-    ua.job,d.id as department_id,d.department_name
+    ua.job,ua.identity_id, i.identity_name,ua.department_id,d.department_name
     from user_table u
     left join `identity_table` i on i.id = u.identity_id
     left join user_activity_table ua on u.id = ua.user_id
     left join association_table a on a.id = ua.association_id
     left join department_table d on d.association_id = a.id
-    where u.id = #{id,jdbcType=BIGINT}
+    where  u.id = #{id,jdbcType=BIGINT}
   </select>
 
   <!-- 查询全部信息 -->
-  <select id="selectAll" resultMap="UserResultMap">
-    select u.id,u.identity_id, i.identity_name, u.major, u.user_name, u.pwd, u.`name`,
+  <select id="selectAll" resultMap="BaseResultMap">
+    select u.id, u.major, u.user_name, u.pwd, u.`name`,
     u.sex, u.age, u.tel_number, u.grade, u.user_img
     from user_table u
-    left join `identity_table` i on i.id = u.identity_id
     <where>
-      <if test="identityId != null ">
-         and  u.identity_id = #{identityId}
-      </if>
-      <if test="identityName != null and identityName != ''">
-        and i.identity_name like CONCAT('%',#{identityName},'%')
-      </if>
       <if test="name != null and name != ''">
         and  u.name like CONCAT('%',#{name},'%')
       </if>
@@ -111,14 +102,7 @@
   <select id="selectCount" resultType="java.lang.Long">
     select count(*)
     from user_table u
-    left join `identity_table` i on i.id = u.identity_id
     <where>
-      <if test="identityId != null ">
-        and  u.identity_id = #{identityId}
-      </if>
-      <if test="identityName != null and identityName != ''">
-        and i.identity_name like CONCAT('%',#{identityName},'%')
-      </if>
       <if test="name != null and name != ''">
         and  u.name like CONCAT('%',#{name},'%')
       </if>
@@ -130,15 +114,16 @@
 
   <!-- 通过账号密码查询 -->
   <select id="selectByUserNameAndPwd"  resultMap="UserResultMap">
-    select u.id,u.identity_id, i.identity_name, u.major, u.user_name, u.pwd, u.`name`,
+    select u.id, u.major, u.user_name, u.pwd, u.`name`,
      u.sex, u.age, u.tel_number, u.grade, u.user_img, a.id as association_id ,a.association_name,
-     ua.job,d.id as department_id,d.department_name
+     ua.job,ua.identity_id, i.identity_name,ua.department_id,d.department_name
     from user_table u
     left join `identity_table` i on i.id = u.identity_id
     left join user_activity_table ua on u.id = ua.user_id
     left join association_table a on a.id = ua.association_id
     left join department_table d on d.association_id = a.id
-    where u.user_name = #{userName}
+    where ua.department_id = 0
+    and u.user_name = #{userName}
     and u.pwd = #{pwd}
   </select>
 

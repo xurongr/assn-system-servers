@@ -74,9 +74,8 @@ public class UserService {
     public Integer insertUser(User users){
         Assert.notNull(users.getUserName(), "用户名不能为空");
         Assert.notNull(users.getPwd(), "密码不能为空");
-        Assert.notNull(users.getIdentityId(), "必须绑定身份");
         List<UserDto> usersList = userMapper
-                .selectAll(null,null,null,users.getUserName(),0,99);
+                .selectAll(null,users.getUserName(),0,99);
         if(0 != usersList.size())
             throw new ServiceException(501, "该用户名已存在！");
         int result = userMapper.insert(users);
@@ -90,7 +89,6 @@ public class UserService {
      * @return
      */
     public Integer updateUser(User users){
-        Assert.notNull(users.getIdentityId(), "必须绑定身份");
         int result = userMapper.updateByPrimaryKey(users);
         return result;
     }
@@ -112,20 +110,17 @@ public class UserService {
 
     /**
      * 查询所有用户列表
-     * @param identityId
      * @param pageNo
      * @param pageSize
      * @return
      */
-    public PageDto<UserDto> selectUsersAll(Long identityId,
-                                           String identityName,
-                                           String name,
+    public PageDto<UserDto> selectUsersAll(String name,
                                            String userName,
                                            Integer pageNo,
                                            Integer pageSize) {
         pageNo = pageSize * (pageNo - 1);
-        List<UserDto> users = userMapper.selectAll(identityId,identityName,name,userName,pageNo,pageSize);
-        Long count = userMapper.selectCount(identityId,identityName,name,userName);
+        List<UserDto> users = userMapper.selectAll(name,userName,pageNo,pageSize);
+        Long count = userMapper.selectCount(name,userName);
         PageDto<UserDto> pageDto = new PageDto<>();
         pageDto.setTotal(count);
         pageDto.setData(users);

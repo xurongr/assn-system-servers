@@ -7,6 +7,7 @@
     <result column="association_id" jdbcType="BIGINT" property="associationId" />
     <result column="department_id" jdbcType="BIGINT" property="departmentId" />
     <result column="activity_id" jdbcType="BIGINT" property="activityId" />
+    <result column="identity_id" jdbcType="BIGINT" property="identityId" />
     <result column="job" jdbcType="VARCHAR" property="job" />
   </resultMap>
 
@@ -21,6 +22,8 @@
         <result column="activity_id" jdbcType="BIGINT" property="activityId" />
         <result column="activity_name" jdbcType="VARCHAR" property="activityName" />
         <result column="job" jdbcType="VARCHAR" property="job" />
+        <result column="identity_id" jdbcType="BIGINT" property="identityId" />
+        <result column="identity_name" jdbcType="VARCHAR" property="identityName" />
     </resultMap>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
@@ -31,27 +34,26 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into user_activity_table (user_id,association_id, department_id, activity_id
-      )
-    values (#{userId,jdbcType=BIGINT},#{associationId,jdbcType=BIGINT}, #{departmentId,jdbcType=BIGINT}, #{activityId,jdbcType=BIGINT}
-      )
+    insert into user_activity_table (user_id,association_id, department_id, activity_id,
+      identity_id)
+    values (#{userId,jdbcType=BIGINT},#{associationId,jdbcType=BIGINT}, #{departmentId,jdbcType=BIGINT}, #{activityId,jdbcType=BIGINT},
+      #{identityId,jdbcType=BIGINT})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.xrr.assnsystem.dto.po.UserActivity">
     update user_activity_table
     set user_id = #{userId,jdbcType=BIGINT},
         association_id = #{associationId,jdbcType=BIGINT},
       department_id = #{departmentId,jdbcType=BIGINT},
-      activity_id = #{activityId,jdbcType=BIGINT}
+      activity_id = #{activityId,jdbcType=BIGINT},
+      identity_id = #{identityId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="UserActivityResultMap">
-    select id, user_id,association_id, department_id, activity_id
+    select id, user_id,association_id, department_id, activity_id,identity_id
     from user_activity_table
     where id = #{id,jdbcType=BIGINT}
   </select>
-
-
 
     <!-- 根据条件删除 -->
     <delete id="deleteBy">
@@ -74,10 +76,12 @@
 
     <!-- 查询某用户参与的所有社团列表 -->
     <select id="selectAssociationAllByUserId" resultMap="UserActivityResultMap">
-        select ua.id, ua.user_id,u.name,ua.association_id,a.association_name
+        select ua.id, ua.user_id,u.name,ua.association_id,a.association_name,
+        ua.identity_id,i.identity_name
         from user_activity_table ua
-        join user_table u on u.id = ua.user_id
-        join association_table a on a.id = ua.association_id
+        left join user_table u on u.id = ua.user_id
+        left join association_table a on a.id = ua.association_id
+        left join identity_table a on a.id = ua.identity_id
         where ua.user_id = #{userId}
         and ua.department_id = 0
         and ua.activity_id = 0
@@ -87,8 +91,8 @@
     <select id="selectCountAssociationAllByUserId" resultType="java.lang.Long">
         select count(*)
         from user_activity_table ua
-        join user_table u on u.id = ua.user_id
-        join association_table a on a.id = ua.association_id
+        left join user_table u on u.id = ua.user_id
+        left join association_table a on a.id = ua.association_id
         where ua.user_id = #{userId}
         and ua.department_id = 0
         and ua.activity_id = 0
@@ -96,13 +100,13 @@
 
     <!-- 查询某用户参与的所有部门列表 -->
     <select id="selectDepartmentAllByUserId" resultMap="UserActivityResultMap">
-        select ua.id, ua.user_id,u.name,ua.association_id,a.association_name, ua.department_id,
-        d.department_name
+        select ua.id, ua.user_id,u.name,ua.association_id,a.association_name,
+        ua.department_id,d.department_name,ua.identity_id,i.identity_name
         from user_activity_table ua
-        join user_table u on u.id = ua.user_id
-        join association_table a on a.id = ua.association_id
-        join department_table d on d.id = ua.department_id
-        join association_activity_table aa on aa.id = ua.activity_id
+        left join user_table u on u.id = ua.user_id
+        left join association_table a on a.id = ua.association_id
+        left join department_table d on d.id = ua.department_id
+        left join association_activity_table aa on aa.id = ua.activity_id
         where ua.user_id = #{userId}
         and ua.department_id  &lt;&gt; 0
         and ua.activity_id = 0
@@ -115,10 +119,10 @@
     <select id="selectCountDepartmentAllByUserId" resultType="java.lang.Long">
         select count(*)
         from user_activity_table ua
-        join user_table u on u.id = ua.user_id
-        join association_table a on a.id = ua.association_id
-        join department_table d on d.id = ua.department_id
-        join association_activity_table aa on aa.id = ua.activity_id
+        left join user_table u on u.id = ua.user_id
+        left join association_table a on a.id = ua.association_id
+        left join department_table d on d.id = ua.department_id
+        left join association_activity_table aa on aa.id = ua.activity_id
         where ua.user_id = #{userId}
         and ua.department_id  &lt;&gt; 0
         and ua.activity_id = 0
@@ -131,7 +135,7 @@
     <!-- 根据条件查询成员列表-->
     <select id="selectUserAll" resultMap="UserActivityResultMap">
         select ua.id, ua.user_id,u.name,ua.association_id,a.association_name, ua.department_id,
-        d.department_name, ua.activity_id,aa.activity_name
+        d.department_name, ua.activity_id,aa.activity_name,ua.identity_id,i.identity_name
         from user_activity_table ua
         left join user_table u on u.id = ua.user_id
         left join association_table a on a.id = ua.association_id
@@ -158,6 +162,7 @@
             </if>
         </where>
         limit #{pageNo},#{pageSize}
+        order by ua.identity_id asc
     </select>
 
     <!-- 根据条件查询成员总数 -->
@@ -190,5 +195,13 @@
         </where>
     </select>
 
+
+    <!-- 修改身份 -->
+    <update id="updateIdentity">
+    update user_activity_table
+    set identity_id = #{identityId}
+    where user_id = #{userId}
+    and  association_id = #{associationId}
+  </update>
 
 </mapper>

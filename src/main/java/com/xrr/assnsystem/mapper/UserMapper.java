@@ -23,9 +23,7 @@ public interface UserMapper {
      * @param pageSize
      * @return
      */
-    List<UserDto> selectAll(@Param("identityId")Long identityId,
-                            @Param("identityName") String identityName,
-                            @Param("name") String name,
+    List<UserDto> selectAll(@Param("name") String name,
                             @Param("userName") String userName,
                             @Param("pageNo") Integer pageNo,
                             @Param("pageSize")Integer pageSize);
@@ -34,9 +32,7 @@ public interface UserMapper {
      * 查询总数
      * @return
      */
-    Long selectCount(@Param("identityId")Long identityId,
-                     @Param("identityName") String identityName,
-                     @Param("name") String name,
+    Long selectCount(@Param("name") String name,
                      @Param("userName") String userName);
 
     /**

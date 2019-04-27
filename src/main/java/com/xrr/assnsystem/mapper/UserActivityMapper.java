@@ -94,4 +94,15 @@ public interface UserActivityMapper {
                          @Param("associationId") Long  associationId,
                          @Param("departmentId") Long  departmentId,
                          @Param("activityId") Long  activityId);
+
+    /**
+     * 修改身份
+     * @param userId
+     * @param associationId
+     * @param identityId
+     * @return
+     */
+    int updateIdentity(@Param("userId") Long  userId,
+                       @Param("associationId") Long  associationId,
+                       @Param("identityId") Long  identityId);
 }

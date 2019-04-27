@@ -47,13 +47,11 @@ public class UserController {
 
     @ApiOperation("查询所有用户列表")
     @GetMapping("selectUsersAll")
-    public ResultDto<PageDto<UserDto>> selectUsersAll(@RequestParam(value ="identityId",required = false) Long identityId,
-                                                      @RequestParam(value ="identityName",required = false) String  identityName,
-                                                      @RequestParam(value ="name",required = false) String name,
+    public ResultDto<PageDto<UserDto>> selectUsersAll(@RequestParam(value ="name",required = false) String name,
                                                       @RequestParam(value ="userName",required = false) String userName,
                                                       @RequestParam Integer pageNo,
                                                       @RequestParam Integer pageSize){
-        return ResultDto.ok(userService.selectUsersAll(identityId,identityName,name,userName,pageNo,pageSize));
+        return ResultDto.ok(userService.selectUsersAll(name,userName,pageNo,pageSize));
     }
 
     @ApiOperation("查询用户信息")

@@ -6,6 +6,7 @@
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="association_id" jdbcType="BIGINT" property="associationId" />
     <result column="department_id" jdbcType="BIGINT" property="departmentId" />
+    <result column="identity_id" jdbcType="BIGINT" property="identityId" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="apply_time" jdbcType="TIMESTAMP" property="applyTime" />
     <result column="state" jdbcType="INTEGER" property="state" />
@@ -18,7 +19,9 @@
     <result column="association_id" jdbcType="BIGINT" property="associationId" />
     <result column="association_name" jdbcType="VARCHAR" property="associationName" />
     <result column="department_id" jdbcType="BIGINT" property="departmentId" />
-    <result column="association_name" jdbcType="VARCHAR" property="associationName" />
+    <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
+    <result column="identity_id" jdbcType="BIGINT" property="identityId" />
+    <result column="identity_name" jdbcType="VARCHAR" property="identityName" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="apply_time" jdbcType="TIMESTAMP" property="applyTime" />
     <result column="state" jdbcType="INTEGER" property="state" />
@@ -31,11 +34,11 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into apply_table (user_id, association_id, department_id, 
+    insert into apply_table (user_id, association_id, department_id, identity_id,
       content, apply_time, `state`
       )
-    values (#{userId,jdbcType=BIGINT}, #{associationId,jdbcType=BIGINT}, #{departmentId,jdbcType=BIGINT}, 
-      #{content,jdbcType=VARCHAR}, #{applyTime,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER}
+    values (#{userId,jdbcType=BIGINT}, #{associationId,jdbcType=BIGINT}, #{departmentId,jdbcType=BIGINT},
+    #{identityId,jdbcType=BIGINT},#{content,jdbcType=VARCHAR}, #{applyTime,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER}
       )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.xrr.assnsystem.dto.po.Apply">
@@ -43,25 +46,31 @@
     set user_id = #{userId,jdbcType=BIGINT},
       association_id = #{associationId,jdbcType=BIGINT},
       department_id = #{departmentId,jdbcType=BIGINT},
+      identity_id = #{identityId,jdbcType=BIGINT},
       content = #{content,jdbcType=VARCHAR},
       apply_time = #{applyTime,jdbcType=TIMESTAMP},
     where id = #{id,jdbcType=BIGINT}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ApplyResultMap">
-    select a.id, a.user_id,u.name, a.association_id,assn.association_name, a.department_id,d.department_name, a.content, a.apply_time, a.`state`
+    select a.id, a.user_id,u.name, a.association_id,assn.association_name, a.department_id,d.department_name,
+     a.identity_id,i.identity_name,a.content, a.apply_time, a.`state`
     from apply_table a
     left join user_table u on u.id = a.user_id
     left join association_table assn on assn.id = a.association_id
     left join department_table d on d.id = a.department_id
+    left join `identity_table` i on i.id = a.identity_id
     where a.id = #{id,jdbcType=BIGINT}
   </select>
+
   <select id="selectAll" resultMap="ApplyResultMap">
     select a.id, a.user_id,u.name, a.association_id,assn.association_name,
-     a.department_id,d.department_name, a.content, a.apply_time, a.`state`
+     a.department_id,d.department_name,a.identity_id,i.identity_name,
+    a.content, a.apply_time, a.`state`
     from apply_table a
     left join user_table u on u.id = a.user_id
     left join association_table assn on assn.id = a.association_id
     left join department_table d on d.id = a.department_id
+    left join `identity_table` i on i.id = a.identity_id
     <where>
       <if test="apply.userId != null ">
         and a.user_id = #{apply.userId}
@@ -87,6 +96,7 @@
     left join user_table u on u.id = a.user_id
     left join association_table assn on assn.id = a.association_id
     left join department_table d on d.id = a.department_id
+    left join `identity_table` i on i.id = a.identity_id
     <where>
       <if test="apply.userId != null ">
         and a.user_id = #{apply.userId}

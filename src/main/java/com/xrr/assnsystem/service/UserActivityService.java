@@ -234,4 +234,21 @@ public class UserActivityService {
             throw new ServiceException(501, "删除失败");
         return result;
     }
+
+    /**
+     * 修改社团中某成员身份
+     * @param userId
+     * @param associationId
+     * @param identityId
+     * @return
+     */
+    public Integer updateIdentity(Long userId,Long associationId,Long identityId){
+        Assert.notNull(userId, "用户不能为空");
+        Assert.notNull(associationId, "社团不能为空");
+        Assert.notNull(identityId, "身份不能为空");
+        Integer result = userActivityMapper.updateIdentity(userId, associationId, identityId);
+        if(0 == result)
+            throw new ServiceException(501, "删除失败");
+        return result;
+    }
 }

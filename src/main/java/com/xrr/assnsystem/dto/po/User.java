@@ -20,8 +20,6 @@ public class User implements Serializable {
     @ApiModelProperty("ID")
     private Long id;
 
-    @ApiModelProperty("身份ID")
-    private Long identityId;
 
     @ApiModelProperty("专业")
     private String major;

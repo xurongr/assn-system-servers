@@ -41,6 +41,12 @@ public class ApplyDto implements Serializable {
     @ApiModelProperty("部门名称")
     private String departmentName;
 
+    @ApiModelProperty("身份ID")
+    private Long identityId;
+
+    @ApiModelProperty("身份名称")
+    private String identityName;
+
     @ApiModelProperty("内容")
     private String content;
 

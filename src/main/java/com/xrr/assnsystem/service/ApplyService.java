@@ -2,6 +2,7 @@ package com.xrr.assnsystem.service;
 
 import com.xrr.assnsystem.dto.ApplyDto;
 import com.xrr.assnsystem.dto.PageDto;
+import com.xrr.assnsystem.dto.UserActivityDto;
 import com.xrr.assnsystem.dto.po.Apply;
 import com.xrr.assnsystem.dto.po.UserActivity;
 import com.xrr.assnsystem.exception.ServiceException;
@@ -86,7 +87,7 @@ public class ApplyService {
      * @return
      */
     @Transactional
-    public Integer updateApplyState(Long applyId,Integer state){
+    public Integer updateApplyState(Long applyId, Integer state){
         ApplyDto applyDto = applyMapper.selectByPrimaryKey(applyId);
         Integer state1 = applyDto.getState();
         int result1 = 0;
@@ -95,19 +96,26 @@ public class ApplyService {
         if(1 == state1){
             throw new ServiceException(501, "成员已通过申请，不能再做修改。");
         }else{
-            result1 = applyMapper.updateState(applyId, state);
-            if(1 == state){
-                UserActivity userActivity = new UserActivity();
-                userActivity.setUserId(applyDto.getUserId());
-                userActivity.setAssociationId(applyDto.getAssociationId());
-                if(null != applyDto.getDepartmentId())
-                    userActivity.setDepartmentId(applyDto.getDepartmentId());
-                result2 = userActivityMapper.insert(userActivity);
+            if(1 == state) {
+                result1 = applyMapper.updateState(applyId, state);
+                List<UserActivityDto> userActivityDtos = userActivityMapper.selectUserAll(applyDto.getUserId(),
+                        null, null, applyDto.getAssociationId(),
+                        0L, 0L, 0, 99);
+                if ((null == userActivityDtos) || (userActivityDtos.size() == 0)) {
+                    UserActivity userActivity = new UserActivity();
+                    userActivity.setUserId(applyDto.getUserId());
+                    userActivity.setAssociationId(applyDto.getAssociationId());
+                    result2 = userActivityMapper.insert(userActivity);
+                    if (null != applyDto.getDepartmentId()) {
+                        userActivity.setDepartmentId(applyDto.getDepartmentId());
+                        userActivityMapper.insert(userActivity);
+                    }
+                } else if(!applyDto.getIdentityId().equals(userActivityDtos.get(0).getIdentityId())) {
+                    result2 = userActivityMapper.updateIdentity(applyDto.getUserId(), applyDto.getAssociationId(), applyDto.getIdentityId());
+                } else {throw new ServiceException(501, "成员已经存在社团中，并且信息没有更换，不能通过申请！");}
             }
         }
-        if (((2 == state) && (1 != result1))
-                || ((1 == state) && (1 != result1) && (1 != result2))) {
-
+        if ((1 != result1) && (0 == result2)) {
             throw new ServiceException(501, "修改状态失败");
         }
         return 1;

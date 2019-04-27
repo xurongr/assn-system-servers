@@ -37,6 +37,9 @@ public class Apply implements Serializable {
     @ApiModelProperty("部门ID")
     private Long departmentId;
 
+    @ApiModelProperty("身份ID")
+    private Long identityId;
+
     @ApiModelProperty("内容")
     private String content;
 

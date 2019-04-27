@@ -21,11 +21,6 @@ public class UserDto implements Serializable {
 
     private Long id;
 
-    @ApiModelProperty("身份ID")
-    private Long identityId;
-
-    @ApiModelProperty("身份名称")
-    private String identityName;
 
     @ApiModelProperty("专业")
     private String major;
@@ -70,6 +65,12 @@ public class UserDto implements Serializable {
 
         @ApiModelProperty("职务")
         private String job;
+
+        @ApiModelProperty("身份ID")
+        private Long identityId;
+
+        @ApiModelProperty("身份名称")
+        private String identityName;
 
         @ApiModelProperty("社团下的部门列表")
         private List<DepartmentBasic> departmentBasicList;

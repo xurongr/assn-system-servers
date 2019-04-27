@@ -48,5 +48,11 @@ public class UserActivityDto implements Serializable {
     @ApiModelProperty("职务")
     private String job;
 
+    @ApiModelProperty("身份ID")
+    private Long identityId;
+
+    @ApiModelProperty("身份名称")
+    private String identityName;
+
 
 }

@@ -58,7 +58,7 @@ public class UserActivityCotroller {
     @ApiOperation("查询某用户参与的所有部门列表")
     @GetMapping("selectDepartmentAllByUserId")
     public ResultDto<PageDto<UserActivityDto>> selectDepartmentAllByUserId(@RequestParam Long userId,
-                                                                           @RequestParam Long associationId,
+                                                                           @RequestParam(value = "associationId",required = false) Long associationId,
                                                                            @RequestParam Integer pageNo,
                                                                            @RequestParam Integer pageSize){
         return ResultDto.ok(userActivityService.selectDepartmentAllByUserId(userId,associationId,pageNo,pageSize));
@@ -111,4 +111,13 @@ public class UserActivityCotroller {
                                                      @RequestParam Long activityId){
         return ResultDto.ok(userActivityService.deleteUserInActivity(userId,associationId,activityId));
     }
+
+    @ApiOperation("修改社团中某成员身份")
+    @GetMapping("updateIdentity")
+    public ResultDto<Integer> updateIdentity(@RequestParam Long userId,
+                                                   @RequestParam Long associationId,
+                                                   @RequestParam Long identityId){
+        return ResultDto.ok(userActivityService.updateIdentity(userId,associationId,identityId));
+    }
+
 }
