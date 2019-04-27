@@ -141,6 +141,7 @@
         left join association_table a on a.id = ua.association_id
         left join department_table d on d.id = ua.department_id
         left join association_activity_table aa on aa.id = ua.activity_id
+        left join `identity_table` i on i.id = ua.identity_id
         <where>
             <if test="userId != null ">
                 and ua.user_id = #{userId}
@@ -161,8 +162,9 @@
                 and ua.activity_id = #{activityId}
             </if>
         </where>
-        limit #{pageNo},#{pageSize}
         order by ua.identity_id asc
+        limit #{pageNo},#{pageSize}
+
     </select>
 
     <!-- 根据条件查询成员总数 -->
@@ -173,14 +175,15 @@
         left join association_table a on a.id = ua.association_id
         left join department_table d on d.id = ua.department_id
         left join association_activity_table aa on aa.id = ua.activity_id
+        left join `identity_table` i on i.id = ua.identity_id
         <where>
             <if test="userId != null ">
                 and ua.user_id = #{userId}
             </if>
-            <if test="name != null and name !=''">
+            <if test="name != null and name != ''">
                 and u.name like CONCAT('%', #{name} ,'%')
             </if>
-            <if test="userName != null and userName !=''">
+            <if test="userName != null and userName != ''">
                 and u.user_name like CONCAT('%', #{userName} ,'%')
             </if>
             <if test="associationId != null ">

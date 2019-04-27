@@ -75,8 +75,8 @@
     u.sex, u.age, u.tel_number, u.grade, u.user_img, a.id as association_id ,a.association_name,
     ua.job,ua.identity_id, i.identity_name,ua.department_id,d.department_name
     from user_table u
-    left join `identity_table` i on i.id = u.identity_id
     left join user_activity_table ua on u.id = ua.user_id
+    left join `identity_table` i on i.id = ua.identity_id
     left join association_table a on a.id = ua.association_id
     left join department_table d on d.association_id = a.id
     where  u.id = #{id,jdbcType=BIGINT}
@@ -118,8 +118,8 @@
      u.sex, u.age, u.tel_number, u.grade, u.user_img, a.id as association_id ,a.association_name,
      ua.job,ua.identity_id, i.identity_name,ua.department_id,d.department_name
     from user_table u
-    left join `identity_table` i on i.id = u.identity_id
     left join user_activity_table ua on u.id = ua.user_id
+    left join `identity_table` i on i.id = ua.identity_id
     left join association_table a on a.id = ua.association_id
     left join department_table d on d.association_id = a.id
     where ua.department_id = 0
