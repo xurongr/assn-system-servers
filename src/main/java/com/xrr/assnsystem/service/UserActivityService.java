@@ -198,6 +198,10 @@ public class UserActivityService {
         if(0L != selectUserCount){
             throw new ServiceException(501, "该用户已参加该活动！");
         }
+        Long selectAssociationUserCount = userActivityMapper.selectUserCount(userId,null,null,associationId, null, null);
+        if(0L == selectAssociationUserCount){
+            throw new ServiceException(501, "该用户未加入该社团，无法参与活动！");
+        }
         Integer result = userActivityMapper.insert(UserActivity.builder()
                 .userId(userId)
                 .associationId(associationId)

@@ -49,6 +49,7 @@ public class ApplyService {
     public Integer insertApply(Apply apply){
         Assert.notNull(apply.getUserId(), "申请人不能为空");
         Assert.notNull(apply.getAssociationId(), "所属社团不能为空");
+        Assert.notNull(apply.getIdentityId(), "身份不能为空");
         apply.setState(0);
         if(null == apply.getApplyTime())
         apply.setApplyTime(Instant.now().plusMillis(TimeUnit.HOURS.toMillis(8)));
@@ -105,6 +106,7 @@ public class ApplyService {
                     UserActivity userActivity = new UserActivity();
                     userActivity.setUserId(applyDto.getUserId());
                     userActivity.setAssociationId(applyDto.getAssociationId());
+                    userActivity.setIdentityId(applyDto.getIdentityId());
                     result2 = userActivityMapper.insert(userActivity);
                     if (null != applyDto.getDepartmentId()) {
                         userActivity.setDepartmentId(applyDto.getDepartmentId());

@@ -11,7 +11,7 @@
  Target Server Version : 50718
  File Encoding         : 65001
 
- Date: 27/04/2019 22:26:43
+ Date: 27/04/2019 22:48:47
 */
 
 SET NAMES utf8mb4;
@@ -26,6 +26,7 @@ CREATE TABLE `apply_table`  (
   `user_id` bigint(20) NULL DEFAULT NULL COMMENT '负责人ID：user_id',
   `association_id` bigint(20) NULL DEFAULT NULL,
   `department_id` bigint(20) NULL DEFAULT NULL COMMENT '部门ID：department_id',
+  `identity_id` bigint(20) NULL DEFAULT 3,
   `content` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '介绍:content',
   `apply_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间：create_time',
   `state` int(11) NULL DEFAULT NULL COMMENT '状态(0申请中,1通过,2未通过):state',
