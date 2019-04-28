@@ -100,7 +100,7 @@ public class AssociationService {
     public Map<String,Long> getAssociationInfoCount(Long associationId){
         Map<String, Long> map = new HashMap<>();
         Long userCount = userActivityMapper.selectUserCount(null,null,null,associationId, 0L, 0L);
-        Long departmentCount = departmentMapper.selectCount(associationId, null);
+        Long departmentCount = departmentMapper.selectCount(associationId, null,null);
         Long associationActivityCount = associationActivityMapper.selectCount(associationId,null,null);
         Long noticeCount = noticeMapper.selectCount(null,associationId,null);
         map.put("userCount", userCount);
