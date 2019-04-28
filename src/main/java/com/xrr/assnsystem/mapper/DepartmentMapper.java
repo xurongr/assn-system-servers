@@ -17,6 +17,7 @@ public interface DepartmentMapper {
 
     List<DepartmentDto> selectAll(@Param("associationId") Long associationId,
                                   @Param("ministerUserId") Long ministerUserId,
+                                  @Param("departmentName") String departmentName,
                                   @Param("pageNo") Integer pageNo ,
                                   @Param("pageSize")Integer pageSize);
 
@@ -29,5 +30,5 @@ public interface DepartmentMapper {
      * @param ministerUserId
      * @return
      */
-    Long selectCount(@Param("associationId") Long associationId, @Param("ministerUserId") Long ministerUserId);
+    Long selectCount(@Param("associationId") Long associationId, @Param("ministerUserId") Long ministerUserId,@Param("departmentName") String departmentName);
 }

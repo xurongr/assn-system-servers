@@ -54,7 +54,8 @@
   </select>
 
   <select id="selectAll" resultMap="DepartmentResultMap">
-    select d.id, d.association_id,a.association_name, d.minister_user_id,u.name as minister_user_name, d.department_name, d.content, d.create_time
+    select d.id, d.association_id,a.association_name, d.minister_user_id,u.name as minister_user_name,
+      d.department_name, d.content, d.create_time
     from department_table d
     left join user_table u on u.id = d.minister_user_id
     left join association_table a on a.id = d.association_id
@@ -64,6 +65,9 @@
         </if>
         <if test="ministerUserId != null ">
             and d.minister_user_id = #{ministerUserId}
+        </if>
+        <if test="departmentName != null and departmentName != ''">
+            and d.department_name like CONCAT('%', #{departmentName} ,'%')
         </if>
     </where>
     limit #{pageNo},#{pageSize}
@@ -81,6 +85,9 @@
             </if>
             <if test="ministerUserId != null ">
                 and d.minister_user_id = #{ministerUserId}
+            </if>
+            <if test="departmentName != null and departmentName != ''">
+                and d.department_name like CONCAT('%', #{departmentName} ,'%')
             </if>
         </where>
     </select>
