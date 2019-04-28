@@ -40,6 +40,9 @@ public class Apply implements Serializable {
     @ApiModelProperty("身份ID")
     private Long identityId;
 
+    @ApiModelProperty("类型(0人员变动,1社团解散)")
+    private Integer type;
+
     @ApiModelProperty("内容")
     private String content;
 

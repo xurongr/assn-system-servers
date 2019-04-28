@@ -7,6 +7,7 @@
     <result column="association_id" jdbcType="BIGINT" property="associationId" />
     <result column="department_id" jdbcType="BIGINT" property="departmentId" />
     <result column="identity_id" jdbcType="BIGINT" property="identityId" />
+    <result column="type" jdbcType="INTEGER" property="type" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="apply_time" jdbcType="TIMESTAMP" property="applyTime" />
     <result column="state" jdbcType="INTEGER" property="state" />
@@ -22,6 +23,7 @@
     <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
     <result column="identity_id" jdbcType="BIGINT" property="identityId" />
     <result column="identity_name" jdbcType="VARCHAR" property="identityName" />
+    <result column="type" jdbcType="INTEGER" property="type" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="apply_time" jdbcType="TIMESTAMP" property="applyTime" />
     <result column="state" jdbcType="INTEGER" property="state" />
@@ -35,11 +37,10 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into apply_table (user_id, association_id, department_id, identity_id,
-      content, apply_time, `state`
-      )
+    `type`,content, apply_time, `state`)
     values (#{userId,jdbcType=BIGINT}, #{associationId,jdbcType=BIGINT}, #{departmentId,jdbcType=BIGINT},
-    #{identityId,jdbcType=BIGINT},#{content,jdbcType=VARCHAR}, #{applyTime,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER}
-      )
+    #{identityId,jdbcType=BIGINT},#{type,jdbcType=INTEGER},#{content,jdbcType=VARCHAR},
+    #{applyTime,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.xrr.assnsystem.dto.po.Apply">
     update apply_table
@@ -47,13 +48,14 @@
       association_id = #{associationId,jdbcType=BIGINT},
       department_id = #{departmentId,jdbcType=BIGINT},
       identity_id = #{identityId,jdbcType=BIGINT},
+      `type` = #{type,jdbcType=INTEGER},
       content = #{content,jdbcType=VARCHAR},
       apply_time = #{applyTime,jdbcType=TIMESTAMP},
     where id = #{id,jdbcType=BIGINT}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ApplyResultMap">
     select a.id, a.user_id,u.name, a.association_id,assn.association_name, a.department_id,d.department_name,
-     a.identity_id,i.identity_name,a.content, a.apply_time, a.`state`
+     a.identity_id,i.identity_name,a.`type`,a.content, a.apply_time, a.`state`
     from apply_table a
     left join user_table u on u.id = a.user_id
     left join association_table assn on assn.id = a.association_id
@@ -65,7 +67,7 @@
   <select id="selectAll" resultMap="ApplyResultMap">
     select a.id, a.user_id,u.name, a.association_id,assn.association_name,
      a.department_id,d.department_name,a.identity_id,i.identity_name,
-    a.content, a.apply_time, a.`state`
+    a.`type`,a.content, a.apply_time, a.`state`
     from apply_table a
     left join user_table u on u.id = a.user_id
     left join association_table assn on assn.id = a.association_id

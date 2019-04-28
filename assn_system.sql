@@ -11,7 +11,7 @@
  Target Server Version : 50718
  File Encoding         : 65001
 
- Date: 27/04/2019 22:48:47
+ Date: 28/04/2019 22:22:46
 */
 
 SET NAMES utf8mb4;
@@ -26,6 +26,7 @@ CREATE TABLE `apply_table`  (
   `user_id` bigint(20) NULL DEFAULT NULL COMMENT '负责人ID：user_id',
   `association_id` bigint(20) NULL DEFAULT NULL,
   `department_id` bigint(20) NULL DEFAULT NULL COMMENT '部门ID：department_id',
+  `type` tinyint(2) NULL DEFAULT 0 COMMENT '类型(0人员变动,1社团解散)',
   `identity_id` bigint(20) NULL DEFAULT 3,
   `content` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '介绍:content',
   `apply_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间：create_time',
@@ -164,16 +165,14 @@ CREATE TABLE `user_activity_table`  (
   `job` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '职务：job',
   `identity_id` bigint(20) NULL DEFAULT 3 COMMENT '身份ID:identity_id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '人员活动中间表：user_activity_table' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '人员活动中间表：user_activity_table' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_activity_table
 -- ----------------------------
-INSERT INTO `user_activity_table` VALUES (9, 7, 1, 0, 0, NULL, 3);
-INSERT INTO `user_activity_table` VALUES (10, 7, 1, 0, 0, NULL, 3);
 INSERT INTO `user_activity_table` VALUES (11, 7, 1, 0, 0, NULL, 3);
-INSERT INTO `user_activity_table` VALUES (13, 7, 1, 1, 0, NULL, 3);
 INSERT INTO `user_activity_table` VALUES (14, 7, 1, 2, 0, NULL, 3);
+INSERT INTO `user_activity_table` VALUES (15, 7, 1, 1, 0, NULL, 3);
 
 -- ----------------------------
 -- Table structure for user_table
