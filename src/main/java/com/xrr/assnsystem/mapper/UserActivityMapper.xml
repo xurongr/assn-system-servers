@@ -107,6 +107,7 @@
         left join association_table a on a.id = ua.association_id
         left join department_table d on d.id = ua.department_id
         left join association_activity_table aa on aa.id = ua.activity_id
+        left join `identity_table` i on i.id = ua.identity_id
         where ua.user_id = #{userId}
         and ua.department_id  &lt;&gt; 0
         and ua.activity_id = 0
@@ -123,6 +124,7 @@
         left join association_table a on a.id = ua.association_id
         left join department_table d on d.id = ua.department_id
         left join association_activity_table aa on aa.id = ua.activity_id
+        left join `identity_table` i on i.id = ua.identity_id
         where ua.user_id = #{userId}
         and ua.department_id  &lt;&gt; 0
         and ua.activity_id = 0
