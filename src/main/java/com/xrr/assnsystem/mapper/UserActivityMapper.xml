@@ -81,11 +81,11 @@
         from user_activity_table ua
         left join user_table u on u.id = ua.user_id
         left join association_table a on a.id = ua.association_id
-        left join identity_table a on a.id = ua.identity_id
+        left join identity_table i on i.id = ua.identity_id
         where ua.user_id = #{userId}
         and ua.department_id = 0
         and ua.activity_id = 0
-        limit #{pageNo},{pageSize}
+        limit #{pageNo},#{pageSize}
     </select>
     <!-- 查询某用户参与的社团总数 -->
     <select id="selectCountAssociationAllByUserId" resultType="java.lang.Long">
@@ -113,7 +113,7 @@
         <if test="associationId != null ">
             and ua.association_id = #{associationId}
         </if>
-        limit #{pageNo},{pageSize}
+        limit #{pageNo},#{pageSize}
     </select>
     <!-- 查询某用户参与的部门总数 -->
     <select id="selectCountDepartmentAllByUserId" resultType="java.lang.Long">
