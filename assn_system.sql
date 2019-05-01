@@ -11,7 +11,7 @@
  Target Server Version : 50718
  File Encoding         : 65001
 
- Date: 28/04/2019 22:22:46
+ Date: 01/05/2019 20:56:39
 */
 
 SET NAMES utf8mb4;
@@ -32,7 +32,12 @@ CREATE TABLE `apply_table`  (
   `apply_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间：create_time',
   `state` int(11) NULL DEFAULT NULL COMMENT '状态(0申请中,1通过,2未通过):state',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '申请表：apply_table' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '申请表：apply_table' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of apply_table
+-- ----------------------------
+INSERT INTO `apply_table` VALUES (1, 0, 0, 0, 0, 0, 'string', '1970-01-19 08:03:44', 0);
 
 -- ----------------------------
 -- Table structure for association_activity_table
@@ -170,9 +175,9 @@ CREATE TABLE `user_activity_table`  (
 -- ----------------------------
 -- Records of user_activity_table
 -- ----------------------------
-INSERT INTO `user_activity_table` VALUES (11, 7, 1, 0, 0, NULL, 3);
-INSERT INTO `user_activity_table` VALUES (14, 7, 1, 2, 0, NULL, 3);
-INSERT INTO `user_activity_table` VALUES (15, 7, 1, 1, 0, NULL, 3);
+INSERT INTO `user_activity_table` VALUES (11, 7, 1, 0, 0, '部长', 2);
+INSERT INTO `user_activity_table` VALUES (14, 7, 1, 2, 0, NULL, 2);
+INSERT INTO `user_activity_table` VALUES (15, 7, 1, 1, 0, NULL, 2);
 
 -- ----------------------------
 -- Table structure for user_table
@@ -183,6 +188,7 @@ CREATE TABLE `user_table`  (
   `major` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '专业:major',
   `user_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '用户名:user_name',
   `pwd` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '密码：pwd',
+  `id_card` varchar(18) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '身份证：id_card',
   `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '姓名：name',
   `sex` tinyint(4) NULL DEFAULT NULL COMMENT '性别：sex',
   `age` int(11) NULL DEFAULT NULL COMMENT '年龄：age',
@@ -195,17 +201,17 @@ CREATE TABLE `user_table`  (
 -- ----------------------------
 -- Records of user_table
 -- ----------------------------
-INSERT INTO `user_table` VALUES (1, '', 'NDSFXY', '111111', '徐徐', 2, 18, 17705032963, 0, NULL);
-INSERT INTO `user_table` VALUES (3, '', 'B2015102201', '111111', '张三', 0, 20, 17705032963, 2015, '');
-INSERT INTO `user_table` VALUES (4, NULL, 'admin', 'admin', 'admin', 0, NULL, NULL, NULL, NULL);
-INSERT INTO `user_table` VALUES (5, 'string', '111111', '111111', '111111', 0, 0, 0, 0, NULL);
-INSERT INTO `user_table` VALUES (6, '计算机科学与技术', 'B2015102202', '123456', '张三', NULL, 18, NULL, NULL, NULL);
-INSERT INTO `user_table` VALUES (7, '1', 'B2015102203', '1', '1', 1, 1, 1111, 1, '');
-INSERT INTO `user_table` VALUES (8, '中文系', 'B2015102204', 'iajsd', '艳艳', 2, 22, 18873838384, 2016, '');
-INSERT INTO `user_table` VALUES (9, '计算机科学与技术', 'B2015102210', '123456', '徐蓉蓉', 2, 22, 17705032963, 2015, '');
-INSERT INTO `user_table` VALUES (10, 'gffg', 'sjjhdd', 'dddd', 'fdg', 1, 14, 14455445445, NULL, '');
-INSERT INTO `user_table` VALUES (11, '', 'defsdf', 'ff', 'dfdf', 1, NULL, NULL, NULL, '');
-INSERT INTO `user_table` VALUES (12, '', 'fffff', 'fff', 'fff', NULL, NULL, NULL, NULL, '');
-INSERT INTO `user_table` VALUES (13, '', 'aaaa', 'aaaa', '', NULL, NULL, NULL, NULL, '');
+INSERT INTO `user_table` VALUES (1, '', 'NDSFXY', '111111', NULL, '徐徐', 2, 18, 17705032963, 0, NULL);
+INSERT INTO `user_table` VALUES (3, '', 'B2015102201', '111111', NULL, '张三', 0, 20, 17705032963, 2015, '');
+INSERT INTO `user_table` VALUES (4, NULL, 'admin', 'admin', NULL, 'admin', 0, NULL, NULL, NULL, NULL);
+INSERT INTO `user_table` VALUES (5, 'string', '111111', '111111', NULL, '111111', 0, 0, 0, 0, NULL);
+INSERT INTO `user_table` VALUES (6, '计算机科学与技术', 'B2015102202', '123456', NULL, '张三', NULL, 18, NULL, NULL, NULL);
+INSERT INTO `user_table` VALUES (7, '1', 'B2015102203', '1', NULL, '1', 1, 1, 1111, 1, '');
+INSERT INTO `user_table` VALUES (8, '中文系', 'B2015102204', 'iajsd', NULL, '艳艳', 2, 22, 18873838384, 2016, '');
+INSERT INTO `user_table` VALUES (9, '计算机科学与技术', 'B2015102210', '123456', NULL, '徐蓉蓉', 2, 22, 17705032963, 2015, '');
+INSERT INTO `user_table` VALUES (10, 'gffg', 'sjjhdd', 'dddd', NULL, 'fdg', 1, 14, 14455445445, NULL, '');
+INSERT INTO `user_table` VALUES (11, '', 'defsdf', 'ff', NULL, 'dfdf', 1, NULL, NULL, NULL, '');
+INSERT INTO `user_table` VALUES (12, '', 'fffff', 'fff', NULL, 'fff', NULL, NULL, NULL, NULL, '');
+INSERT INTO `user_table` VALUES (13, '', 'aaaa', 'aaaa', NULL, '', NULL, NULL, NULL, NULL, '');
 
 SET FOREIGN_KEY_CHECKS = 1;

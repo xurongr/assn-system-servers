@@ -60,7 +60,10 @@ public interface UserMapper {
      * @param newPwd
      * @return
      */
-    int updatePwd(@Param("userName") String userName, @Param("oldPwd") String oldPwd, @Param("newPwd") String newPwd);
+    int updatePwd(@Param("userName") String userName,
+                  @Param("idCard") String idCard,
+                  @Param("oldPwd") String oldPwd,
+                  @Param("newPwd") String newPwd);
 
     int updatePwdById(@Param("id") Long userId,@Param("pwd") String pwd);
 

@@ -19,11 +19,11 @@ public class ApplyController {
 
     @ApiOperation("获取申请列表")
     @GetMapping("selectApplyAll")
-    public ResultDto<PageDto<ApplyDto>> selectApplyAll(Long userId,
-                                                       @RequestParam Long associationId,
-                                                       @RequestParam Long departmentId,
-                                                       @RequestParam Long type,
-                                                       @RequestParam Long state,
+    public ResultDto<PageDto<ApplyDto>> selectApplyAll(@RequestParam(value = "userId", required = false) Long userId,
+                                                       @RequestParam(value = "associationId", required = false) Long associationId,
+                                                       @RequestParam(value = "departmentId", required = false) Long departmentId,
+                                                       @RequestParam(value = "type", required = false) Long type,
+                                                       @RequestParam(value = "state", required = false) Long state,
                                                        @RequestParam Integer pageNo ,
                                                        @RequestParam Integer pageSize){
         return ResultDto.ok(applyService.selectApplyAll(userId, associationId, departmentId, type, state, pageNo, pageSize));

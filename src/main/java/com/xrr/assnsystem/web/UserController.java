@@ -23,8 +23,11 @@ public class UserController {
 
     @ApiOperation("修改密码")
     @GetMapping("updatePwd")
-    public ResultDto<Integer> updatePwd(@RequestParam String userName,@RequestParam String oldPwd,@RequestParam String newPwd){
-        return ResultDto.ok(userService.updatePwd(userName, oldPwd, newPwd));
+    public ResultDto<Integer> updatePwd(@RequestParam String userName,
+                                        @RequestParam String oldPwd,
+                                        @RequestParam String idCard,
+                                        @RequestParam String newPwd){
+        return ResultDto.ok(userService.updatePwd(userName, idCard,oldPwd, newPwd));
     }
 
     @ApiOperation("强制修改密码")

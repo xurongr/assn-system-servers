@@ -44,13 +44,16 @@ public class UserService {
      * @param newPwd
      * @return
      */
-    public Integer updatePwd(String userName, String oldPwd, String newPwd) {
+    public Integer updatePwd(String userName,String idCard, String oldPwd, String newPwd) {
         Assert.notNull(userName, "用户名不能为空");
         Assert.isTrue("admin".equals(userName), "admin账号不允许修改密码");
         Assert.notNull(oldPwd,"旧密码不能为空");
         Assert.notNull(newPwd,"新密码不能为空");
-        int result = userMapper.updatePwd(userName, oldPwd, newPwd);
-        if (0 == result) throw new ServiceException(501, "账号或密码错误");
+        if(null == idCard || 18 != idCard.length()){
+            throw new ServiceException(501, "身份证号码错误！");
+        }
+        int result = userMapper.updatePwd(userName, idCard,oldPwd, newPwd);
+        if (0 == result) throw new ServiceException(501, "账号或身份证号码或密码错误！");
         return result;
     }
 
@@ -77,6 +80,9 @@ public class UserService {
     public Integer insertUser(User users){
         Assert.notNull(users.getUserName(), "用户名不能为空");
         Assert.notNull(users.getPwd(), "密码不能为空");
+        if(null == users.getIdCard() || 18 != users.getIdCard().length()){
+            throw new ServiceException(501, "身份证号码错误！");
+        }
         List<UserDto> usersList = userMapper
                 .selectAll(null,users.getUserName(),0,99);
         if(0 != usersList.size())
