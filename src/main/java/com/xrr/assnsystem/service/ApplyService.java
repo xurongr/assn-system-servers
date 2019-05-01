@@ -37,10 +37,10 @@ public class ApplyService {
      * 获取申请列表
      * @return
      */
-    public PageDto<ApplyDto> selectApplyAll(Apply apply, Integer pageNo , Integer pageSize){
+    public PageDto<ApplyDto> selectApplyAll(Long userId, Long associationId, Long departmentId, Long type, Long state, Integer pageNo , Integer pageSize){
         pageNo = pageSize * (pageNo - 1);
-        List<ApplyDto> applyDtoList = applyMapper.selectAll(apply,pageNo,pageSize);
-        Long count = applyMapper.selectCount(apply);
+        List<ApplyDto> applyDtoList = applyMapper.selectAll(userId, associationId, departmentId, type, state, pageNo, pageSize);
+        Long count = applyMapper.selectCount(userId, associationId, departmentId, type, state);
         PageDto<ApplyDto> pageDto = new PageDto<>();
         pageDto.setTotal(count);
         pageDto.setData(applyDtoList);

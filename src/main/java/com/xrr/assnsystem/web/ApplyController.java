@@ -8,7 +8,6 @@ import com.xrr.assnsystem.dto.po.Apply;
 import com.xrr.assnsystem.service.ApplyService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,11 +18,15 @@ public class ApplyController {
     private ApplyService applyService;
 
     @ApiOperation("获取申请列表")
-    @PostMapping("selectApplyAll")
-    public ResultDto<PageDto<ApplyDto>> selectApplyAll(@ApiParam(name = "apply", value = "可以不传，可选条件参数（userId，associationId，departmentId，state）") @RequestBody Apply apply,
+    @GetMapping("selectApplyAll")
+    public ResultDto<PageDto<ApplyDto>> selectApplyAll(Long userId,
+                                                       @RequestParam Long associationId,
+                                                       @RequestParam Long departmentId,
+                                                       @RequestParam Long type,
+                                                       @RequestParam Long state,
                                                        @RequestParam Integer pageNo ,
                                                        @RequestParam Integer pageSize){
-        return ResultDto.ok(applyService.selectApplyAll(apply,pageNo,pageSize));
+        return ResultDto.ok(applyService.selectApplyAll(userId, associationId, departmentId, type, state, pageNo, pageSize));
     }
 
     @ApiOperation("添加申请")

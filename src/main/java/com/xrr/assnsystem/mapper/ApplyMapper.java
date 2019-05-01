@@ -15,7 +15,11 @@ public interface ApplyMapper {
 
     ApplyDto selectByPrimaryKey(Long id);
 
-    List<ApplyDto> selectAll(@Param("apply")Apply apply,
+    List<ApplyDto> selectAll(@Param("userId")Long userId,
+                             @Param("associationId")Long associationId,
+                             @Param("departmentId")Long departmentId,
+                             @Param("type")Long type,
+                             @Param("state")Long state,
                              @Param("pageNo") Integer pageNo ,
                              @Param("pageSize")Integer pageSize);
 
@@ -26,7 +30,11 @@ public interface ApplyMapper {
      * @param apply
      * @return
      */
-    Long selectCount(@Param("apply")Apply apply);
+    Long selectCount(@Param("userId")Long userId,
+                     @Param("associationId")Long associationId,
+                     @Param("departmentId")Long departmentId,
+                     @Param("type")Long type,
+                     @Param("state")Long state);
 
     /**
      * 修改状态

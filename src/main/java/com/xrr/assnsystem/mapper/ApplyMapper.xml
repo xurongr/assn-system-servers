@@ -74,17 +74,20 @@
     left join department_table d on d.id = a.department_id
     left join `identity_table` i on i.id = a.identity_id
     <where>
-      <if test="apply.userId != null ">
-        and a.user_id = #{apply.userId}
+      <if test="userId != null ">
+        and a.user_id = #{userId}
       </if>
-      <if test="apply.associationId != null ">
-        and a.association_id = #{apply.associationId}
+      <if test="associationId != null ">
+        and a.association_id = #{associationId}
       </if>
-      <if test="apply.departmentId != null ">
-        and a.department_id = #{apply.departmentId}
+      <if test="departmentId != null ">
+        and a.department_id = #{departmentId}
       </if>
-      <if test="apply.state != null ">
-        and a.state = #{apply.state}
+      <if test="type != null ">
+        and a.`type` = #{type}
+      </if>
+      <if test="state != null ">
+        and a.state = #{state}
       </if>
     </where>
     order by a.state asc
@@ -100,17 +103,20 @@
     left join department_table d on d.id = a.department_id
     left join `identity_table` i on i.id = a.identity_id
     <where>
-      <if test="apply.userId != null ">
-        and a.user_id = #{apply.userId}
+      <if test="userId != null ">
+        and a.user_id = #{userId}
       </if>
-      <if test="apply.associationId != null ">
-        and a.association_id = #{apply.associationId}
+      <if test="associationId != null ">
+        and a.association_id = #{associationId}
       </if>
-      <if test="apply.departmentId != null ">
-        and a.department_id = #{apply.departmentId}
+      <if test="departmentId != null ">
+        and a.department_id = #{departmentId}
       </if>
-      <if test="apply.state != null ">
-        and a.state = #{apply.state}
+      <if test="type != null ">
+        and a.`type` = #{type}
+      </if>
+      <if test="state != null ">
+        and a.state = #{state}
       </if>
     </where>
   </select>
