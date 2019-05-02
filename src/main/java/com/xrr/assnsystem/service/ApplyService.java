@@ -103,9 +103,9 @@ public class ApplyService {
         if(1 == applyDto.getState()){
             throw new ServiceException(501, "已通过申请，不能再做修改!");
         }else{
+            result1 = applyMapper.updateState(applyId, state);
             if(0 == applyDto.getType()){
                 if(1 == state) {
-                    result1 = applyMapper.updateState(applyId, state);
                     List<UserActivityDto> userActivityDtos = userActivityMapper.selectUserAll(applyDto.getUserId(),
                             null, null, applyDto.getAssociationId(),
                             0L, 0L, 0, 5);
@@ -124,7 +124,7 @@ public class ApplyService {
                     } else {throw new ServiceException(501, "成员已经存在社团中，并且信息没有更换，不能通过申请！");}
                 }
             }else if(1 == applyDto.getType()){
-                result2 = (null != applyDto.getIdentityId()) ?
+                result2 = (null != applyDto.getDepartmentId()) ?
                         departmentService.deleteDepartment(applyDto.getDepartmentId())
                         : associationService.deleteAssociation(applyDto.getAssociationId());
             }else {throw new ServiceException(501, "处理类型不正确，无法进行处理！");}

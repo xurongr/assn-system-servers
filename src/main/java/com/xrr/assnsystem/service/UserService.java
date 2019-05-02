@@ -46,7 +46,7 @@ public class UserService {
      */
     public Integer updatePwd(String userName,String idCard, String oldPwd, String newPwd) {
         Assert.notNull(userName, "用户名不能为空");
-        Assert.isTrue("admin".equals(userName), "admin账号不允许修改密码");
+        Assert.isTrue(!"admin".equals(userName), "admin账号不允许修改密码");
         Assert.notNull(oldPwd,"旧密码不能为空");
         Assert.notNull(newPwd,"新密码不能为空");
         if(null == idCard || 18 != idCard.length()){

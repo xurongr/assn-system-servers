@@ -120,7 +120,7 @@ public class AssociationService {
         associationMapper.deleteDepartment(associationId);
         associationMapper.deleteAssociationActivity(associationId);
         associationMapper.deleteNotice(associationId);
-        associationMapper.deleteApply(associationId);
+//        associationMapper.deleteApply(associationId);
         userActivityMapper.deleteBy(null, associationId, null, null);
         int result = associationMapper.deleteByPrimaryKey(associationId);
         if(0 == result) throw new ServiceException(501, "删除失败");
