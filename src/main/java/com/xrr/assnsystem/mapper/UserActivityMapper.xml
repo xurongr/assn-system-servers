@@ -137,7 +137,7 @@
     <!-- 根据条件查询成员列表-->
     <select id="selectUserAll" resultMap="UserActivityResultMap">
         select ua.id, ua.user_id,u.name,ua.association_id,a.association_name, ua.department_id,
-        d.department_name, ua.activity_id,aa.activity_name,ua.identity_id,i.identity_name
+        d.department_name, ua.activity_id,aa.activity_name,ua.job,ua.identity_id,i.identity_name
         from user_activity_table ua
         left join user_table u on u.id = ua.user_id
         left join association_table a on a.id = ua.association_id
