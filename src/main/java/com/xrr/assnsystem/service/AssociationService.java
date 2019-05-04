@@ -56,7 +56,9 @@ public class AssociationService {
      * @return
      */
     public Integer insertAssociation(Association association){
-        Assert.notNull(association.getAssociationName(), "社团名称不能为空");
+        Assert.notNull(association.getAssociationName(), "社团名称不能为空！");
+        Long selectCountAssociation = associationMapper.selectCount(null, association.getAssociationName(), null);
+        if(0 != selectCountAssociation) throw new ServiceException(501, "社团名称已存在，请更换社团名称！");
         if(null == association.getCreateTime())
         association.setCreateTime(Instant.now().plusMillis(TimeUnit.HOURS.toMillis(8)));
         int result = associationMapper.insert(association);
