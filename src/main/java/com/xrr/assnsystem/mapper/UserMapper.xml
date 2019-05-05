@@ -164,8 +164,6 @@
     set job = #{job}
     where user_id = #{userId}
     and association_id = #{associationId}
-    and department_id = 0
-    and activity_id = 0
   </update>
 
 
