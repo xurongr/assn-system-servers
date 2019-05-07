@@ -122,13 +122,13 @@ public class ApplyService {
                     } else if(!applyDto.getIdentityId().equals(userActivityDtos.get(0).getIdentityId())) {
                         result2 = userActivityMapper.updateIdentity(applyDto.getUserId(), applyDto.getAssociationId(), applyDto.getIdentityId());
                     } else {throw new ServiceException(501, "成员已经存在社团中，并且信息没有更换，不能通过申请！");}
-                }
+                }else { result2 = 1;}
             }else if(1 == applyDto.getType()){
                 if(1 == state) {
                     result2 = (null != applyDto.getDepartmentId()) ?
                             departmentService.deleteDepartment(applyDto.getDepartmentId())
                             : associationService.deleteAssociation(applyDto.getAssociationId());
-                }
+                }else { result2 = 1;}
             }else {throw new ServiceException(501, "处理类型不正确，无法进行处理！");}
         }
         if ((0 == result1) || (0 == result2)) {
