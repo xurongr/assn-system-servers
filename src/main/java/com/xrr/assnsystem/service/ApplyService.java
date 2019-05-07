@@ -124,13 +124,14 @@ public class ApplyService {
                     } else {throw new ServiceException(501, "成员已经存在社团中，并且信息没有更换，不能通过申请！");}
                 }
             }else if(1 == applyDto.getType()){
-                result2 = (null != applyDto.getDepartmentId()) ?
-                        departmentService.deleteDepartment(applyDto.getDepartmentId())
-                        : associationService.deleteAssociation(applyDto.getAssociationId());
+                if(1 == state) {
+                    result2 = (null != applyDto.getDepartmentId()) ?
+                            departmentService.deleteDepartment(applyDto.getDepartmentId())
+                            : associationService.deleteAssociation(applyDto.getAssociationId());
+                }
             }else {throw new ServiceException(501, "处理类型不正确，无法进行处理！");}
         }
-        if ((0 == applyDto.getType()) && (1 != result1) && (0 == result2)
-                || (1 == applyDto.getType()) && (0 == result2)) {
+        if ((0 == result1) || (0 == result2)) {
             throw new ServiceException(501, "修改状态失败");
         }
         return 1;
